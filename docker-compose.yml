@@ -1,0 +1,36 @@
+version: "3"
+services:
+  webapp:
+    build: ./frontend
+    ports:
+      - 3000:3000
+    container_name: webapp
+    restart: always
+    depends_on:
+      - api
+
+  api:
+    build: ./backend
+    ports:
+      - 8000:8000
+    volumes:
+      - ./:/usr/src/app
+    env_file:
+      - ./.env
+    container_name: api
+    restart: always
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_DB=[placeholder]
+      - POSTGRES_PASSWORD=[placeholder]
+    volumes:
+      - postgres-db:/var/lib/postgresql/data
+    container_name: database
+    restart: always
+
+volumes:
+  postgres-db:

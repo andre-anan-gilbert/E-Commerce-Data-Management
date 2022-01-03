@@ -1,0 +1,6 @@
+fastapi[all]
+psycopg2
+pylint
+pytest
+requests
+yapf
