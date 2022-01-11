@@ -37,4 +37,4 @@ jobs:
         echo "${{ steps.get_file_changes.outputs.files}}" | tr " " "\n" | grep ".py$" | xargs pylint --rcfile=backend/pylintrc
     - name: Run Pytest
       run: |
-        pytest backend/src/test_app.py
+        pytest backend/tests
