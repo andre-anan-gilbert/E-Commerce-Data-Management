@@ -1,7 +1,6 @@
 """Test REST API."""
+from api.main import app
 from fastapi.testclient import TestClient
-
-from app import app
 
 client = TestClient(app)
 

@@ -1,6 +1,8 @@
+alembic
 fastapi[all]
 psycopg2
 pylint
 pytest
 requests
+SQLAlchemy
 yapf
