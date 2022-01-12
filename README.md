@@ -1,5 +1,10 @@
 # Database
 
+To build the containers
+```
+docker-compose up --build
+```
+
 To run the containers
 ```
 docker-compose up -d
