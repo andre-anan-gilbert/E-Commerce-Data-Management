@@ -1,13 +1,12 @@
-import MenuIcon from "@mui/icons-material/Menu";
 import type { NextPage } from "next";
+import styled from "styled-components";
 
 const Home: NextPage = () => {
-  return (
-    <div>
-      Hello
-      <MenuIcon />
-    </div>
-  );
+  return <Page>Home Page</Page>;
 };
 
 export default Home;
+
+const Page = styled.div`
+  padding: 5rem 0;
+`;
