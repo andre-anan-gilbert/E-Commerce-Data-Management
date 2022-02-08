@@ -10,7 +10,7 @@ services:
     ports:
       - 8000:8000
     env_file:
-      - ./.env
+      - .env
     container_name: api
     depends_on:
       - postgres
