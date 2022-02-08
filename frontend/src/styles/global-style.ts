@@ -1,22 +1,6 @@
+import "normalize.css/normalize.css";
+import "@blueprintjs/core/lib/css/blueprint.css";
+import "@blueprintjs/icons/lib/css/blueprint-icons.css";
 import { createGlobalStyle } from "styled-components";
 
-export const GlobalStyle = createGlobalStyle`
-  *,
-  ::after,
-  ::before {
-    box-sizing: border-box;
-  }
-
-  html {
-    width: 100%;
-    height: 100%;
-    font-size: 62.5%;
-  }
-
-  body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    font-size: 16px;
-  }
-`;
+export const GlobalStyle = createGlobalStyle``;

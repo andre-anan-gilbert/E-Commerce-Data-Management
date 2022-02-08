@@ -11,21 +11,27 @@ services:
     build: ./backend
     ports:
       - 8000:8000
-    # volumes:
-    #   - ./:/app
-    # env_file:
-    #   - ./.env
+    env_file:
+      - ./.env
     container_name: api
     depends_on:
       - postgres
   postgres:
     image: postgres
-    environment:
-      - POSTGRES_DB=test123
-      - POSTGRES_PASSWORD=password123
+    env_file:
+      - .env
     volumes:
       - postgres-db:/var/lib/postgresql/data
     container_name: database
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - 5050:5050
+    depends_on:
+      - db
+    env_file:
+      - .env
+    container_name: pgadmin
 
 volumes:
   postgres-db:
