@@ -5,8 +5,6 @@ services:
     ports:
       - 3000:3000
     container_name: webapp
-    depends_on:
-      - api
   api:
     build: ./backend
     ports:
