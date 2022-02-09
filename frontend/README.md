@@ -1,9 +1,13 @@
-# Next.js Typescript.
+# Next.js
 
-## Getting Started
+## Development
 
-First, run the development server:
+To install the dependencies:
+```
+npm install
+```
 
-```bash
+To run the development server:
+```
 npm run dev
 ```
