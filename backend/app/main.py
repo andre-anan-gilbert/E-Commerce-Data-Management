@@ -1,9 +1,13 @@
 """REST API."""
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers import item
+from app.core import config
+from app.api.v1 import api_v1
 
-app = FastAPI()
+app = FastAPI(
+    title=config.settings.PROJECT_NAME,
+    openapi_url=f'{config.settings.API_V1_STR}/openapi.json',
+)
 
 # Middleware
 app.add_middleware(
@@ -15,9 +19,4 @@ app.add_middleware(
 )
 
 # Routers
-app.include_router(item.router)
-
-
-@app.get('/')
-async def read_root():
-    return {'message': 'Hello World'}
+app.include_router(api_v1.router, prefix=config.settings.API_V1_STR)

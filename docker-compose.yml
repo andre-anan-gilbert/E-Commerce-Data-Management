@@ -5,6 +5,8 @@ services:
     ports:
       - 3000:3000
     container_name: webapp
+    command: node server.js
+
   api:
     build: ./backend
     ports:
@@ -12,15 +14,20 @@ services:
     env_file:
       - .env
     container_name: api
+    command: bash -c "./prestart.sh && uvicorn main:app --host 0.0.0.0 --port 8000"
     depends_on:
       - postgres
+
   postgres:
     image: postgres
     env_file:
       - .env
     volumes:
       - postgres-db:/var/lib/postgresql/data
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
     container_name: database
+
   pgadmin:
     image: dpage/pgadmin4
     ports:
