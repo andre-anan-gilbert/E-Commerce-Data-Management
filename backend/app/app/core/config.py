@@ -15,11 +15,7 @@ class Settings(BaseSettings):
     SQLALCHEMY_DATABASE_URI: Optional[PostgresDsn] = None
 
     @validator('SQLALCHEMY_DATABASE_URI', pre=True)
-    def assemble_database_connection(
-        cls,
-        value: Optional[str],
-        values: dict[str, Any],
-    ) -> str:  # pylint: disable=no-self-argument
+    def assemble_database_connection(cls, value: Optional[str], values: dict[str, Any]) -> str:  # pylint: disable=no-self-argument
         if isinstance(value, str): return value
         return PostgresDsn.build(
             scheme='postgresql',
