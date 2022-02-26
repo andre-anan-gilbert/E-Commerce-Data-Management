@@ -1,20 +1,22 @@
 version: '3.9'
 services:
-  webapp:
+  frontend:
     build: ./frontend
     ports:
       - 3000:3000
-    container_name: webapp
+    container_name: frontend
     command: node server.js
 
-  api:
+  backend:
     build: ./backend
     ports:
-      - 8000:8000
+      - 8000:80
+    volumes:
+      - ./backend/app:/app
     env_file:
       - .env
-    container_name: api
-    command: bash -c "./prestart.sh && uvicorn main:app --host 0.0.0.0 --port 8000"
+    container_name: backend
+    command: /start-reload.sh
     depends_on:
       - postgres
 
@@ -33,7 +35,7 @@ services:
     ports:
       - 5050:5050
     depends_on:
-      - db
+      - postgres
     env_file:
       - .env
     container_name: pgadmin
