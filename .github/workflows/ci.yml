@@ -35,6 +35,6 @@ jobs:
     - name: Run Pylint on changed files
       run: |
         echo "${{ steps.get_file_changes.outputs.files}}" | tr " " "\n" | grep ".py$" | xargs pylint --rcfile=backend/pylintrc
-    - name: Run Pytest
-      run: |
-        pytest backend/tests
+#     - name: Run Pytest
+#       run: |
+#         pytest backend/app/tests
