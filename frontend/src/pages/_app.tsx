@@ -1,6 +1,8 @@
-import type { ReactElement, ReactNode } from "react";
-import type { NextPage } from "next";
-import type { AppProps } from "next/app";
+import { ReactElement, ReactNode } from "react";
+import { NextPage } from "next";
+import { AppProps } from "next/app";
+import { Provider } from "react-redux";
+import { store } from "../redux/store";
 import { GlobalStyle } from "../styles/global-style";
 
 type NextPageWithLayout = NextPage & {
@@ -14,10 +16,10 @@ type AppPropsWithLayout = AppProps & {
 function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
   return (
-    <>
+    <Provider store={store}>
       <GlobalStyle />
       {getLayout(<Component {...pageProps} />)}
-    </>
+    </Provider>
   );
 }
 
