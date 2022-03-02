@@ -14,6 +14,14 @@ To run the Docker containers:
 docker-compose up -d
 ```
 
+Now you can open your browser and interact with these URLs:
+
+- Frontend, built with Docker, with routes handled based on the path: http://localhost:3000
+- Backend, JSON based web API based on OpenAPI: http://localhost:8000/api/v1/openapi.json
+- Automatic interactive documentation with Swagger UI (from the OpenAPI backend): http://localhost:8000/docs
+- Alternative automatic documentation with ReDoc (from the OpenAPI backend): http://localhost:8000/redoc
+- PGAdmin, PostgreSQL web administration: http://localhost:5050
+
 To stop the Docker containers:
 ```
 docker-compose down
