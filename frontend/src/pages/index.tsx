@@ -1,5 +1,5 @@
-import type { ReactElement } from "react";
-import type { NextPage } from "next";
+import { ReactElement } from "react";
+import { NextPage } from "next";
 import { ThemeProvider } from "styled-components";
 import { theme } from "../styles/theme";
 import Layout from "../components/layout/Layout";
