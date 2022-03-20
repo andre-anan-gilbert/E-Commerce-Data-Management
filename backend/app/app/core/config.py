@@ -1,12 +1,27 @@
 """Database Configuration."""
-from typing import Any, Optional
-from pydantic import BaseSettings, validator, PostgresDsn
+from typing import Any, Optional, Union
+from pydantic import AnyHttpUrl, BaseSettings, validator, PostgresDsn
 
 
 class Settings(BaseSettings):
     """PostgreSQL settings."""
-    PROJECT_NAME: str = '404'
     API_V1_STR: str = '/api/v1'
+    PROJECT_NAME: str
+
+    @validator('PROJECT_NAME')
+    def get_project_name(cls, value: Optional[str], values: dict[str, Any]) -> str:  # pylint: disable=no-self-argument
+        if not value: return values['PROJECT_NAME']
+        return value
+
+    BACKEND_CORS_ORIGINS: list[AnyHttpUrl] = []
+
+    @validator('BACKEND_CORS_ORIGINS', pre=True)
+    def assemble_cors_origins(cls, value: Union[str, list[str]]) -> Union[list[str], str]:  # pylint: disable=no-self-argument
+        if isinstance(value, str) and not value.startswith('['):
+            return [origin.strip() for origin in value.split(',')]
+        elif isinstance(value, (list, str)):
+            return value
+        raise ValueError(value)
 
     POSTGRES_USER: str
     POSTGRES_PASSWORD: str
