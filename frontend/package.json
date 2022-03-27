@@ -8,20 +8,20 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@blueprintjs/core": "^3.54.0",
-    "axios": "^0.25.0",
-    "next": "12.0.7",
+    "@blueprintjs/core": "^4.0.1",
+    "axios": "^0.26.1",
+    "next": "12.1.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-query": "^3.34.16",
-    "styled-components": "^5.3.3"
+    "react-query": "^3.34.19",
+    "styled-components": "^5.3.5"
   },
   "devDependencies": {
-    "@types/node": "17.0.8",
-    "@types/react": "17.0.38",
-    "@types/styled-components": "^5.1.19",
-    "eslint": "8.6.0",
-    "eslint-config-next": "12.0.7",
-    "typescript": "4.5.4"
+    "@types/node": "17.0.23",
+    "@types/react": "17.0.43",
+    "@types/styled-components": "^5.1.24",
+    "eslint": "8.12.0",
+    "eslint-config-next": "12.1.1",
+    "typescript": "4.6.3"
   }
 }
