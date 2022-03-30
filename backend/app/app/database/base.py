@@ -1,2 +1,5 @@
 """Import all the models, so that Base has them before being imported by Alembic (Base.metadata)."""
-from app.database.session import Base  # pylint: disable=unused-import
+
+# pylint: skip-file
+from app.database.base_class import Base
+# from app.models.products import Product

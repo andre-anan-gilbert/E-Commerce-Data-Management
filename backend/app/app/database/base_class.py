@@ -1,11 +1,11 @@
-"""Base Class."""
+"""Base class."""
 from typing import Any
 from sqlalchemy.ext.declarative import as_declarative, declared_attr
 
 
 @as_declarative()
 class Base:
-    """Class that generates __tablename__ automatically"""
+    """Class that generates __tablename__ automatically."""
     id: Any
     __name__: str
 
