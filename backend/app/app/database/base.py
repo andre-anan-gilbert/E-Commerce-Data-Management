@@ -2,4 +2,4 @@
 
 # pylint: skip-file
 from app.database.base_class import Base
-# from app.models.products import Product
+from app.models.products import Products
