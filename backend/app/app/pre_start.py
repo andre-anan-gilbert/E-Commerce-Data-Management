@@ -1,4 +1,4 @@
-"""Tests if postgreSQL database is available."""
+"""Tests if the database is available."""
 import logging
 from tenacity import after_log, before_log, retry, stop_after_attempt, wait_fixed
 from app.database.session import SessionLocal
