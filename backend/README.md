@@ -16,6 +16,11 @@ To run the server:
 docker-compose up -d
 ```
 
+To bypass husky pre-commit if only Python files got changed:
+```
+git commit -m "message" --no-verify
+```
+
 ## Migrations
 
 During local development the app directory is mounted as a volume inside the container, thus you can also run the migrations with alembic commands inside the container. The migration files ought to be added to the repository.
