@@ -25,7 +25,7 @@ git commit -m "message" --no-verify
 
 During local development the app directory is mounted as a volume inside the container, thus you can also run the migrations with alembic commands inside the container. The migration files ought to be added to the repository.
 
-To start an interactive session in the backend container:
+To start an interactive session in the backend container (skip this step if you run alembic from your environment):
 ```
 docker-compose exec backend bash
 ```
@@ -35,7 +35,7 @@ If you created a new model, make sure to import it in:
 /backend/app/app/database/base.py
 ```
 
-If you changed a model, create a revision inside the container:
+If you changed a model, create a revision:
 ```
 alembic revision --autogenerate -m "message"
 ```
