@@ -1,10 +1,10 @@
-import { ReactElement } from "react";
-import { NextPage } from "next";
-import { ThemeProvider } from "styled-components";
-import { theme } from "../styles/theme";
-import Layout from "../components/layout/Layout";
-import Navbar from "../components/ui/Navbar";
-import { H1, H2, H3, H4, H5, H6 } from "@blueprintjs/core";
+import { ReactElement } from 'react';
+import { NextPage } from 'next';
+import { ThemeProvider } from 'styled-components';
+import { theme } from '../styles/theme';
+import Layout from '../components/layout/Layout';
+import Navbar from '../components/ui/Navbar';
+import { H1, H2, H3, H4, H5, H6 } from '@blueprintjs/core';
 
 const Home: NextPage = () => {
   return (

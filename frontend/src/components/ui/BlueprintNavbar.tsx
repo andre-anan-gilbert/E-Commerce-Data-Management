@@ -1,11 +1,11 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   Navbar,
   NavbarGroup,
   NavbarHeading,
   Button,
   Classes,
-} from "@blueprintjs/core";
+} from '@blueprintjs/core';
 
 const BlueprintNavbar = () => {
   return (

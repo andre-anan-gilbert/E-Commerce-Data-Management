@@ -1,5 +1,5 @@
-import * as React from "react";
-import Footer from "../ui/Footer";
+import * as React from 'react';
+import Footer from '../ui/Footer';
 
 type LayoutProps = {
   children: React.ReactNode;
