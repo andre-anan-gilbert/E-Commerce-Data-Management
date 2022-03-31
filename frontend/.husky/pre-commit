@@ -4,11 +4,6 @@
 cd frontend
 echo 'Woof! 🐶'
 
-# ESLint --fix
-echo ''
-echo 'Fixing linting problems (if possible). 🔨'
-npm run fix
-
 # Prettier
 echo ''
 echo 'Checking for formatting problems. 🧪'
@@ -21,7 +16,7 @@ npm run check-format || (
 # ESLint
 echo ''
 echo 'Checking for linting problems. 🧪'
-npm run lint || (
+npm run fix || (
     echo ''
     echo "ESLint Check Failed, we'll get 'em next time. Make the required changes listed above, add changes and try to commit again. ☹️"
     false;
