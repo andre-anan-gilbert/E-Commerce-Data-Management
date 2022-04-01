@@ -13,12 +13,7 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
-/**
- * App component to initialize pages.
- * @param {AppPropsWithLayout} Component - The active page.
- * @return {JSX.Element}
- */
-function App({ Component, pageProps }: AppPropsWithLayout): JSX.Element {
+function App({ Component, pageProps }: AppPropsWithLayout) {
   const [queryClient] = useState(() => new QueryClient());
   const getLayout = Component.getLayout ?? (page => page);
 
