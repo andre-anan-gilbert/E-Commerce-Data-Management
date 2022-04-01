@@ -1,0 +1,29 @@
+name: ESLint
+
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - '**.js'
+      - '**.jsx'
+      - '**.ts'
+      - '**.tsx'
+      
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      working-directory: ./frontend
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+    - name: Install dependencies
+      working-directory: ${{ env.working-directory }}
+      run: npm ci
+    - name: Run ESLint
+      working-directory: ${{ env.working-directory }}
+      run: npm run lint
