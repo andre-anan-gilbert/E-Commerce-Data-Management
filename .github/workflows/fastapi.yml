@@ -1,0 +1,44 @@
+name: Test FastAPI
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '**.py'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - '**.py'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_USER: ${{ secrets.DATABASE_USERNAME }}
+      DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
+      DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+      DATABASE_DB: ${{ secrets.DATABASE_NAME }}-test
+    services:
+      postgres:
+        image: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.9"
+    - name: Install dependencies
+      working-directory: ./backend
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Run Pytest
+      run: pytest ./backend/app/tests/
+      env:
+        PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
