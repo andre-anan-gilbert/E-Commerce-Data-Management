@@ -17,10 +17,10 @@ jobs:
       postgres:
         image: postgres
         env:
-          DATABASE_USER: ${{ secrets.DATABASE_USERNAME }}
-          DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
-          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-          DATABASE_DB: ${{ secrets.DATABASE_NAME }}-test
+          POSTGRES_USER: ${{ secrets.DATABASE_USERNAME }}
+          POSTGRES_HOST: ${{ secrets.DATABASE_HOST }}
+          POSTGRES_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+          POSTGRES_DB: ${{ secrets.DATABASE_NAME }}-test
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -42,7 +42,7 @@ jobs:
       run: pytest ./backend/app/tests/
       env:
         PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
-        DATABASE_USER: ${{ secrets.DATABASE_USERNAME }}
-        DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
-        DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-        DATABASE_DB: ${{ secrets.DATABASE_NAME }}-test
+        POSTGRES_USER: ${{ secrets.DATABASE_USERNAME }}
+        POSTGRES_HOST: ${{ secrets.DATABASE_HOST }}
+        POSTGRES_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+        POSTGRES_DB: ${{ secrets.DATABASE_NAME }}-test
