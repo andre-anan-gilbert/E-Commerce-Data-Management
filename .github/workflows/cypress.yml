@@ -1,0 +1,53 @@
+name: Cypress
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '**.js'
+      - '**.jsx'
+      - '**.ts'
+      - '**.tsx'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - '**.js'
+      - '**.jsx'
+      - '**.ts'
+      - '**.tsx'
+
+env:
+  working-directory: ./frontend
+      
+jobs:
+  cross-browser:
+    runs-on: ubuntu-latest
+    container:
+      image: cypress/browsers:node12.16.1-chrome80-ff73
+      options: --user 1001
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Run Cypress on Chrome
+      uses: cypress-io/github-action@v2
+      with:
+        browser: chrome
+        config-file: cypress.json
+        working-directory: ${{ env.working-directory }}
+    - name: Run Cypress on Firefox
+      uses: cypress-io/github-action@v2
+      with:
+        browser: firefox
+        config-file: cypress.json
+        working-directory: ${{ env.working-directory }}
+        
+  edge:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - uses: cypress-io/github-action@v2
+        with:
+          browser: edge
+          config-file: cypress.json
+          working-directory: ${{ env.working-directory }}
