@@ -32,14 +32,16 @@ jobs:
       uses: cypress-io/github-action@v2
       with:
         browser: chrome
-        start: npm run dev
+        build: npm run build
+        start: npm run start
         config-file: cypress.json
         working-directory: ${{ env.working-directory }}
     - name: Run Cypress on Firefox
       uses: cypress-io/github-action@v2
       with:
         browser: firefox
-        start: npm run dev
+        build: npm run build
+        start: npm run start
         config-file: cypress.json
         working-directory: ${{ env.working-directory }}
         
@@ -52,6 +54,7 @@ jobs:
         uses: cypress-io/github-action@v2
         with: 
           browser: edge
-          start-windows: npm run dev:windows:server
+          build: npm run build
+          start: npm run start
           config-file: cypress.json
           working-directory: ${{ env.working-directory }}
