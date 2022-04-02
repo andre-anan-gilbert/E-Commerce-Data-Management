@@ -23,7 +23,7 @@ jobs:
   cross-browser:
     runs-on: ubuntu-latest
     container:
-      image: cypress/browsers:node12.16.1-chrome80-ff73
+      image: cypress/browsers:node16.14.0-slim-chrome99-ff97
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
