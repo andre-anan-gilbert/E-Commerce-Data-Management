@@ -1,4 +1,4 @@
-name: FastAPI
+name: Pytest
 
 on:
   push:
