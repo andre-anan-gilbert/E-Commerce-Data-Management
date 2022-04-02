@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('Navigation', () => {
+describe('Index Page', () => {
   it('Navigate to the index page', () => {
     cy.visit('/');
   });
