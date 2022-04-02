@@ -51,3 +51,27 @@ To check for TypeScript errors:
 ```
 npm run check-types
 ```
+
+To open the Cypress test runner:
+
+```
+npm run cypress
+```
+
+To run the Cypress tests:
+
+```
+npm run cypress:headless
+```
+
+To start the webapp and the Cypress test runner:
+
+```
+npm run e2e
+```
+
+To run E2E tests:
+
+```
+npm run e2e:headless
+```
