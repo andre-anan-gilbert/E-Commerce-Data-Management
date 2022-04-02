@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 describe('Navigation', () => {
-  it('should navigate to the index page', () => {
+  it('Navigate to the index page', () => {
     cy.visit('/');
   });
 });
