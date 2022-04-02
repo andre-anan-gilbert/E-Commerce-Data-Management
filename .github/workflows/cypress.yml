@@ -32,12 +32,18 @@ jobs:
       uses: cypress-io/github-action@v2
       with:
         browser: chrome
+        build: npm run build
+        start: npm run start
+        wait-on: 'http://localhost:3000'
         config-file: cypress.json
         working-directory: ${{ env.working-directory }}
     - name: Run Cypress on Firefox
       uses: cypress-io/github-action@v2
       with:
         browser: firefox
+        build: npm run build
+        start: npm run start
+        wait-on: 'http://localhost:3000'
         config-file: cypress.json
         working-directory: ${{ env.working-directory }}
         
@@ -48,7 +54,10 @@ jobs:
         uses: actions/checkout@v3
       - name: Run Cypress on Edge
         uses: cypress-io/github-action@v2
-        with:
+        with: 
           browser: edge
+          build: npm run build
+          start: npm run start
+          wait-on: 'http://localhost:3000'
           config-file: cypress.json
           working-directory: ${{ env.working-directory }}
