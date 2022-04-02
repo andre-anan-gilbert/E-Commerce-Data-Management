@@ -34,6 +34,7 @@ jobs:
         browser: chrome
         build: npm run build
         start: npm run start
+        wait-on: 'http://localhost:3000'
         config-file: cypress.json
         working-directory: ${{ env.working-directory }}
     - name: Run Cypress on Firefox
@@ -42,6 +43,7 @@ jobs:
         browser: firefox
         build: npm run build
         start: npm run start
+        wait-on: 'http://localhost:3000'
         config-file: cypress.json
         working-directory: ${{ env.working-directory }}
         
@@ -56,5 +58,6 @@ jobs:
           browser: edge
           build: npm run build
           start: npm run start
+          wait-on: 'http://localhost:3000'
           config-file: cypress.json
           working-directory: ${{ env.working-directory }}
