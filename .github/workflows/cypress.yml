@@ -46,7 +46,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - uses: cypress-io/github-action@v2
+      - name: Run Cypress on Edge
+        uses: cypress-io/github-action@v2
         with:
           browser: edge
           config-file: cypress.json
