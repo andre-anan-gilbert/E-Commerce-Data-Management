@@ -20,29 +20,33 @@ env:
   working-directory: ./frontend
       
 jobs:
-  cross-browser:
+  chrome:
     runs-on: ubuntu-latest
-    container:
-      image: cypress/browsers:node16.14.0-slim-chrome99-ff97
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Run Cypress on Chrome
-      uses: cypress-io/github-action@v2
-      with:
-        browser: chrome
-        build: npm run build
-        start: npm run start
-        config-file: cypress.json
-        working-directory: ${{ env.working-directory }}
-    - name: Run Cypress on Firefox
-      uses: cypress-io/github-action@v2
-      with:
-        browser: firefox
-        build: npm run build
-        start: npm run start
-        config-file: cypress.json
-        working-directory: ${{ env.working-directory }}
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Run Cypress on Chrome
+        uses: cypress-io/github-action@v2
+        with: 
+          browser: chrome
+          build: npm run build
+          start: npm run start
+          config-file: cypress.json
+          working-directory: ${{ env.working-directory }}
+          
+  firefox:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Run Cypress on Firefox
+        uses: cypress-io/github-action@v2
+        with: 
+          browser: firefox
+          build: npm run build
+          start: npm run start
+          config-file: cypress.json
+          working-directory: ${{ env.working-directory }}
         
   edge:
     runs-on: windows-latest
