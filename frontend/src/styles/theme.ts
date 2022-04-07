@@ -1,6 +1,9 @@
 export const theme = {
-  textDark: `#3C4043`,
-  textLight: `#FFFFFF`,
-  primary: `#3913B8`,
-  secondary: `#2FB5FC`,
+  primary: 'linear-gradient(123.9deg, #1D007E 3.71%, #EBE4FF 70.1%)',
+  secondary: '#8D8DF7',
+  text: {
+    light: '#F5F8FA',
+    dark: '#182026',
+    muted: '#F5F8FAB3',
+  },
 };
