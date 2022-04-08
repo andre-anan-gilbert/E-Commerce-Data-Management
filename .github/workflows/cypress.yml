@@ -25,6 +25,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.npm
+            ${{ github.workspace }}/.next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
       - name: Run Cypress on Chrome
         uses: cypress-io/github-action@v2
         with: 
@@ -39,6 +47,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.npm
+            ${{ github.workspace }}/.next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
       - name: Run Cypress on Firefox
         uses: cypress-io/github-action@v2
         with: 
@@ -53,6 +69,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.npm
+            ${{ github.workspace }}/.next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
       - name: Run Cypress on Edge
         uses: cypress-io/github-action@v2
         with: 
