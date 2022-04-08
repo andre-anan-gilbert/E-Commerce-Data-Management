@@ -1,4 +1,4 @@
-import * as React from 'react';
+/** The navbar of the landing page. */
 import styled from 'styled-components';
 
 const Navbar = () => {

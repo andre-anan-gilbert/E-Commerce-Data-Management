@@ -1,3 +1,4 @@
+/** The custom document for styled-components to inject the server side rendered styles into the <head>. */
 import Document, { DocumentContext, DocumentInitialProps } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 

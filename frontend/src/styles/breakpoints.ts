@@ -1,3 +1,4 @@
+/** The breakpoints for the media queries. */
 export const breakpoints = {
   mobile: '480px',
   tablet: '768px',

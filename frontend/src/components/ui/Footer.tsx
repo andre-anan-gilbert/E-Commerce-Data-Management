@@ -1,4 +1,4 @@
-import * as React from 'react';
+/** The footer of the application. */
 
 const Footer = () => {
   return <div>Footer</div>;

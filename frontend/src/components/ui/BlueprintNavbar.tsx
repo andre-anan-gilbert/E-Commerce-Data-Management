@@ -1,4 +1,4 @@
-import * as React from 'react';
+/** The navbar of the data management application. */
 import {
   Navbar,
   NavbarGroup,

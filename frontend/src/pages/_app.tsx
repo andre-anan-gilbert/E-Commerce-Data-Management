@@ -1,3 +1,4 @@
+/** The app component to intialize pages. */
 import { ReactElement, ReactNode, useState } from 'react';
 import { NextPage } from 'next';
 import { AppProps } from 'next/app';

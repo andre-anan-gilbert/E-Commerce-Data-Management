@@ -1,8 +1,9 @@
-import * as React from 'react';
+/** The layout component of the application. */
+import { ReactNode } from 'react';
 import Footer from '../ui/Footer';
 
 type LayoutProps = {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 const Layout = ({ children }: LayoutProps) => {

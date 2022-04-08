@@ -1,3 +1,4 @@
+/** The landing page which the users first see. */
 import { ReactElement } from 'react';
 import { NextPage } from 'next';
 import { ThemeProvider } from 'styled-components';
