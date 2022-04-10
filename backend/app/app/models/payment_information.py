@@ -5,6 +5,6 @@ from app.database.base_class import Base
 
 class PaymentInformation(Base):
     """Class that represents the payment information."""
-    id = Column(Integer, primary_key=True, index=True)
+    _id = Column(Integer, primary_key=True, index=True)
     iban = Column(String, unique=True, index=True)
     bic = Column(String, index=True)

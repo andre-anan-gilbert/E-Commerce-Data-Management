@@ -13,7 +13,7 @@ class OrderStatus(enum.Enum):
 
 class Orders(Base):
     """Class that represents the orders of customer."""
-    id = Column(Integer, primary_key=True, index=True)
+    _id = Column(Integer, primary_key=True, index=True)
     customer_number = Column(Integer, index=True)
     invoice_id = Column(Integer, unique=True, index=True)
     status = Column(Enum(OrderStatus), index=True)

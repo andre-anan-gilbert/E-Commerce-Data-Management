@@ -19,13 +19,13 @@ CREATE TABLE "products" (
 );
 
 CREATE TABLE "categories" (
-  "id" int PRIMARY KEY,
+  "_id" int PRIMARY KEY,
   "name" varchar,
   "description" varchar
 );
 
 CREATE TABLE "suppliers" (
-  "id" int PRIMARY KEY,
+  "_id" int PRIMARY KEY,
   "name" varchar,
   "address_id" int,
   "phone_number" varchar,
@@ -33,7 +33,7 @@ CREATE TABLE "suppliers" (
 );
 
 CREATE TABLE "addresses" (
-  "id" int PRIMARY KEY,
+  "_id" int PRIMARY KEY,
   "county" varchar,
   "region" varchar,
   "postal_code" varchar,
@@ -42,7 +42,7 @@ CREATE TABLE "addresses" (
 );
 
 CREATE TABLE "orders" (
-  "id" int PRIMARY KEY,
+  "_id" int PRIMARY KEY,
   "customer_number" int,
   "invoice_id" int UNIQUE,
   "status" order_status,
@@ -69,7 +69,7 @@ CREATE TABLE "customers" (
 );
 
 CREATE TABLE "payment_information" (
-  "id" int PRIMARY KEY,
+  "_id" int PRIMARY KEY,
   "iban" varchar UNIQUE,
   "bic" varchar
 );
@@ -102,13 +102,13 @@ CREATE TABLE "employees" (
 );
 
 CREATE TABLE "departments" (
-  "id" int PRIMARY KEY,
+  "_id" int PRIMARY KEY,
   "name" varchar,
   "manager" int
 );
 
 CREATE TABLE "shipping_services" (
-  "id" int PRIMARY KEY,
+  "_id" int PRIMARY KEY,
   "name" varchar,
   "address_id" int,
   "email" varchar,
@@ -121,7 +121,7 @@ CREATE TABLE "postal_code_2_city" (
 );
 
 CREATE TABLE "invoices" (
-  "id" int PRIMARY KEY,
+  "_id" int PRIMARY KEY,
   "status" invoice_status,
   "issue_date" date,
   "due_date" date,
@@ -129,7 +129,7 @@ CREATE TABLE "invoices" (
 );
 
 CREATE TABLE "warehouses" (
-  "id" int PRIMARY KEY,
+  "_id" int PRIMARY KEY,
   "address_id" int,
   "email" varchar,
   "phone_number" varchar
@@ -142,51 +142,51 @@ CREATE TABLE "product_2_warehouse" (
   PRIMARY KEY ("product_item_number", "warehouse_id")
 );
 
-ALTER TABLE "products" ADD FOREIGN KEY ("category_id") REFERENCES "categories" ("id");
+ALTER TABLE "products" ADD FOREIGN KEY ("category_id") REFERENCES "categories" ("_id");
 
-ALTER TABLE "products" ADD FOREIGN KEY ("supplier_id") REFERENCES "suppliers" ("id");
+ALTER TABLE "products" ADD FOREIGN KEY ("supplier_id") REFERENCES "suppliers" ("_id");
 
-ALTER TABLE "suppliers" ADD FOREIGN KEY ("address_id") REFERENCES "addresses" ("id");
+ALTER TABLE "suppliers" ADD FOREIGN KEY ("address_id") REFERENCES "addresses" ("_id");
 
 ALTER TABLE "addresses" ADD FOREIGN KEY ("postal_code") REFERENCES "postal_code_2_city" ("postal_code");
 
 ALTER TABLE "orders" ADD FOREIGN KEY ("customer_number") REFERENCES "customers" ("customer_number");
 
-ALTER TABLE "orders" ADD FOREIGN KEY ("invoice_id") REFERENCES "invoices" ("id");
+ALTER TABLE "orders" ADD FOREIGN KEY ("invoice_id") REFERENCES "invoices" ("_id");
 
-ALTER TABLE "orders" ADD FOREIGN KEY ("address_id") REFERENCES "addresses" ("id");
+ALTER TABLE "orders" ADD FOREIGN KEY ("address_id") REFERENCES "addresses" ("_id");
 
 ALTER TABLE "orders" ADD FOREIGN KEY ("employee_id") REFERENCES "employees" ("employee_number");
 
-ALTER TABLE "orders" ADD FOREIGN KEY ("shipping_service_id") REFERENCES "shipping_services" ("id");
+ALTER TABLE "orders" ADD FOREIGN KEY ("shipping_service_id") REFERENCES "shipping_services" ("_id");
 
-ALTER TABLE "order_details" ADD FOREIGN KEY ("order_id") REFERENCES "orders" ("id");
+ALTER TABLE "order_details" ADD FOREIGN KEY ("order_id") REFERENCES "orders" ("_id");
 
 ALTER TABLE "order_details" ADD FOREIGN KEY ("product_item_number") REFERENCES "products" ("item_number");
 
 ALTER TABLE "payment_information_2_customer" ADD FOREIGN KEY ("customer_number") REFERENCES "customers" ("customer_number");
 
-ALTER TABLE "payment_information_2_customer" ADD FOREIGN KEY ("payment_information_id") REFERENCES "payment_information" ("id");
+ALTER TABLE "payment_information_2_customer" ADD FOREIGN KEY ("payment_information_id") REFERENCES "payment_information" ("_id");
 
 ALTER TABLE "address_2_customer" ADD FOREIGN KEY ("customer_number") REFERENCES "customers" ("customer_number");
 
-ALTER TABLE "address_2_customer" ADD FOREIGN KEY ("address_id") REFERENCES "addresses" ("id");
+ALTER TABLE "address_2_customer" ADD FOREIGN KEY ("address_id") REFERENCES "addresses" ("_id");
 
-ALTER TABLE "employees" ADD FOREIGN KEY ("department_id") REFERENCES "departments" ("id");
+ALTER TABLE "employees" ADD FOREIGN KEY ("department_id") REFERENCES "departments" ("_id");
 
-ALTER TABLE "employees" ADD FOREIGN KEY ("warehouses_id") REFERENCES "warehouses" ("id");
+ALTER TABLE "employees" ADD FOREIGN KEY ("warehouses_id") REFERENCES "warehouses" ("_id");
 
-ALTER TABLE "employees" ADD FOREIGN KEY ("address_id") REFERENCES "addresses" ("id");
+ALTER TABLE "employees" ADD FOREIGN KEY ("address_id") REFERENCES "addresses" ("_id");
 
 ALTER TABLE "departments" ADD FOREIGN KEY ("manager") REFERENCES "employees" ("employee_number");
 
-ALTER TABLE "shipping_services" ADD FOREIGN KEY ("address_id") REFERENCES "addresses" ("id");
+ALTER TABLE "shipping_services" ADD FOREIGN KEY ("address_id") REFERENCES "addresses" ("_id");
 
-ALTER TABLE "invoices" ADD FOREIGN KEY ("payment_information_id") REFERENCES "payment_information" ("id");
+ALTER TABLE "invoices" ADD FOREIGN KEY ("payment_information_id") REFERENCES "payment_information" ("_id");
 
-ALTER TABLE "warehouses" ADD FOREIGN KEY ("address_id") REFERENCES "addresses" ("id");
+ALTER TABLE "warehouses" ADD FOREIGN KEY ("address_id") REFERENCES "addresses" ("_id");
 
 ALTER TABLE "product_2_warehouse" ADD FOREIGN KEY ("product_item_number") REFERENCES "products" ("item_number");
 
-ALTER TABLE "product_2_warehouse" ADD FOREIGN KEY ("warehouse_id") REFERENCES "warehouses" ("id");
+ALTER TABLE "product_2_warehouse" ADD FOREIGN KEY ("warehouse_id") REFERENCES "warehouses" ("_id");
 

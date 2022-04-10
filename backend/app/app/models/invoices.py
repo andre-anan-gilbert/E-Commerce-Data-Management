@@ -13,7 +13,7 @@ class InvoiceStatus(enum.Enum):
 
 class Invoices(Base):
     """Class that represents the invoices."""
-    id = Column(Integer, primary_key=True, index=True)
+    _id = Column(Integer, primary_key=True, index=True)
     status = Column(Enum(InvoiceStatus), index=True)
     issue_date = Column(Date, index=True)
     due_date = Column(Date, index=True)
