@@ -8,7 +8,6 @@ Create Date: 2022-04-10 10:06:46.045245
 from alembic import op
 import sqlalchemy as sa
 
-
 # revision identifiers, used by Alembic.
 revision = 'ce37814209a6'
 down_revision = 'b398073187b3'
@@ -50,7 +49,9 @@ def upgrade():
     op.drop_column('paymentinformation', 'id')
     op.add_column('paymentinformation2customer', sa.Column('customer_number', sa.Integer(), nullable=False))
     op.drop_index('ix_paymentinformation2customer_customer_id', table_name='paymentinformation2customer')
-    op.create_index(op.f('ix_paymentinformation2customer_customer_number'), 'paymentinformation2customer', ['customer_number'], unique=False)
+    op.create_index(op.f('ix_paymentinformation2customer_customer_number'),
+                    'paymentinformation2customer', ['customer_number'],
+                    unique=False)
     op.drop_column('paymentinformation2customer', 'customer_id')
     op.add_column('shippingservices', sa.Column('_id', sa.Integer(), nullable=False))
     op.drop_index('ix_shippingservices_id', table_name='shippingservices')
@@ -81,9 +82,12 @@ def downgrade():
     op.drop_index(op.f('ix_shippingservices__id'), table_name='shippingservices')
     op.create_index('ix_shippingservices_id', 'shippingservices', ['id'], unique=False)
     op.drop_column('shippingservices', '_id')
-    op.add_column('paymentinformation2customer', sa.Column('customer_id', sa.INTEGER(), autoincrement=False, nullable=False))
+    op.add_column('paymentinformation2customer',
+                  sa.Column('customer_id', sa.INTEGER(), autoincrement=False, nullable=False))
     op.drop_index(op.f('ix_paymentinformation2customer_customer_number'), table_name='paymentinformation2customer')
-    op.create_index('ix_paymentinformation2customer_customer_id', 'paymentinformation2customer', ['customer_id'], unique=False)
+    op.create_index('ix_paymentinformation2customer_customer_id',
+                    'paymentinformation2customer', ['customer_id'],
+                    unique=False)
     op.drop_column('paymentinformation2customer', 'customer_number')
     op.add_column('paymentinformation', sa.Column('id', sa.INTEGER(), autoincrement=True, nullable=False))
     op.drop_index(op.f('ix_paymentinformation__id'), table_name='paymentinformation')
