@@ -1,10 +1,10 @@
 /** Theme of the landing page. */
 export const theme = {
-  primary: 'linear-gradient(123.9deg, #1D007E 3.71%, #EBE4FF 70.1%)',
+  primary: 'linear-gradient(123.9deg, #1d007e 3.71%, #ebe4ff 100%)',
   secondary: '#8D8DF7',
   text: {
-    light: '#F5F8FA',
-    dark: '#182026',
-    muted: '#F5F8FAB3',
+    light: '#f6f7f9',
+    dark: '#1C2127',
+    muted: '#abb3bf',
   },
 };
