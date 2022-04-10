@@ -43,7 +43,7 @@ CREATE TABLE "addresses" (
 
 CREATE TABLE "orders" (
   "id" int PRIMARY KEY,
-  "customer_id" int,
+  "customer_number" int,
   "invoice_id" int UNIQUE,
   "status" order_status,
   "address_id" int,
@@ -75,16 +75,16 @@ CREATE TABLE "payment_information" (
 );
 
 CREATE TABLE "payment_information_2_customer" (
-  "customer_id" int,
+  "customer_number" int,
   "payment_information_id" int,
   "is_default" boolean,
-  PRIMARY KEY ("customer_id", "payment_information_id")
+  PRIMARY KEY ("customer_number", "payment_information_id")
 );
 
 CREATE TABLE "address_2_customer" (
-  "customer_id" int,
+  "customer_number" int,
   "address_id" int,
-  PRIMARY KEY ("customer_id", "address_id")
+  PRIMARY KEY ("customer_number", "address_id")
 );
 
 CREATE TABLE "employees" (
@@ -150,7 +150,7 @@ ALTER TABLE "suppliers" ADD FOREIGN KEY ("address_id") REFERENCES "addresses" ("
 
 ALTER TABLE "addresses" ADD FOREIGN KEY ("postal_code") REFERENCES "postal_code_2_city" ("postal_code");
 
-ALTER TABLE "orders" ADD FOREIGN KEY ("customer_id") REFERENCES "customers" ("customer_number");
+ALTER TABLE "orders" ADD FOREIGN KEY ("customer_number") REFERENCES "customers" ("customer_number");
 
 ALTER TABLE "orders" ADD FOREIGN KEY ("invoice_id") REFERENCES "invoices" ("id");
 
@@ -164,11 +164,11 @@ ALTER TABLE "order_details" ADD FOREIGN KEY ("order_id") REFERENCES "orders" ("i
 
 ALTER TABLE "order_details" ADD FOREIGN KEY ("product_item_number") REFERENCES "products" ("item_number");
 
-ALTER TABLE "payment_information_2_customer" ADD FOREIGN KEY ("customer_id") REFERENCES "customers" ("customer_number");
+ALTER TABLE "payment_information_2_customer" ADD FOREIGN KEY ("customer_number") REFERENCES "customers" ("customer_number");
 
 ALTER TABLE "payment_information_2_customer" ADD FOREIGN KEY ("payment_information_id") REFERENCES "payment_information" ("id");
 
-ALTER TABLE "address_2_customer" ADD FOREIGN KEY ("customer_id") REFERENCES "customers" ("customer_number");
+ALTER TABLE "address_2_customer" ADD FOREIGN KEY ("customer_number") REFERENCES "customers" ("customer_number");
 
 ALTER TABLE "address_2_customer" ADD FOREIGN KEY ("address_id") REFERENCES "addresses" ("id");
 
