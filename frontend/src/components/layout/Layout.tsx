@@ -1,12 +1,12 @@
 /** The layout component of the application. */
 import { ReactNode } from 'react';
-import Footer from '../ui/Footer';
+import { Footer } from '../ui/Footer';
 
 type LayoutProps = {
   children: ReactNode;
 };
 
-const Layout = ({ children }: LayoutProps) => {
+export const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       {children}
@@ -14,5 +14,3 @@ const Layout = ({ children }: LayoutProps) => {
     </>
   );
 };
-
-export default Layout;

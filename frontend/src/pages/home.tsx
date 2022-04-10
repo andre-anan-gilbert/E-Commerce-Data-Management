@@ -1,7 +1,7 @@
 /** The home page of the data management application. */
 import { ReactElement } from 'react';
 import { NextPage } from 'next';
-import Layout from '../components/layout/Layout';
+import { Layout } from '../components/layout/Layout';
 import BlueprintNavbar from '../components/ui/BlueprintNavbar';
 
 const Home: NextPage = () => {
