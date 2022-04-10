@@ -27,8 +27,7 @@ const Foo = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  background-color: ${({ theme }) => theme.text.light};
+  background-color: #f6f7f9;
 `;
 
 const Copyright = styled.p`
