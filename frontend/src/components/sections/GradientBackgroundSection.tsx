@@ -1,11 +1,14 @@
 /** The gradient background of the hero & outro section. */
 import { ReactNode } from 'react';
-import { IFlipX } from '../../types/interfaces';
+import { IFlipXProps } from '../../types/interfaces';
 import Image from 'next/image';
 import Curve from '../../images/curve.svg';
 import styled from 'styled-components';
 
 type GradientBackgroundSectionProps = {
+  /**
+   * Whether to flip the curve SVG on the x-axis.
+   */
   curveFlipX: boolean;
   children: ReactNode;
 };
@@ -31,7 +34,7 @@ const Section = styled.section`
   z-index: -1;
 `;
 
-const ImageWrapper = styled.div<IFlipX>`
+const ImageWrapper = styled.div<IFlipXProps>`
   position: absolute;
   top: ${({ flipX }) => (flipX ? '-0.05rem' : 'auto')};
   bottom: ${({ flipX }) => (flipX ? 'auto' : '-0.05rem')};
