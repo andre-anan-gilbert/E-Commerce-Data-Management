@@ -2,12 +2,14 @@
 import { ReactElement } from 'react';
 import { NextPage } from 'next';
 import { ThemeProvider } from 'styled-components';
-import { theme } from '../styles/theme';
+import { theme } from '../styles';
 import { Layout } from '../components/layout/Layout';
-import { Navbar } from '../components/ui/Navbar';
-import { HeroSection } from '../components/sections/HeroSection';
-import { TechnologyStackSection } from '../components/sections/TechnologyStackSection';
-import { OutroSection } from '../components/sections/OutroSection';
+import { Navbar } from '../components/ui/';
+import {
+  HeroSection,
+  TechnologyStackSection,
+  OutroSection,
+} from '../components/sections';
 
 const Home: NextPage = () => {
   return (

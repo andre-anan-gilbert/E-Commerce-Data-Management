@@ -4,7 +4,7 @@ import { NextPage } from 'next';
 import { AppProps } from 'next/app';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import { GlobalStyle } from '../styles/global-style';
+import { GlobalStyle } from '../styles';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;

@@ -1,6 +1,6 @@
 /** The layout component of the application. */
 import { ReactNode } from 'react';
-import { Footer } from '../ui/Footer';
+import { Footer } from '../ui';
 
 type LayoutProps = {
   children: ReactNode;

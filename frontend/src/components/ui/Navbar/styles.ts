@@ -1,30 +1,13 @@
-/** The navbar of the landing page. */
 import styled from 'styled-components';
-import Image from 'next/image';
-import Logo from '../../images/logo.svg';
 
-export const Navbar = () => {
-  return (
-    <Header>
-      <Wrapper>
-        <Image src={Logo} alt="logo" />
-        <ButtonWrapper>
-          <SignInButton type="button">Sign in</SignInButton>
-          <SignUpButton type="button">Sign up</SignUpButton>
-        </ButtonWrapper>
-      </Wrapper>
-    </Header>
-  );
-};
-
-const Header = styled.header`
+export const Header = styled.header`
   position: absolute;
   left: 0;
   right: 0;
   z-index: 100;
 `;
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   width: min(100%, 120rem);
   min-height: 5rem;
   margin-inline: auto;
@@ -35,11 +18,11 @@ const Wrapper = styled.div`
   justify-content: space-between;
 `;
 
-const ButtonWrapper = styled.div`
+export const ButtonWrapper = styled.div`
   display: inline-block;
 `;
 
-const Button = styled.button`
+export const Button = styled.button`
   position: relative;
   display: inline-flex;
   flex-direction: row;
@@ -51,12 +34,12 @@ const Button = styled.button`
   white-space: nowrap;
 `;
 
-const SignInButton = styled(Button)`
+export const SignInButton = styled(Button)`
   color: ${({ theme }) => theme.text.light};
   background-color: transparent;
 `;
 
-const SignUpButton = styled(Button)`
+export const SignUpButton = styled(Button)`
   padding: 0.8rem 1.6rem;
   margin-left: 1.6rem;
 

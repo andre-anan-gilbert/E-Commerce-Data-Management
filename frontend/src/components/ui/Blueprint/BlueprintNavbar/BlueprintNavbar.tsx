@@ -7,7 +7,7 @@ import {
   Classes,
 } from '@blueprintjs/core';
 
-const BlueprintNavbar = () => {
+export const BlueprintNavbar = () => {
   return (
     <Navbar>
       <NavbarGroup>
@@ -23,5 +23,3 @@ const BlueprintNavbar = () => {
     </Navbar>
   );
 };
-
-export default BlueprintNavbar;
