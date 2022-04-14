@@ -1,10 +1,12 @@
-"""Product 2 warehouses database model."""
+"""Product 2 warehouse database model."""
 from sqlalchemy import Column, Integer
-from app.database.base_class import Base
+from app.database.session import Base
 
 
 class Product2Warehouse(Base):
-    """Class that represents a product which belongs to a warehouse."""
+    """Class that represents the assignment of products to warehouses."""
+    __tablename__ = 'product_2_warehouse'
+
     product_item_number = Column(Integer, primary_key=True, index=True)
     warehouse_id = Column(Integer, primary_key=True, index=True)
     number_in_stock = Column(Integer, index=True)

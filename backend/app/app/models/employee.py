@@ -1,10 +1,12 @@
-"""Employees database model."""
+"""Employee database model."""
 from sqlalchemy import Column, Integer, String
-from app.database.base_class import Base
+from app.database.session import Base
 
 
-class Employees(Base):
+class Employee(Base):
     """Class that represents employees."""
+    __tablename__ = 'employee'
+
     employee_number = Column(Integer, primary_key=True, index=True)
     ssn = Column(Integer, unique=True, index=True)
     title = Column(String, index=True)

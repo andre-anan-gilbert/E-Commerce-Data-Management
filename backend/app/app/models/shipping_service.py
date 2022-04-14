@@ -1,10 +1,12 @@
-"""Shipping services database model."""
+"""Shipping service database model."""
 from sqlalchemy import Column, Integer, String
-from app.database.base_class import Base
+from app.database.session import Base
 
 
-class ShippingServices(Base):
-    """Class that represents the shipping services."""
+class ShippingService(Base):
+    """Class that represents shipping services."""
+    __tablename__ = 'shipping_service'
+
     _id = Column(Integer, primary_key=True, index=True)
     name = Column(String, index=True)
     address_id = Column(Integer, index=True)

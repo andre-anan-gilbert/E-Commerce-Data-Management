@@ -1,18 +1,20 @@
-"""Orders database model."""
+"""Order database model."""
 import enum
 from sqlalchemy import Column, Enum, Integer
-from app.database.base_class import Base
+from app.database.session import Base
 
 
 class OrderStatus(enum.Enum):
-    """Class that represents the status of the purchase order."""
+    """Class that represents the status of the order."""
     OPEN = 1
     SENT = 2
     DELIVERED = 3
 
 
-class Orders(Base):
-    """Class that represents the orders of customer."""
+class Order(Base):
+    """Class that represents orders made by a customer."""
+    __tablename__ = 'order'
+
     _id = Column(Integer, primary_key=True, index=True)
     customer_number = Column(Integer, index=True)
     invoice_id = Column(Integer, unique=True, index=True)

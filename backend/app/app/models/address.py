@@ -1,10 +1,12 @@
-"""Addresses database model."""
+"""Address database model."""
 from sqlalchemy import Column, Integer, String
-from app.database.base_class import Base
+from app.database.session import Base
 
 
-class Addresses(Base):
+class Address(Base):
     """Class that represents addresses."""
+    __tablename__ = 'address'
+
     _id = Column(Integer, primary_key=True, index=True)
     country = Column(String, index=True)
     region = Column(String, index=True)

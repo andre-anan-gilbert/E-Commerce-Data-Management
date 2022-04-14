@@ -1,10 +1,12 @@
-"""Products database model."""
+"""Product database model."""
 from sqlalchemy import Column, Float, Integer, String
-from app.database.base_class import Base
+from app.database.session import Base
 
 
-class Products(Base):
-    """Class that represents the products."""
+class Product(Base):
+    """Class that represents products."""
+    __tablename__ = 'product'
+
     item_number = Column(Integer, primary_key=True, index=True)
     name = Column(String, index=True)
     price = Column(Float, index=True)

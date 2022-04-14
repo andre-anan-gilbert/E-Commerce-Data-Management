@@ -1,10 +1,12 @@
-"""Customers database model."""
+"""Customer database model."""
 from sqlalchemy import Column, Integer, String
-from app.database.base_class import Base
+from app.database.session import Base
 
 
-class Customers(Base):
-    """Class that represents customer."""
+class Customer(Base):
+    """Class that represents customers."""
+    __tablename__ = 'customer'
+
     customer_number = Column(Integer, primary_key=True, index=True)
     title = Column(String, index=True)
     first_name = Column(String, index=True)

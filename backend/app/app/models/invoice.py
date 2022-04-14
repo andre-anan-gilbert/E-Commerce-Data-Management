@@ -1,7 +1,7 @@
-"""Invoices database model."""
+"""Invoice database model."""
 import enum
 from sqlalchemy import Column, Enum, Integer, Date
-from app.database.base_class import Base
+from app.database.session import Base
 
 
 class InvoiceStatus(enum.Enum):
@@ -11,8 +11,10 @@ class InvoiceStatus(enum.Enum):
     PAID = 3
 
 
-class Invoices(Base):
-    """Class that represents the invoices."""
+class Invoice(Base):
+    """Class that represents invoices."""
+    __tablename__ = 'invoice'
+
     _id = Column(Integer, primary_key=True, index=True)
     status = Column(Enum(InvoiceStatus), index=True)
     issue_date = Column(Date, index=True)
