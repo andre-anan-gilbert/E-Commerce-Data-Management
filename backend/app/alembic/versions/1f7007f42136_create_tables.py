@@ -1,15 +1,15 @@
 """create tables
 
-Revision ID: 605f8badc215
+Revision ID: 1f7007f42136
 Revises:
-Create Date: 2022-04-14 09:11:52.127774
+Create Date: 2022-04-14 13:30:41.561582
 
 """
 from alembic import op
 import sqlalchemy as sa
 
 # revision identifiers, used by Alembic.
-revision = '605f8badc215'
+revision = '1f7007f42136'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -38,6 +38,16 @@ def upgrade():
     op.create_index(op.f('ix_category__id'), 'category', ['_id'], unique=False)
     op.create_index(op.f('ix_category_description'), 'category', ['description'], unique=False)
     op.create_index(op.f('ix_category_name'), 'category', ['name'], unique=False)
+    op.create_table('customer', sa.Column('customer_number', sa.Integer(), nullable=False),
+                    sa.Column('title', sa.String(), nullable=True), sa.Column('first_name', sa.String(), nullable=True),
+                    sa.Column('last_name', sa.String(), nullable=True), sa.Column('email', sa.String(), nullable=True),
+                    sa.Column('phone_number', sa.String(), nullable=True), sa.PrimaryKeyConstraint('customer_number'))
+    op.create_index(op.f('ix_customer_customer_number'), 'customer', ['customer_number'], unique=False)
+    op.create_index(op.f('ix_customer_email'), 'customer', ['email'], unique=False)
+    op.create_index(op.f('ix_customer_first_name'), 'customer', ['first_name'], unique=False)
+    op.create_index(op.f('ix_customer_last_name'), 'customer', ['last_name'], unique=False)
+    op.create_index(op.f('ix_customer_phone_number'), 'customer', ['phone_number'], unique=False)
+    op.create_index(op.f('ix_customer_title'), 'customer', ['title'], unique=False)
     op.create_table('department', sa.Column('_id', sa.Integer(), nullable=False),
                     sa.Column('name', sa.String(), nullable=True), sa.Column('manager', sa.Integer(), nullable=True),
                     sa.PrimaryKeyConstraint('_id'))
@@ -250,6 +260,13 @@ def downgrade():
     op.drop_index(op.f('ix_department_manager'), table_name='department')
     op.drop_index(op.f('ix_department__id'), table_name='department')
     op.drop_table('department')
+    op.drop_index(op.f('ix_customer_title'), table_name='customer')
+    op.drop_index(op.f('ix_customer_phone_number'), table_name='customer')
+    op.drop_index(op.f('ix_customer_last_name'), table_name='customer')
+    op.drop_index(op.f('ix_customer_first_name'), table_name='customer')
+    op.drop_index(op.f('ix_customer_email'), table_name='customer')
+    op.drop_index(op.f('ix_customer_customer_number'), table_name='customer')
+    op.drop_table('customer')
     op.drop_index(op.f('ix_category_name'), table_name='category')
     op.drop_index(op.f('ix_category_description'), table_name='category')
     op.drop_index(op.f('ix_category__id'), table_name='category')
