@@ -1,14 +1,11 @@
 [MASTER]
 
 # Files or directories to be skipped. They should be base names, not paths.
-ignore=third_party,versions
+ignore=third_party
 
 # Files or directories matching the regex patterns are skipped. The regex
 # matches against base names, not paths.
 ignore-patterns=
-
-# ignores alembic versions
-ignore-paths=^app/alembic/versions/.*$
 
 # Pickle collected data for later comparisons.
 persistent=no
