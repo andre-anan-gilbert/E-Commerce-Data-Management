@@ -1,6 +1,7 @@
 """Invoice database model."""
 import enum
-from sqlalchemy import Column, Enum, Integer, Date
+from sqlalchemy import Column, Enum, Integer, Date, ForeignKey
+from sqlalchemy.orm import relationship
 from app.database.session import Base
 
 
@@ -19,4 +20,6 @@ class Invoice(Base):
     status = Column(Enum(InvoiceStatus), index=True)
     issue_date = Column(Date, index=True)
     due_date = Column(Date, index=True)
-    payment_information_id = Column(Integer, index=True)
+    payment_information_id = Column(Integer, ForeignKey('payment_information._id'), index=True)
+
+    payment_information = relationship('PaymentInformation', backref='invoices')

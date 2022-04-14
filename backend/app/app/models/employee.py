@@ -1,5 +1,6 @@
 """Employee database model."""
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy.orm import relationship
 from app.database.session import Base
 
 
@@ -13,8 +14,10 @@ class Employee(Base):
     first_name = Column(String, index=True)
     last_name = Column(String, index=True)
     job_title = Column(String, index=True)
-    department_id = Column(Integer, index=True)
-    warehouse_id = Column(Integer, index=True)
-    address_id = Column(Integer, index=True)
+    department_id = Column(Integer, ForeignKey('department._id'), index=True)
+    warehouse_id = Column(Integer, ForeignKey('warehouse._id'), index=True)
+    address_id = Column(Integer, ForeignKey('address._id'), index=True)
     email = Column(String, index=True)
     phone_number = Column(String, index=True)
+
+    department = relationship('Department', backref='employees')
