@@ -115,7 +115,7 @@ CREATE TABLE "shipping_service" (
   "phone_number" varchar
 );
 
-CREATE TABLE "postal_code_2_city" (
+CREATE TABLE "city" (
   "postal_code" varchar PRIMARY KEY,
   "city" varchar
 );
@@ -148,7 +148,7 @@ ALTER TABLE "product" ADD FOREIGN KEY ("supplier_id") REFERENCES "supplier" ("_i
 
 ALTER TABLE "supplier" ADD FOREIGN KEY ("address_id") REFERENCES "address" ("_id");
 
-ALTER TABLE "address" ADD FOREIGN KEY ("postal_code") REFERENCES "postal_code_2_city" ("postal_code");
+ALTER TABLE "address" ADD FOREIGN KEY ("postal_code") REFERENCES "city" ("postal_code");
 
 ALTER TABLE "order" ADD FOREIGN KEY ("customer_number") REFERENCES "customer" ("customer_number");
 
