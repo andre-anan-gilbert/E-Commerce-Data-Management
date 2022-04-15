@@ -1,4 +1,5 @@
 /** The landing page which the users first see. */
+import dynamic from 'next/dynamic';
 import { ReactElement } from 'react';
 import { NextPage } from 'next';
 import { ThemeProvider } from 'styled-components';
@@ -7,6 +8,7 @@ import { Layout } from '../components/layout/Layout';
 import { Navbar } from '../components/ui/';
 import {
   HeroSection,
+  OverviewSection,
   TechnologyStackSection,
   OutroSection,
 } from '../components/sections';
@@ -15,6 +17,7 @@ const Home: NextPage = () => {
   return (
     <>
       <HeroSection />
+      <OverviewSection />
       <TechnologyStackSection />
       <OutroSection />
     </>
