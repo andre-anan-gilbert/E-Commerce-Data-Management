@@ -4,7 +4,8 @@ import { NextPage } from 'next';
 import { AppProps } from 'next/app';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import { GlobalStyle } from '../styles';
+import { ThemeProvider } from 'styled-components';
+import { theme, GlobalStyle } from '../styles';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -20,8 +21,10 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <GlobalStyle />
-      {getLayout(<Component {...pageProps} />)}
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        {getLayout(<Component {...pageProps} />)}
+      </ThemeProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );

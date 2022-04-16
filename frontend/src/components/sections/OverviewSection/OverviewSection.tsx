@@ -11,13 +11,13 @@ import { OverviewSectionCard } from '../../cards';
 import { overviewCardData } from '../../../data/overview-card-data';
 
 export const OverviewSection = () => {
-  const overviewCards = overviewCardData.map(cardData => (
+  const overviewCards = overviewCardData.map(card => (
     <OverviewSectionCard
-      key={cardData.id}
-      img={cardData.img}
-      imgAlt={cardData.imgAlt}
-      title={cardData.title}
-      subtitle={cardData.subtitle}
+      key={card.id}
+      img={card.img}
+      alt={card.alt}
+      title={card.title}
+      subtitle={card.subtitle}
     />
   ));
 
@@ -25,7 +25,7 @@ export const OverviewSection = () => {
     <Section>
       <TextWrapper>
         <Grid>
-          <Title>Why 404</Title>
+          <Title>What is 404?</Title>
           <Subtitle className={`${Classes.RUNNING_TEXT} ${Classes.TEXT_LARGE}`}>
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
             nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam

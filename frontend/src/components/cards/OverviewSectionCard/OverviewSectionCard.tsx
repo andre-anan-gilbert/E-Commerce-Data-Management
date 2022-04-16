@@ -4,21 +4,21 @@ import { Card, ImageWrapper, Title, Subtitle } from './styles';
 
 type OverviewSectionCardProps = {
   img: string;
-  imgAlt: string;
+  alt: string;
   title: string;
   subtitle: string;
 };
 
 export const OverviewSectionCard = ({
   img,
-  imgAlt,
+  alt,
   title,
   subtitle,
 }: OverviewSectionCardProps) => {
   return (
     <Card>
       <ImageWrapper>
-        <Image src={img} alt={imgAlt} />
+        <Image src={img} alt={alt} />
       </ImageWrapper>
       <Title>{title}</Title>
       <Subtitle className={Classes.RUNNING_TEXT}>{subtitle}</Subtitle>

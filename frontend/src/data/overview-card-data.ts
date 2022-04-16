@@ -5,7 +5,7 @@ import Management from '../images/management.svg';
 interface IOverviewCard {
   id: number;
   img: string;
-  imgAlt: string;
+  alt: string;
   title: string;
   subtitle: string;
 }
@@ -14,7 +14,7 @@ export const overviewCardData: IOverviewCard[] = [
   {
     id: 1,
     img: World,
-    imgAlt: 'World',
+    alt: 'World',
     title: 'World',
     subtitle: `Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
       sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.`,
@@ -22,7 +22,7 @@ export const overviewCardData: IOverviewCard[] = [
   {
     id: 2,
     img: Data,
-    imgAlt: 'Data',
+    alt: 'Data',
     title: 'Data',
     subtitle: `Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
       sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.`,
@@ -30,7 +30,7 @@ export const overviewCardData: IOverviewCard[] = [
   {
     id: 3,
     img: Management,
-    imgAlt: 'Management',
+    alt: 'Management',
     title: 'Management',
     subtitle: `Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
       sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.`,
