@@ -9,7 +9,6 @@ export const Foo = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #f6f7f9;
 `;
 
 export const Copyright = styled.p`

@@ -2,14 +2,6 @@ import styled from 'styled-components';
 import { H3 } from '@blueprintjs/core';
 import { Breakpoints } from '../../../styles';
 
-export const Wrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  width: min(100%, 120rem);
-  margin-inline: auto;
-  justify-content: center;
-`;
-
 export const Card = styled.div`
   flex: 1 1 80%;
   display: flex;

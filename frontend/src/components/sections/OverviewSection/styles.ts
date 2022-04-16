@@ -27,3 +27,11 @@ export const Subtitle = styled.p`
   text-align: center;
   margin: 0;
 `;
+
+export const CardWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: min(100%, 120rem);
+  margin-inline: auto;
+  justify-content: center;
+`;

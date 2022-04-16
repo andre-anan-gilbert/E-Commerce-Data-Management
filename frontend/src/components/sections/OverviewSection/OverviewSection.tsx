@@ -1,8 +1,26 @@
 import { Classes } from '@blueprintjs/core';
-import { Section, TextWrapper, Grid, Title, Subtitle } from './styles';
+import {
+  Section,
+  TextWrapper,
+  Grid,
+  Title,
+  Subtitle,
+  CardWrapper,
+} from './styles';
 import { OverviewSectionCard } from '../../cards';
+import { overviewCardData } from '../../../data/overview-card-data';
 
 export const OverviewSection = () => {
+  const overviewCards = overviewCardData.map(cardData => (
+    <OverviewSectionCard
+      key={cardData.id}
+      img={cardData.img}
+      imgAlt={cardData.imgAlt}
+      title={cardData.title}
+      subtitle={cardData.subtitle}
+    />
+  ));
+
   return (
     <Section>
       <TextWrapper>
@@ -15,7 +33,7 @@ export const OverviewSection = () => {
           </Subtitle>
         </Grid>
       </TextWrapper>
-      <OverviewSectionCard />
+      <CardWrapper>{overviewCards}</CardWrapper>
     </Section>
   );
 };
