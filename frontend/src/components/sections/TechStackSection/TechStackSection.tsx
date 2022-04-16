@@ -1,7 +1,18 @@
 import { Classes } from '@blueprintjs/core';
 import { Section, Grid, Title, Subtitle } from './styles';
+import { TechStackSectionCard } from '../../cards/TechStackSectionCard/TechStackSectionCard';
+import { techStackCardData } from '../../../data/tech-stack-card-data';
 
 export const TechStackSection = () => {
+  const teckStackCards = techStackCardData.map(card => (
+    <TechStackSectionCard
+      key={card.id}
+      icon={card.icon}
+      title={card.title}
+      subtitle={card.subtitle}
+    />
+  ));
+
   return (
     <Section>
       <Grid>
@@ -11,6 +22,7 @@ export const TechStackSection = () => {
           nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
           sed diam voluptua.
         </Subtitle>
+        {teckStackCards}
       </Grid>
     </Section>
   );
