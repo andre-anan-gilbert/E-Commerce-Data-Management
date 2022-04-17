@@ -1,7 +1,7 @@
 import { Classes } from '@blueprintjs/core';
+import { TechStackSectionCard } from '@/cards/TechStackSectionCard/TechStackSectionCard';
+import { techStackCardData } from '@/data/tech-stack-card-data';
 import { Section, Grid, Title, Subtitle } from './styles';
-import { TechStackSectionCard } from '../../cards/TechStackSectionCard/TechStackSectionCard';
-import { techStackCardData } from '../../../data/tech-stack-card-data';
 
 export const TechStackSection = () => {
   const teckStackCards = techStackCardData.map(card => (

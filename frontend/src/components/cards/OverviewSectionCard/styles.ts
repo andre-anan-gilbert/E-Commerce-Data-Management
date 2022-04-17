@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { H3 } from '@blueprintjs/core';
-import { Breakpoints } from '../../../styles';
+import { TABLET } from '@/styles/breakpoints';
 
 export const Card = styled.div`
   flex: 1 1 80%;
@@ -11,7 +11,7 @@ export const Card = styled.div`
   margin-inline: 2rem;
   margin-bottom: 2rem;
 
-  @media (min-width: ${Breakpoints.TABLET}) {
+  @media (min-width: ${TABLET}) {
     flex: 1 1 30%;
   }
 `;

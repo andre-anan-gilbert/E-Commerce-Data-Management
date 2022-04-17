@@ -1,7 +1,7 @@
 /** The data for the cards in the overview section of the landing page. */
-import World from '../images/world.svg';
-import Data from '../images/data.svg';
-import Management from '../images/management.svg';
+import World from '@/images/world.svg';
+import Data from '@/images/data.svg';
+import Management from '@/images/management.svg';
 
 interface IOverviewCard {
   id: number;

@@ -1,4 +1,6 @@
 import { Classes } from '@blueprintjs/core';
+import { OverviewSectionCard } from '@/cards/OverviewSectionCard/OverviewSectionCard';
+import { overviewCardData } from '@/data/overview-card-data';
 import {
   Section,
   TextWrapper,
@@ -7,8 +9,6 @@ import {
   Subtitle,
   CardWrapper,
 } from './styles';
-import { OverviewSectionCard } from '../../cards';
-import { overviewCardData } from '../../../data/overview-card-data';
 
 export const OverviewSection = () => {
   const overviewCards = overviewCardData.map(card => (

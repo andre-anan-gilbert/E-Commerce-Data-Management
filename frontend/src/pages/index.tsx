@@ -1,14 +1,12 @@
 /** The landing page which the users first see. */
 import { ReactElement } from 'react';
 import { NextPage } from 'next';
-import { Layout } from '../components/layout/Layout';
-import { Navbar } from '../components/ui/';
-import {
-  HeroSection,
-  OverviewSection,
-  TechStackSection,
-  OutroSection,
-} from '../components/sections';
+import { Layout } from '@/layout/Layout';
+import { Navbar } from '@/ui/Navbar/Navbar';
+import { HeroSection } from '@/sections/HeroSection/HeroSection';
+import { OverviewSection } from '@/sections/OverviewSection/OverviewSection';
+import { TechStackSection } from '@/sections/TechStackSection/TechStackSection';
+import { OutroSection } from '@/sections/OutroSection/OutroSection';
 
 const Home: NextPage = () => {
   return (

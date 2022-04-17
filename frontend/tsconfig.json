@@ -1,5 +1,16 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/layout/*": ["src/components/layout/*"],
+      "@/buttons/*": ["src/components/buttons/*"],
+      "@/cards/*": ["src/components/cards/*"],
+      "@/sections/*": ["src/components/sections/*"],
+      "@/ui/*": ["src/components/ui/*"],
+      "@/data/*": ["src/data/*"],
+      "@/styles/*": ["src/styles/*"],
+      "@/images/*": ["src/images/*"]
+    },
     "allowJs": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
