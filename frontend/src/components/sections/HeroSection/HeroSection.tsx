@@ -1,6 +1,6 @@
 /** The hero section of the landing page. */
 import Image from 'next/image';
-import App from '@/images/app.svg';
+import App from '@images/app.svg';
 import { Classes } from '@blueprintjs/core';
 import { SignInButton } from '@buttons/SignInButton/SignInButton';
 import { SignUpButton } from '@buttons/SignUpButton/SignUpButton';
