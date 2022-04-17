@@ -7,6 +7,7 @@
       "@cards/*": ["components/cards/*"],
       "@sections/*": ["components/sections/*"],
       "@ui/*": ["components/ui/*"],
+      "@animations/*": ["components/animations/*"],
       "@data/*": ["data/*"],
       "@styles/*": ["styles/*"],
       "@images/*": ["images/*"]

@@ -14,7 +14,7 @@ export const TechStackSectionCard = ({
 }: TechStackSectionCardProps) => {
   return (
     <Wrapper>
-      <Icon icon={icon} size={20} />
+      <Icon icon={icon} size={30} />
       <Title>{title}</Title>
       <Subtitle>, {subtitle}</Subtitle>
     </Wrapper>
