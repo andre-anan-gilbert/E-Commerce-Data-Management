@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { H3 } from '@blueprintjs/core';
-import { TABLET } from '@/styles/breakpoints';
+import { TABLET } from '@styles/breakpoints';
 
 export const Card = styled.div`
   flex: 1 1 80%;
