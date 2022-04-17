@@ -2,8 +2,8 @@
 import Image from 'next/image';
 import App from '@/images/app.svg';
 import { Classes } from '@blueprintjs/core';
-import { SignInButton } from '@/buttons/SignInButton/SignInButton';
-import { SignUpButton } from '@/buttons/SignUpButton/SignUpButton';
+import { SignInButton } from '@buttons/SignInButton/SignInButton';
+import { SignUpButton } from '@buttons/SignUpButton/SignUpButton';
 import { GradientBackgroundSection } from '../GradientBackgroundSection/GradientBackgroundSection';
 import { Wrapper, Title, Subtitle, Grid, ButtonWrapper } from './styles';
 

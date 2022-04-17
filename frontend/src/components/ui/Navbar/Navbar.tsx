@@ -1,6 +1,6 @@
 /** The navbar of the landing page. */
 import Image from 'next/image';
-import Logo from '@/images/logo.svg';
+import Logo from '@images/logo.svg';
 import {
   Header,
   Wrapper,

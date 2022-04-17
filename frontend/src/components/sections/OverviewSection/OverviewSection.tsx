@@ -1,6 +1,6 @@
 import { Classes } from '@blueprintjs/core';
-import { OverviewSectionCard } from '@/cards/OverviewSectionCard/OverviewSectionCard';
-import { overviewCardData } from '@/data/overview-card-data';
+import { OverviewSectionCard } from '@cards/OverviewSectionCard/OverviewSectionCard';
+import { overviewCardData } from '@data/overview-card-data';
 import {
   Section,
   TextWrapper,

@@ -1,15 +1,15 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "paths": {
-      "@/layout/*": ["src/components/layout/*"],
-      "@/buttons/*": ["src/components/buttons/*"],
-      "@/cards/*": ["src/components/cards/*"],
-      "@/sections/*": ["src/components/sections/*"],
-      "@/ui/*": ["src/components/ui/*"],
-      "@/data/*": ["src/data/*"],
-      "@/styles/*": ["src/styles/*"],
-      "@/images/*": ["src/images/*"]
+      "@layout/*": ["components/layout/*"],
+      "@buttons/*": ["components/buttons/*"],
+      "@cards/*": ["components/cards/*"],
+      "@sections/*": ["components/sections/*"],
+      "@ui/*": ["components/ui/*"],
+      "@data/*": ["data/*"],
+      "@styles/*": ["styles/*"],
+      "@images/*": ["images/*"]
     },
     "allowJs": true,
     "allowUnreachableCode": false,

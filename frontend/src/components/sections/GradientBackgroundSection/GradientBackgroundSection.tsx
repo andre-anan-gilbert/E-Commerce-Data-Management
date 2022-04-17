@@ -1,13 +1,11 @@
 /** The gradient background of the hero & outro section. */
 import { ReactNode } from 'react';
 import Image from 'next/image';
-import Curve from '../../../images/curve.svg';
+import Curve from '@images/curve.svg';
 import { Section, ImageWrapper } from './styles';
 
 type GradientBackgroundSectionProps = {
-  /**
-   * Whether to flip the curve SVG on the x-axis.
-   */
+  /** Whether to flip the curve SVG on the x-axis. */
   curveFlipX: boolean;
   children: ReactNode;
 };
