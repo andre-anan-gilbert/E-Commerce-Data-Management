@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+import { motion } from 'framer-motion';
 import { TABLET } from '@styles/breakpoints';
 
 export const Wrapper = styled.div`
@@ -9,7 +10,8 @@ export const Wrapper = styled.div`
 
   @media (min-width: ${TABLET}) {
     flex: 1 1 50%;
-    align-items: center;
+    align-items: flex-start;
+    margin-top: 5rem;
   }
 `;
 
@@ -22,21 +24,14 @@ export const CubeWrapper = styled.div`
   perspective-origin: 50% 100px;
 `;
 
-const spin = keyframes`
-  from {
-    transform: rotateY(0deg);
-  }
-
-  to {
-    transform: rotateY(360deg);
-  }
-`;
-
-export const CubeFaces = styled.div`
+export const CubeFaces = styled(motion.div)`
   position: relative;
   transform-style: preserve-3d;
   width: 200px;
-  animation: ${spin} 45s infinite linear;
+
+  @media (min-width: ${TABLET}) {
+    width: 300px;
+  }
 
   div {
     width: 200px;
@@ -48,48 +43,80 @@ export const CubeFaces = styled.div`
     box-shadow: inset 0px 0px 100px #02203c;
     display: grid;
     place-items: center;
+
+    @media (min-width: ${TABLET}) {
+      width: 300px;
+      height: 300px;
+    }
   }
 `;
 
 export const CubeFaceFront = styled.div`
   transform: translateZ(100px);
   background-color: #3e526a;
+
+  @media (min-width: ${TABLET}) {
+    transform: translateZ(150px);
+  }
 `;
 
 export const CubeFaceBack = styled.div`
   transform: translateZ(-100px) rotateY(180deg);
   background-color: #3e526a;
+
+  @media (min-width: ${TABLET}) {
+    transform: translateZ(-150px) rotateY(180deg);
+  }
 `;
 
 export const CubeFaceLeft = styled.div`
   transform: rotateY(270deg) translateX(-100px);
   transform-origin: center left;
   background-color: #3e526a;
+
+  @media (min-width: ${TABLET}) {
+    transform: rotateY(270deg) translateX(-150px);
+  }
 `;
 
 export const CubeFaceRight = styled.div`
   transform: rotateY(-270deg) translateX(100px);
   transform-origin: top right;
   background-color: #3e526a;
+
+  @media (min-width: ${TABLET}) {
+    transform: rotateY(-270deg) translateX(150px);
+  }
 `;
 
 export const CubeFaceTop = styled.div`
   transform: rotateX(-90deg) translateY(-100px);
   transform-origin: top center;
   background-color: #02203c;
+
+  @media (min-width: ${TABLET}) {
+    transform: rotateX(-90deg) translateY(-150px);
+  }
 `;
 
 export const CubeFaceBottom = styled.div`
   transform: rotateX(90deg) translateY(100px);
   transform-origin: bottom center;
   background-color: #02203c;
+
+  @media (min-width: ${TABLET}) {
+    transform: rotateX(90deg) translateY(150px);
+  }
 `;
 
-export const CubeShadow = styled.div`
+export const CubeShadow = styled(motion.div)`
   position: relative;
   width: 200px;
   transform-style: preserve-3d;
-  animation: ${spin} 45s infinite linear;
+
+  @media (min-width: ${TABLET}) {
+    width: 300px;
+  }
 
   div {
     width: 200px;
@@ -100,5 +127,11 @@ export const CubeShadow = styled.div`
     opacity: 0.98;
     box-shadow: 0px 0px 100px #000;
     transform-origin: bottom center;
+
+    @media (min-width: ${TABLET}) {
+      width: 300px;
+      height: 300px;
+      transform: rotateX(90deg) translateY(150px);
+    }
   }
 `;

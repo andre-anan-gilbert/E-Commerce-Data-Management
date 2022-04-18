@@ -17,17 +17,38 @@ import {
   CubeFaceBottom,
 } from './styles';
 
+const spinAnimation = {
+  rotateY: 360,
+  repeat: Infinity,
+  duration: 45,
+  ease: 'linear',
+};
+
 export const CubeAnimation = () => {
   return (
     <Wrapper>
       <Cube>
         <CubeWrapper>
-          <CubeShadow>
+          <CubeShadow
+            whileInView={{ rotateY: spinAnimation.rotateY }}
+            transition={{
+              repeat: spinAnimation.repeat,
+              duration: spinAnimation.duration,
+              ease: spinAnimation.ease,
+            }}
+          >
             <div>&nbsp;</div>
           </CubeShadow>
         </CubeWrapper>
         <CubeWrapper>
-          <CubeFaces>
+          <CubeFaces
+            whileInView={{ rotateY: spinAnimation.rotateY }}
+            transition={{
+              repeat: spinAnimation.repeat,
+              duration: spinAnimation.duration,
+              ease: spinAnimation.ease,
+            }}
+          >
             <CubeFaceFront>
               <Image src={NextJS} alt="Next.js" />
             </CubeFaceFront>
