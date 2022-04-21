@@ -1,24 +1,21 @@
 /** The navbar of the data management application. */
 import {
+  Alignment,
   Navbar,
   NavbarGroup,
   NavbarHeading,
-  Button,
   Classes,
 } from '@blueprintjs/core';
+import { BlueprintMobileNavbar } from '../BlueprintMobileNavbar/BlueprintMobileNavbar';
 
 export const BlueprintNavbar = () => {
   return (
-    <Navbar>
+    <Navbar className={Classes.DARK}>
       <NavbarGroup>
         <NavbarHeading>404</NavbarHeading>
-        <Button className={Classes.MINIMAL} icon="home" text="Home" />
-        <Button className={Classes.MINIMAL} icon="document" text="Files" />
       </NavbarGroup>
-      <NavbarGroup align="right">
-        <Button className={Classes.MINIMAL} icon="user" />
-        <Button className={Classes.MINIMAL} icon="notifications" />
-        <Button className={Classes.MINIMAL} icon="cog" />
+      <NavbarGroup align={Alignment.RIGHT}>
+        <BlueprintMobileNavbar />
       </NavbarGroup>
     </Navbar>
   );
