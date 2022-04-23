@@ -1,8 +1,9 @@
 /** The gradient background of the hero & outro section. */
 import { ReactNode } from 'react';
 import Image from 'next/image';
+import Blob from '@images/blob.svg';
 import Curve from '@images/curve.svg';
-import { Section, ImageWrapper } from './styles';
+import { Section, BlobWrapper, ImageWrapper } from './styles';
 
 type GradientBackgroundSectionProps = {
   /** Whether to flip the curve SVG on the x-axis. */
@@ -17,6 +18,9 @@ export const GradientBackgroundSection = ({
   return (
     <Section>
       {children}
+      <BlobWrapper>
+        <Image src={Blob} alt="Blob" />
+      </BlobWrapper>
       <ImageWrapper flipX={curveFlipX}>
         <Image src={Curve} alt="Curve" layout="responsive" />
       </ImageWrapper>

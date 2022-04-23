@@ -8,6 +8,15 @@ export const Section = styled.section`
   z-index: -1;
 `;
 
+export const BlobWrapper = styled.div`
+  position: absolute;
+  top: 60%;
+  left: 100%;
+  width: 80%;
+  transform: translate(-100%, -60%);
+  z-index: -1;
+`;
+
 export const ImageWrapper = styled.div<IFlipXProps>`
   position: absolute;
   top: ${({ flipX }) => (flipX ? '-0.05rem' : 'auto')};
