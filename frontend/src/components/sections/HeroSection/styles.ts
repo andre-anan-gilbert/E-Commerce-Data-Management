@@ -1,30 +1,91 @@
 import styled from 'styled-components';
 import { H1, H3 } from '@blueprintjs/core';
+import { TABLET } from '@styles/breakpoints';
 
-export const Wrapper = styled.div`
-  padding-top: 10rem;
+export const Flex = styled.div`
+  display: block;
+
+  @media (min-width: ${TABLET}) {
+    height: 100%;
+    display: flex;
+    grid-gap: 10rem;
+    justify-content: center;
+    align-items: center;
+  }
+`;
+
+export const TextWrapper = styled.div`
+  padding-top: 15rem;
   color: ${({ theme }) => theme.text.light};
+
+  @media (min-width: ${TABLET}) {
+    flex: 1 1 50%;
+    padding-top: 0;
+    padding-left: 2rem;
+  }
 `;
 
 export const Grid = styled.div`
   display: grid;
   grid-gap: 2rem;
   padding-inline: 0.8rem;
-  margin-bottom: 5rem;
+  width: min(100%, 50rem);
+  margin: 0 0 0 auto;
+  transition: margin 0.4s;
 `;
 
 export const Title = styled(H1)`
   margin: 0;
   text-align: center;
+
+  @media (min-width: ${TABLET}) {
+    text-align: left;
+  }
 `;
 
 export const Subtitle = styled(H3)`
   margin: 0;
   text-align: center;
   color: ${({ theme }) => theme.text.muted};
+
+  @media (min-width: ${TABLET}) {
+    text-align: left;
+  }
 `;
 
 export const ButtonWrapper = styled.div`
   display: inline-block;
   margin-inline: auto;
+
+  @media (min-width: ${TABLET}) {
+    margin-inline: 0;
+  }
+`;
+
+export const ImageWrapper = styled.div`
+  margin-top: 7.5rem;
+  margin-inline: 1.2rem;
+
+  @media (min-width: ${TABLET}) {
+    flex: 1 1 50%;
+    display: flex;
+    align-items: flex-end;
+    margin-top: 0;
+    margin-inline: 0;
+    margin-right: 1.2rem;
+    height: 90rem;
+  }
+`;
+
+export const ImageApp = styled.div`
+  position: relative;
+  width: 100%;
+  filter: drop-shadow(0 10px 20px rgb(49, 34, 147, 0.25));
+`;
+
+export const ImageAppSection = styled.div`
+  position: absolute;
+  bottom: 0;
+  width: 80%;
+  filter: drop-shadow(0 10px 20px rgb(213, 110, 229, 0.15));
 `;

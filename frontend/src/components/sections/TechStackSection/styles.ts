@@ -11,6 +11,7 @@ export const Flex = styled.div`
   flex-direction: column-reverse;
   width: min(100%, 120rem);
   margin-inline: auto;
+  grid-gap: 5rem;
 
   @media (min-width: ${TABLET}) {
     flex-direction: row;
@@ -37,7 +38,6 @@ export const Title = styled(H1)`
 
 export const Subtitle = styled.p`
   text-align: center;
-  margin: 0;
 
   @media (min-width: ${TABLET}) {
     text-align: left;

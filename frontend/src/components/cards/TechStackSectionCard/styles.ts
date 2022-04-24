@@ -12,9 +12,9 @@ export const Wrapper = styled.div`
 `;
 
 export const Title = styled.b`
-  font-size: 16px;
+  font-size: 1.8rem;
   margin-left: 1rem;
-  margin-bottom: 0;
+  margin-block: 1rem;
 
   @media (min-width: ${TABLET}) {
     margin-left: 2rem;
@@ -22,6 +22,6 @@ export const Title = styled.b`
 `;
 
 export const Subtitle = styled.p`
-  font-size: 16px;
+  font-size: 1.8rem;
   margin: 0;
 `;

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { IFlipXProps } from './types';
+import { TABLET } from '@styles/breakpoints';
 
 export const Section = styled.section`
   position: relative;
@@ -8,13 +9,20 @@ export const Section = styled.section`
   z-index: -1;
 `;
 
-export const BlobWrapper = styled.div`
+export const GlowWrapper = styled.div`
   position: absolute;
-  top: 60%;
-  left: 100%;
-  width: 80%;
-  transform: translate(-100%, -60%);
+  top: 80%;
+  left: 75%;
+  width: 60%;
+  height: 100%;
+  transform: translate(-80%, -50%);
   z-index: -1;
+
+  @media (min-width: ${TABLET}) {
+    top: 60%;
+    left: 100%;
+    transform: translate(-100%, -60%);
+  }
 `;
 
 export const ImageWrapper = styled.div<IFlipXProps>`

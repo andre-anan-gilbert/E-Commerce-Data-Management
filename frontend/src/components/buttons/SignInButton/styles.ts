@@ -16,9 +16,13 @@ export const Button = styled.button`
 
   color: ${({ theme }) => theme.text.light};
   background-color: ${({ theme }) => theme.secondary};
-  box-shadow: 0 2rem 4rem rgb(141, 141, 247, 0.25);
+  box-shadow: 0 1rem 2rem rgb(141, 141, 247, 0.15);
 
   white-space: nowrap;
   border: none;
   transition: background-color 0.2s, padding 0.4s, box-shadow 0.2s, border 0.2s;
+
+  &:hover {
+    box-shadow: 0 1.5rem 3rem rgb(141, 141, 247, 0.25);
+  }
 `;
