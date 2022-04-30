@@ -14,4 +14,4 @@ services:
       - TEST_USER_PASSWORD
       - ALGORITHM
     container_name: backend-tests
-    command: bash && cd app/app && python app/pre_start.py && alembic upgrade head && python app/initial_data.py
+    command: bash -c "cd app/app && python app/pre_start.py && alembic upgrade head && python app/initial_data.py"
