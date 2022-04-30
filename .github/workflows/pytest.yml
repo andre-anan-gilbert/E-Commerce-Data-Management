@@ -44,5 +44,4 @@ jobs:
       run: docker logs backend-tests
     - name: Run Pytest
       run: |
-        docker-compose exec backend-tests bash
-        pytest
+        docker-compose exec backend-tests pytest
