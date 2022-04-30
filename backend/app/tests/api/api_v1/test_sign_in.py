@@ -10,7 +10,6 @@ def test_get_access_token(client: TestClient) -> None:
     }
     response = client.post(f'{settings.API_V1_STR}/sign-in/token', data=user)
     tokens = response.json()
-
     assert response.status_code == 200
     assert response.cookies
     assert 'access_token' in tokens
