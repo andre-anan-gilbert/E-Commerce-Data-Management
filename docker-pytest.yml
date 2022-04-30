@@ -3,7 +3,7 @@ services:
   backend-tests:
     build: ./backend
     ports:
-      - 8080:80
+      - 8000:80
     environment:
       - PROJECT_NAME
       - POSTGRES_USER
@@ -14,4 +14,4 @@ services:
       - TEST_USER_PASSWORD
       - ALGORITHM
     container_name: backend-tests
-    command: bash -c "cd app/app && python app/pre_start.py && alembic upgrade head && python app/initial_data.py"
+    command: /start.sh
