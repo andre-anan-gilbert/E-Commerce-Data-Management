@@ -15,6 +15,7 @@ class Settings(BaseSettings):
         return value
 
     SECRET_KEY: str = secrets.token_urlsafe(32)
+    ALGORITHM: str
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 15
     TEST_USER: EmailStr
     TEST_USER_PASSWORD: str

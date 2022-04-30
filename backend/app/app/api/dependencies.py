@@ -6,7 +6,6 @@ from jose import jwt
 from pydantic import ValidationError
 from sqlalchemy.orm import Session
 from app.database.session import SessionLocal
-from app.authentication import security
 from app.core.config import settings
 from app import crud, models, schemas
 
@@ -24,7 +23,7 @@ def get_database_session() -> Generator:
 
 def get_current_user(database: Session = Depends(get_database_session), token: str = Depends(oauth2)) -> models.User:
     try:
-        payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[security.ALGORITHM])
+        payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
         token_data = schemas.TokenPayload(**payload)
     except (jwt.JWTError, ValidationError) as error:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail='Could not validate credentials') from error
