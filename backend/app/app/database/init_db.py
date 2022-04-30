@@ -7,10 +7,10 @@ from app.core.config import settings
 
 def run(database: Session) -> None:
     """Fills the database with initial data."""
-    user = crud.user.get_by_email(database, email=settings.FIRST_USER)
+    user = crud.user.get_by_email(database, email=settings.TEST_USER)
     if not user:
         user_in = schemas.UserCreate(
-            email=settings.FIRST_USER,
-            password=settings.FIRST_USER_PASSWORD,
+            email=settings.TEST_USER,
+            password=settings.TEST_USER_PASSWORD,
         )
         user = crud.user.create(database, obj_in=user_in)

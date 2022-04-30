@@ -16,8 +16,8 @@ class Settings(BaseSettings):
 
     SECRET_KEY: str = secrets.token_urlsafe(32)
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 15
-    FIRST_USER: EmailStr
-    FIRST_USER_PASSWORD: str
+    TEST_USER: EmailStr
+    TEST_USER_PASSWORD: str
 
     BACKEND_CORS_ORIGINS: list[AnyHttpUrl] = []
 
