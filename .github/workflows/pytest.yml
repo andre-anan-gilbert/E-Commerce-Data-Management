@@ -46,3 +46,4 @@ jobs:
         POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
         TEST_USER: ${{ secrets.TEST_USER }}
         TEST_USER_PASSWORD: ${{ secrets.TEST_USER_PASSWORD }}
+        ALGORITHM: ${{ secrets.ALGORITHM }}
