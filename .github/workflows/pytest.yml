@@ -44,3 +44,5 @@ jobs:
         POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
         POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
         POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+        TEST_USER: ${{ secrets.TEST_USER }}
+        TEST_USER_PASSWORD: ${{ secrets.TEST_USER_PASSWORD }}
