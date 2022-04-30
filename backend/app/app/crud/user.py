@@ -8,6 +8,7 @@ from app.authentication.security import get_password_hash, verify_password
 
 
 class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
+    """CRUD user class with methods to get, create, update, and authenticate."""
 
     def get_by_email(self, database: Session, *, email: str) -> Optional[User]:
         return database.query(User).filter(User.email == email).first()
@@ -36,10 +37,10 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
         return super().update(database, database_obj=database_obj, obj_in=update_data)
 
     def authenticate(self, database: Session, *, email: str, password: str) -> Optional[User]:
-        user = self.get_by_email(database, email=email)
-        if not user: return
+        user_email = self.get_by_email(database, email=email)
+        if not user_email: return
         if not verify_password(password, user.hashed_password): return
-        return user
+        return user_email
 
 
 user = CRUDUser(User)
