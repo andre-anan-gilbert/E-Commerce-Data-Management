@@ -28,7 +28,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
     - name: Build docker-compose stack
-      run: docker-compose -f "docker-pytest.yml" up -d --build
+      run: docker-compose -f "docker-pytest.yml" up -d
       env:
         PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
         POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
