@@ -39,7 +39,18 @@ jobs:
     - name: Run Prestart Script
       working-directory: ./backend/app
       run: |
-        sh prestart.sh
+        python pre_start.py
+        alembic upgrade head
+        python initial_data.py
+      env:
+        PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
+        POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+        POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
+        POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+        POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+        TEST_USER: ${{ secrets.TEST_USER }}
+        TEST_USER_PASSWORD: ${{ secrets.TEST_USER_PASSWORD }}
+        ALGORITHM: ${{ secrets.ALGORITHM }}
     - name: Run Pytest
       run: pytest ./backend/app/tests/
       env:
