@@ -12,4 +12,4 @@ class Department(Base):
     name = Column(String, index=True)
     manager = Column(Integer, ForeignKey('employee.employee_number'), index=True)
 
-    employee = relationship('Employee', backref='departments')
+    employee = relationship('Employee', backref='departments', foreign_keys=[manager])
