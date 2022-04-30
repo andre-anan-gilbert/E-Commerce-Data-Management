@@ -36,6 +36,10 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+    - name: Run Prestart Script
+      working-directory: ./backend/app
+      run: |
+        sh prestart.sh
     - name: Run Pytest
       run: pytest ./backend/app/tests/
       env:
