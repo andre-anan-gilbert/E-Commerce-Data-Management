@@ -37,10 +37,10 @@ export const CubeFaces = styled(motion.div)`
     width: 200px;
     height: 200px;
     padding: 1rem;
-    outline: 1px solid #02203c;
+    outline: 1px solid ${({ theme }) => theme.secondary};
     position: absolute;
-    opacity: 0.8;
-    box-shadow: inset 0px 0px 100px #02203c;
+    opacity: 0.9;
+    box-shadow: inset 0px 0px 100px ${({ theme }) => theme.secondary};
     display: grid;
     place-items: center;
 
@@ -53,7 +53,7 @@ export const CubeFaces = styled(motion.div)`
 
 export const CubeFaceFront = styled.div`
   transform: translateZ(100px);
-  background-color: #3e526a;
+  background: ${({ theme }) => theme.primary};
 
   @media (min-width: ${TABLET}) {
     transform: translateZ(150px);
@@ -62,7 +62,7 @@ export const CubeFaceFront = styled.div`
 
 export const CubeFaceBack = styled.div`
   transform: translateZ(-100px) rotateY(180deg);
-  background-color: #3e526a;
+  background: ${({ theme }) => theme.primary};
 
   @media (min-width: ${TABLET}) {
     transform: translateZ(-150px) rotateY(180deg);
@@ -72,7 +72,7 @@ export const CubeFaceBack = styled.div`
 export const CubeFaceLeft = styled.div`
   transform: rotateY(270deg) translateX(-100px);
   transform-origin: center left;
-  background-color: #3e526a;
+  background: ${({ theme }) => theme.primary};
 
   @media (min-width: ${TABLET}) {
     transform: rotateY(270deg) translateX(-150px);
@@ -82,7 +82,7 @@ export const CubeFaceLeft = styled.div`
 export const CubeFaceRight = styled.div`
   transform: rotateY(-270deg) translateX(100px);
   transform-origin: top right;
-  background-color: #3e526a;
+  background: ${({ theme }) => theme.primary};
 
   @media (min-width: ${TABLET}) {
     transform: rotateY(-270deg) translateX(150px);
@@ -92,7 +92,7 @@ export const CubeFaceRight = styled.div`
 export const CubeFaceTop = styled.div`
   transform: rotateX(-90deg) translateY(-100px);
   transform-origin: top center;
-  background-color: #02203c;
+  background-color: ${({ theme }) => theme.secondary};
 
   @media (min-width: ${TABLET}) {
     transform: rotateX(-90deg) translateY(-150px);
@@ -102,7 +102,7 @@ export const CubeFaceTop = styled.div`
 export const CubeFaceBottom = styled.div`
   transform: rotateX(90deg) translateY(100px);
   transform-origin: bottom center;
-  background-color: #02203c;
+  background-color: ${({ theme }) => theme.secondary};
 
   @media (min-width: ${TABLET}) {
     transform: rotateX(90deg) translateY(150px);
@@ -125,7 +125,7 @@ export const CubeShadow = styled(motion.div)`
     position: absolute;
     top: 0px;
     opacity: 0.98;
-    box-shadow: 0px 0px 100px #000;
+    box-shadow: 0px 0px 100px ${({ theme }) => theme.secondary};
     transform-origin: bottom center;
 
     @media (min-width: ${TABLET}) {

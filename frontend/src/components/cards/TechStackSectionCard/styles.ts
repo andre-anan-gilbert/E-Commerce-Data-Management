@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Title = styled.b`
-  font-size: 1.8rem;
+  font-size: 2rem;
   margin-left: 1rem;
   margin-block: 1rem;
 

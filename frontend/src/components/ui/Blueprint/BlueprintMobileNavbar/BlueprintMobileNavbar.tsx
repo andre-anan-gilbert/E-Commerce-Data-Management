@@ -32,7 +32,7 @@ export const BlueprintMobileNavbar = () => {
         size="320px"
       >
         <div className={Classes.DRAWER_BODY}>
-          <Link href="/home" passHref={true}>
+          <Link href="/home" passHref>
             <AnchorButton
               text="Home"
               alignText={Alignment.LEFT}
@@ -40,7 +40,7 @@ export const BlueprintMobileNavbar = () => {
               onClick={handleClose}
             />
           </Link>
-          <Link href="/employees" passHref={true}>
+          <Link href="/employees" passHref>
             <AnchorButton
               text="Employees"
               alignText={Alignment.LEFT}
@@ -48,7 +48,7 @@ export const BlueprintMobileNavbar = () => {
               onClick={handleClose}
             />
           </Link>
-          <Link href="/warehouses" passHref={true}>
+          <Link href="/warehouses" passHref>
             <AnchorButton
               text="Warehouses"
               alignText={Alignment.LEFT}
@@ -56,7 +56,7 @@ export const BlueprintMobileNavbar = () => {
               onClick={handleClose}
             />
           </Link>
-          <Link href="/orders" passHref={true}>
+          <Link href="/orders" passHref>
             <AnchorButton
               text="Orders"
               alignText={Alignment.LEFT}
@@ -64,7 +64,7 @@ export const BlueprintMobileNavbar = () => {
               onClick={handleClose}
             />
           </Link>
-          <Link href="/customers" passHref={true}>
+          <Link href="/customers" passHref>
             <AnchorButton
               text="Customers"
               alignText={Alignment.LEFT}
@@ -72,7 +72,7 @@ export const BlueprintMobileNavbar = () => {
               onClick={handleClose}
             />
           </Link>
-          <Link href="/suppliers" passHref={true}>
+          <Link href="/suppliers" passHref>
             <AnchorButton
               text="Suppliers"
               alignText={Alignment.LEFT}

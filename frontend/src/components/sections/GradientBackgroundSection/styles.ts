@@ -14,13 +14,14 @@ export const GlowWrapper = styled.div`
   top: 80%;
   left: 75%;
   width: 60%;
-  height: 100%;
+  height: 30%;
   transform: translate(-80%, -50%);
   z-index: -1;
 
   @media (min-width: ${TABLET}) {
     top: 60%;
     left: 100%;
+    height: 100%;
     transform: translate(-100%, -60%);
   }
 `;
