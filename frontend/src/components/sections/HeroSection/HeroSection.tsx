@@ -39,9 +39,14 @@ export const HeroSection = () => {
         </TextWrapper>
         <ImageWrapper>
           <ImageApp>
-            <Image src={App} alt="App" priority />
+            <Image src={App} alt="App" layout="responsive" priority />
             <ImageAppSection>
-              <Image src={AppSection} alt="App Section" priority />
+              <Image
+                src={AppSection}
+                alt="App Section"
+                layout="responsive"
+                priority
+              />
             </ImageAppSection>
           </ImageApp>
         </ImageWrapper>

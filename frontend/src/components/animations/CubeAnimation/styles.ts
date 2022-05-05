@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import { motion } from 'framer-motion';
-import { TABLET } from '@styles/breakpoints';
+import * as Breakpoints from '@styles/breakpoints';
 
 export const Wrapper = styled.div`
   margin-bottom: 5rem;
@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
 
-  @media (min-width: ${TABLET}) {
+  @media (min-width: ${Breakpoints.MD}) {
     flex: 1 1 50%;
     align-items: flex-start;
     margin-top: 5rem;
@@ -29,7 +29,7 @@ export const CubeFaces = styled(motion.div)`
   transform-style: preserve-3d;
   width: 200px;
 
-  @media (min-width: ${TABLET}) {
+  @media (min-width: ${Breakpoints.MD}) {
     width: 300px;
   }
 
@@ -44,7 +44,7 @@ export const CubeFaces = styled(motion.div)`
     display: grid;
     place-items: center;
 
-    @media (min-width: ${TABLET}) {
+    @media (min-width: ${Breakpoints.MD}) {
       width: 300px;
       height: 300px;
     }
@@ -55,7 +55,7 @@ export const CubeFaceFront = styled.div`
   transform: translateZ(100px);
   background: ${({ theme }) => theme.primary};
 
-  @media (min-width: ${TABLET}) {
+  @media (min-width: ${Breakpoints.MD}) {
     transform: translateZ(150px);
   }
 `;
@@ -64,7 +64,7 @@ export const CubeFaceBack = styled.div`
   transform: translateZ(-100px) rotateY(180deg);
   background: ${({ theme }) => theme.primary};
 
-  @media (min-width: ${TABLET}) {
+  @media (min-width: ${Breakpoints.MD}) {
     transform: translateZ(-150px) rotateY(180deg);
   }
 `;
@@ -74,7 +74,7 @@ export const CubeFaceLeft = styled.div`
   transform-origin: center left;
   background: ${({ theme }) => theme.primary};
 
-  @media (min-width: ${TABLET}) {
+  @media (min-width: ${Breakpoints.MD}) {
     transform: rotateY(270deg) translateX(-150px);
   }
 `;
@@ -84,7 +84,7 @@ export const CubeFaceRight = styled.div`
   transform-origin: top right;
   background: ${({ theme }) => theme.primary};
 
-  @media (min-width: ${TABLET}) {
+  @media (min-width: ${Breakpoints.MD}) {
     transform: rotateY(-270deg) translateX(150px);
   }
 `;
@@ -94,7 +94,7 @@ export const CubeFaceTop = styled.div`
   transform-origin: top center;
   background-color: ${({ theme }) => theme.secondary};
 
-  @media (min-width: ${TABLET}) {
+  @media (min-width: ${Breakpoints.MD}) {
     transform: rotateX(-90deg) translateY(-150px);
   }
 `;
@@ -104,7 +104,7 @@ export const CubeFaceBottom = styled.div`
   transform-origin: bottom center;
   background-color: ${({ theme }) => theme.secondary};
 
-  @media (min-width: ${TABLET}) {
+  @media (min-width: ${Breakpoints.MD}) {
     transform: rotateX(90deg) translateY(150px);
   }
 `;
@@ -114,7 +114,7 @@ export const CubeShadow = styled(motion.div)`
   width: 200px;
   transform-style: preserve-3d;
 
-  @media (min-width: ${TABLET}) {
+  @media (min-width: ${Breakpoints.MD}) {
     width: 300px;
   }
 
@@ -128,7 +128,7 @@ export const CubeShadow = styled(motion.div)`
     box-shadow: 0px 0px 100px ${({ theme }) => theme.secondary};
     transform-origin: bottom center;
 
-    @media (min-width: ${TABLET}) {
+    @media (min-width: ${Breakpoints.MD}) {
       width: 300px;
       height: 300px;
       transform: rotateX(90deg) translateY(150px);

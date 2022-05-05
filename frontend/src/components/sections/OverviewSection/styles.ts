@@ -25,7 +25,8 @@ export const Title = styled(H1)`
 
 export const Subtitle = styled.p`
   text-align: center;
-  margin: 0;
+  margin-inline: auto;
+  max-width: 70rem;
 `;
 
 export const CardWrapper = styled.div`
