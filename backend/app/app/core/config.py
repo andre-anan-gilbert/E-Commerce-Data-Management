@@ -14,7 +14,8 @@ class Settings(BaseSettings):
         if not value: return values['PROJECT_NAME']
         return value
 
-    SECRET_KEY: str = secrets.token_urlsafe(32)
+    ACCESS_TOKEN_SECRET: str = secrets.token_urlsafe(32)
+    REFRESH_TOKEN_SECRET: str = secrets.token_urlsafe(36)
     ALGORITHM: str
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 15
     REFRESH_TOKEN_EXPIRE_MINUTES: int = 60 * 7
