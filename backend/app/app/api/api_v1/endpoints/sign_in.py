@@ -12,11 +12,6 @@ from app.api import dependencies
 from app.schemas import jwt_token
 from app.core.config import settings
 
-import logging
-
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-
 router = APIRouter()
 
 
@@ -28,7 +23,7 @@ async def get_sign_in_token(
 ) -> Any:
     """OAuth2 sign-in token."""
     user = crud.user.authenticate(database, email=form_data.username, password=form_data.password)
-    if not user: raise HTTPException(status_code=400, detail='Incorrect email or password')
+    if user is None: raise HTTPException(status_code=400, detail='Incorrect email or password')
 
     access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = authentication.create_access_token(user.user_id, expires_delta=access_token_expires)
@@ -48,18 +43,15 @@ async def get_refresh_token(
 ):
     """OAuth2 refresh token."""
     token = jid
-    logger.warning('Refresh token: %s', token)
-    if not token: return {'access_token': ''}
+    if token is None: return {'access_token': ''}
 
     try:
         payload = jwt.decode(token, settings.REFRESH_TOKEN_SECRET, algorithms=settings.ALGORITHM)
     except jwt.JWTError as error:
-        raise HTTPException(status_code=401, detail='Login first') from error
-
-    logger.warning('Payload %s', payload)
+        raise HTTPException(status_code=401, detail='User is not signed in') from error
 
     user = crud.user.get(database, obj_id=payload['sub'])
-    if not user: return {'access_token': ''}
+    if user is None: return {'access_token': ''}
 
     access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = authentication.create_access_token(user.user_id, expires_delta=access_token_expires)

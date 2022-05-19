@@ -18,17 +18,17 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
     """
 
     def __init__(self, model: Type[ModelType]) -> None:
-        self.model = model
+        self._model = model
 
     def get(self, database: Session, obj_id: Any) -> Optional[ModelType]:
-        return database.query(self.model).filter(self.model.id == obj_id).first()
+        return database.query(self._model).filter(self.model.id == obj_id).first()
 
     def get_multi(self, database: Session, *, skip: int = 0, limit: int = 50) -> list[ModelType]:
-        return database.query(self.model).offset(skip).limit(limit).all()
+        return database.query(self._model).offset(skip).limit(limit).all()
 
     def create(self, database: Session, *, obj_in: CreateSchemaType) -> ModelType:
         obj_in_data = jsonable_encoder(obj_in)
-        database_obj = self.model(**obj_in_data)
+        database_obj = self._model(**obj_in_data)
         database.add(database_obj)
         database.commit()
         database.refresh(database_obj)
@@ -58,7 +58,7 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         return database_obj
 
     def remove(self, database: Session, *, obj_id: int) -> ModelType:
-        obj = database.query(self.model).get(obj_id)
+        obj = database.query(self._model).get(obj_id)
         database.delete(obj)
         database.commit()
         return obj
