@@ -5,9 +5,9 @@ from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from app.database.base import Base
 
-ModelType = TypeVar("ModelType", bound=Base)
-CreateSchemaType = TypeVar("CreateSchemaType", bound=BaseModel)
-UpdateSchemaType = TypeVar("UpdateSchemaType", bound=BaseModel)
+ModelType = TypeVar('ModelType', bound=Base)
+CreateSchemaType = TypeVar('CreateSchemaType', bound=BaseModel)
+UpdateSchemaType = TypeVar('UpdateSchemaType', bound=BaseModel)
 
 
 class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
@@ -21,7 +21,7 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         self._model = model
 
     def get(self, database: Session, obj_id: Any) -> Optional[ModelType]:
-        return database.query(self._model).filter(self.model.id == obj_id).first()
+        return database.query(self._model).filter(self._model.id == obj_id).first()
 
     def get_multi(self, database: Session, *, skip: int = 0, limit: int = 50) -> list[ModelType]:
         return database.query(self._model).offset(skip).limit(limit).all()
