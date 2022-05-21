@@ -11,24 +11,24 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres
-        env:
-          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
-          POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
-          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+    # services:
+    #   # postgres:
+    #   #   image: postgres
+    #   #   env:
+    #   #     POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+    #   #     POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
+    #   #     POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+    #   #     POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+    #   #   options: >-
+    #   #     --health-cmd pg_isready
+    #   #     --health-interval 10s
+    #   #     --health-timeout 5s
+    #   #     --health-retries 5
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
     - name: Build docker-compose stack
-      run: docker-compose -f "docker-compose.yml" up -d
+      run: docker-compose -f "docker-pytest.yml" up -d
       env:
         PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
         POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
