@@ -7,9 +7,10 @@ from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from jose import jwt
 
-from app import crud, authentication
+from app import crud
 from app.api import dependencies
 from app.schemas import jwt_token
+from app.core import security
 from app.core.config import settings
 
 router = APIRouter()
@@ -26,10 +27,10 @@ async def get_sign_in_token(
     if user is None: raise HTTPException(status_code=400, detail='Incorrect email or password')
 
     access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
-    access_token = authentication.create_access_token(user.user_id, expires_delta=access_token_expires)
+    access_token = security.create_token(user.user_id, expires_delta=access_token_expires)
 
     refresh_token_expires = timedelta(minutes=settings.REFRESH_TOKEN_EXPIRE_MINUTES)
-    refresh_token = authentication.create_refresh_token(user.user_id, expires_delta=refresh_token_expires)
+    refresh_token = security.create_token(user.user_id, expires_delta=refresh_token_expires, refresh=True)
 
     response.set_cookie(key='jid', value=refresh_token, httponly=True)
     return {'access_token': access_token, 'token_type': 'bearer'}
@@ -54,10 +55,10 @@ async def get_refresh_token(
     if user is None: return {'access_token': ''}
 
     access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
-    access_token = authentication.create_access_token(user.user_id, expires_delta=access_token_expires)
+    access_token = security.create_token(user.user_id, expires_delta=access_token_expires)
 
     refresh_token_expires = timedelta(minutes=settings.REFRESH_TOKEN_EXPIRE_MINUTES)
-    refresh_token = authentication.create_refresh_token(user.user_id, expires_delta=refresh_token_expires)
+    refresh_token = security.create_token(user.user_id, expires_delta=refresh_token_expires, refresh=True)
 
     response.set_cookie(key='jid', value=refresh_token, httponly=True)
     return {'access_token': access_token, 'token_type': 'bearer'}

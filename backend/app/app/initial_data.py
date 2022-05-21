@@ -1,4 +1,4 @@
-"""Create initial data in the database."""
+"""Creates initial data in the database."""
 import logging
 from app.database import init_db
 from app.database.session import SessionLocal
