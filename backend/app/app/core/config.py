@@ -1,6 +1,7 @@
 """Database Configuration."""
+import secrets
 from typing import Any, Optional, Union
-from pydantic import AnyHttpUrl, BaseSettings, validator, PostgresDsn
+from pydantic import AnyHttpUrl, BaseSettings, EmailStr, validator, PostgresDsn
 
 
 class Settings(BaseSettings):
@@ -12,6 +13,14 @@ class Settings(BaseSettings):
     def get_project_name(cls, value: Optional[str], values: dict[str, Any]) -> str:  # pylint: disable=no-self-argument
         if not value: return values['PROJECT_NAME']
         return value
+
+    ACCESS_TOKEN_SECRET: str = secrets.token_urlsafe(32)
+    REFRESH_TOKEN_SECRET: str = secrets.token_urlsafe(36)
+    ALGORITHM: str
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 15
+    REFRESH_TOKEN_EXPIRE_MINUTES: int = 60 * 7
+    TEST_USER: EmailStr
+    TEST_USER_PASSWORD: str
 
     BACKEND_CORS_ORIGINS: list[AnyHttpUrl] = []
 

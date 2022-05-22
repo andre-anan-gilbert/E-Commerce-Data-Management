@@ -1,0 +1,33 @@
+version: '3.9'
+services:
+  backend:
+    build: ./backend
+    ports:
+      - 8000:80
+    environment:
+      - PROJECT_NAME
+      - POSTGRES_USER
+      - POSTGRES_HOST
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+      - TEST_USER
+      - TEST_USER_PASSWORD
+      - ALGORITHM
+    container_name: backend
+    command: /start.sh
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_HOST
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+    volumes:
+      - postgres-db:/var/lib/postgresql/data
+    container_name: database
+
+volumes:
+  postgres-db:

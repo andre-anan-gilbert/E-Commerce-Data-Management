@@ -7,7 +7,7 @@ import { Wrapper, Grid, Title, Subtitle, ButtonWrapper } from './styles';
 
 export const OutroSection = () => {
   return (
-    <GradientBackgroundSection curveFlipX={true}>
+    <GradientBackgroundSection curveFlipX>
       <Wrapper>
         <Grid>
           <Title className={Classes.DARK}>Get Started Now.</Title>

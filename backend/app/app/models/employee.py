@@ -20,4 +20,4 @@ class Employee(Base):
     email = Column(String, index=True)
     phone_number = Column(String, index=True)
 
-    department = relationship('Department', backref='employees')
+    department = relationship('Department', backref='employees', foreign_keys=[department_id])

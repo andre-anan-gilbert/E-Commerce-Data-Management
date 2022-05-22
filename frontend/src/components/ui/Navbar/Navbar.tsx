@@ -13,7 +13,7 @@ export const Navbar = () => {
   return (
     <Header>
       <Wrapper>
-        <Image src={Logo} alt="logo" />
+        <Image src={Logo} alt="logo" priority />
         <ButtonWrapper>
           <SignInButton type="button">Sign in</SignInButton>
           <SignUpButton type="button">Sign up</SignUpButton>

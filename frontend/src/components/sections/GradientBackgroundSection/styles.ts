@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { IFlipXProps } from './types';
-import { TABLET } from '@styles/breakpoints';
+import * as Breakpoints from '@styles/breakpoints';
 
 export const Section = styled.section`
   position: relative;
@@ -14,13 +14,14 @@ export const GlowWrapper = styled.div`
   top: 80%;
   left: 75%;
   width: 60%;
-  height: 100%;
+  height: 30%;
   transform: translate(-80%, -50%);
   z-index: -1;
 
-  @media (min-width: ${TABLET}) {
+  @media (min-width: ${Breakpoints.MD}) {
     top: 60%;
     left: 100%;
+    height: 100%;
     transform: translate(-100%, -60%);
   }
 `;
