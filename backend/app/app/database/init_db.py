@@ -1,5 +1,4 @@
 """Initializes the database with data."""
-from unicodedata import category
 from sqlalchemy.orm import Session
 from app import crud, schemas
 from app.database import base  # pylint: disable=unused-import
@@ -24,7 +23,16 @@ def run(database: Session) -> None:
     for category in categories:
         crud.category.create(database, obj_in=category)
 
+    # more fictional test examples
+    city = {'postal_code': '33602', 'city': 'Bielefeld'}
+
+    crud.city.create(database, obj_in=city)
+
+    # create address
+
     # create supplier
+
+    # create products
 
     # products = [{
     #     'item_number': 1,

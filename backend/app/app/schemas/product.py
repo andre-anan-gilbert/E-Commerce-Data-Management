@@ -1,10 +1,7 @@
 """Product properties."""
 from typing import Optional
-from unicodedata import category
 
 from pydantic import BaseModel
-
-from app import models
 
 
 # Shared properties
