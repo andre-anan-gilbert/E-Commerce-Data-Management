@@ -30,13 +30,15 @@ def read_products() -> Any:
 
 
 @router.post('/', response_model=schemas.Product)
-def create_product() -> Any:
-    """Create a new product.
-
-    Returns:
-        _description_
-    """
-    return {'message': 'The endpoint for product creation is not yet implemented.'}
+def create_product(
+        *,
+        db: Session = Depends(dependencies.get_database_session),
+        product_in: schemas.ProductCreate,
+        current_user: models.User = Depends(dependencies.get_current_user),
+) -> Any:
+    """Create a new product."""
+    product = crud.product.create(db=db, obj_in=product_in)
+    return product
 
 
 @router.put('/{item_number}', response_model=schemas.Product)
