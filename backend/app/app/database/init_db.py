@@ -12,23 +12,36 @@ def run(database: Session) -> None:
         user_in = schemas.UserCreate(email=settings.TEST_USER, password=settings.TEST_USER_PASSWORD)
         user = crud.user.create(database, obj_in=user_in)
 
-    categories = [{
+    categories_data = [{
         'name': 'Category A',
-        'description': 'A test category for initial data.'
+        'description': 'A test category for initial data.',
     }, {
         'name': 'Category B',
-        'description': 'Another test category for initial data.'
+        'description': 'Another test category for initial data.',
     }]
 
-    for category in categories:
-        crud.category.create(database, obj_in=category)
+    categories = []
 
-    # more fictional test examples
-    city = {'postal_code': '33602', 'city': 'Bielefeld'}
+    for category_data in categories_data:
+        categories.append(crud.category.create(database, obj_in=category_data))
 
-    crud.city.create(database, obj_in=city)
+    # more purely fictional test examples
+    city_data = {
+        'postal_code': '33602',
+        'city': 'Bielefeld',
+    }
 
-    # create address
+    city = crud.city.create(database, obj_in=city_data)
+
+    address_data = {
+        'country': 'Germany',
+        'region': 'North Rhine-Westphalia',
+        'postal_code': city.postal_code,
+        'street': 'Example Street',
+        'house_number': 1,
+    }
+
+    address = crud.address.create(database, obj_in=address_data)
 
     # create supplier
 
