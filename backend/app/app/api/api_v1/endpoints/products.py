@@ -21,7 +21,7 @@ def read_product(
     product = crud.product.get(database, obj_id=id)
 
     if not product:
-        raise HTTPException(status_code=404, detail="Product not found")
+        raise HTTPException(status_code=404, detail='Product not found')
 
     return product
 
@@ -37,7 +37,7 @@ def read_products(
     products = crud.product.get_multi(database, skip=skip, limit=limit)
 
     if len(products) == 0:
-        raise HTTPException(status_code=404, detail="No products were found")
+        raise HTTPException(status_code=404, detail='No products were found')
 
     return products
 
@@ -64,12 +64,12 @@ def update_product(
         current_user: models.User = Depends(dependencies.get_current_user),  # pylint: disable=unused-argument
 ) -> Any:
     """Update a product."""
-    product = crud.product.get(database, id=id)
+    product = crud.product.get(database, obj_id=id)
 
     if not product:
-        raise HTTPException(status_code=404, detail="Product not found")
+        raise HTTPException(status_code=404, detail='Product not found')
 
-    product = crud.product.update(database, db_obj=product, obj_in=product)
+    product = crud.product.update(database, database_obj=product, obj_in=product_in)
 
     return product
 
@@ -85,8 +85,8 @@ def delete_product(
     product = crud.product.get(database, obj_id=id)
 
     if not product:
-        raise HTTPException(status_code=404, detail="Product not found")
+        raise HTTPException(status_code=404, detail='Product not found')
 
-    product = crud.product.remove(database, id=id)
+    product = crud.product.remove(database, obj_id=id)
 
     return product
