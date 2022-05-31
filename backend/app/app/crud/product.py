@@ -5,6 +5,8 @@ from app.schemas.product import ProductCreate, ProductUpdate
 
 
 class CRUDProduct(CRUDBase[Product, ProductCreate, ProductUpdate]):
+    """CRUD product class with methods to get, create, update, and delete."""
+
     pass
 
 

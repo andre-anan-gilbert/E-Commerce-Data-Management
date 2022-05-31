@@ -6,14 +6,12 @@ from pydantic import BaseModel
 
 # Shared properties
 class ProductBase(BaseModel):
-    # implemented when API functionalities are implemented
     name: Optional[str]
     price: Optional[float]
 
 
 # Properties to receive via API on creation
 class ProductCreate(ProductBase):
-    # implemented when API functionalities are implemented
     name: str
     price: float
 
