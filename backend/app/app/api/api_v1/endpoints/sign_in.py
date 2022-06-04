@@ -27,10 +27,10 @@ async def get_sign_in_token(
     if user is None: raise HTTPException(status_code=400, detail='Incorrect email or password')
 
     access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
-    access_token = security.create_token(user.id, expires_delta=access_token_expires)
+    access_token = security.create_access_token(user.id, access_token_expires)
 
     refresh_token_expires = timedelta(minutes=settings.REFRESH_TOKEN_EXPIRE_MINUTES)
-    refresh_token = security.create_token(user.id, expires_delta=refresh_token_expires, refresh=True)
+    refresh_token = security.create_refresh_token(user.id, refresh_token_expires, user.token_version)
 
     response.set_cookie(key='jid', value=refresh_token, httponly=True)
     return {'access_token': access_token, 'token_type': 'bearer'}
@@ -52,13 +52,23 @@ async def get_refresh_token(
         raise HTTPException(status_code=401, detail='User is not signed in') from error
 
     user = crud.user.get(database, obj_id=payload['sub'])
-    if user is None: return {'access_token': ''}
+
+    if user is None:
+        return {'access_token': ''}
+
+    if user.token_version != int(payload['ver']):
+        return {'access_token': ''}
+
+    updated_user = {
+        'password': '',
+        'token_version': user.token_version + 1}
+    user = crud.user.update(database, database_obj=user, obj_in=updated_user)
 
     access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
-    access_token = security.create_token(user.id, expires_delta=access_token_expires)
+    access_token = security.create_access_token(user.id, access_token_expires)
 
     refresh_token_expires = timedelta(minutes=settings.REFRESH_TOKEN_EXPIRE_MINUTES)
-    refresh_token = security.create_token(user.id, expires_delta=refresh_token_expires, refresh=True)
+    refresh_token = security.create_refresh_token(user.id, refresh_token_expires, user.token_version)
 
     response.set_cookie(key='jid', value=refresh_token, httponly=True)
     return {'access_token': access_token, 'token_type': 'bearer'}
