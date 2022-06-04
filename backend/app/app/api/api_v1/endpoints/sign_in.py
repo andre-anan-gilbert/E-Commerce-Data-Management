@@ -27,10 +27,10 @@ async def get_sign_in_token(
     if user is None: raise HTTPException(status_code=400, detail='Incorrect email or password')
 
     access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
-    access_token = security.create_token(user.user_id, expires_delta=access_token_expires)
+    access_token = security.create_token(user.id, expires_delta=access_token_expires)
 
     refresh_token_expires = timedelta(minutes=settings.REFRESH_TOKEN_EXPIRE_MINUTES)
-    refresh_token = security.create_token(user.user_id, expires_delta=refresh_token_expires, refresh=True)
+    refresh_token = security.create_token(user.id, expires_delta=refresh_token_expires, refresh=True)
 
     response.set_cookie(key='jid', value=refresh_token, httponly=True)
     return {'access_token': access_token, 'token_type': 'bearer'}
@@ -55,10 +55,10 @@ async def get_refresh_token(
     if user is None: return {'access_token': ''}
 
     access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
-    access_token = security.create_token(user.user_id, expires_delta=access_token_expires)
+    access_token = security.create_token(user.id, expires_delta=access_token_expires)
 
     refresh_token_expires = timedelta(minutes=settings.REFRESH_TOKEN_EXPIRE_MINUTES)
-    refresh_token = security.create_token(user.user_id, expires_delta=refresh_token_expires, refresh=True)
+    refresh_token = security.create_token(user.id, expires_delta=refresh_token_expires, refresh=True)
 
     response.set_cookie(key='jid', value=refresh_token, httponly=True)
     return {'access_token': access_token, 'token_type': 'bearer'}
