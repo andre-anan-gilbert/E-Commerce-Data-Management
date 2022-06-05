@@ -20,5 +20,5 @@ def client() -> Generator:
 
 
 @pytest.fixture(scope='module')
-def token_headers(client: TestClient) -> Dict[str, str]:
-    return get_token_headers(client)
+def token_headers(test_client: TestClient) -> Dict[str, str]:
+    return get_token_headers(test_client)
