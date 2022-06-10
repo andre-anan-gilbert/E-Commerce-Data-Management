@@ -30,7 +30,6 @@ echo 'Checking for TypeScript errors. 🧪'
 npm run check-types || (
     echo ''
     echo "Failed Type check, we'll get 'em next time. Make the required changes listed above, add changes and try to commit again. 🙃"
-    echo ''
     false;
 )
 

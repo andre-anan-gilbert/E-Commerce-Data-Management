@@ -1,2 +1,4 @@
 /** The breakpoints for the media queries. */
-export const TABLET = '76.8rem';
+export const SM = '40em';
+export const MD = '60em';
+export const LG = '90em';

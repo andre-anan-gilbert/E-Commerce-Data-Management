@@ -2,47 +2,45 @@ name: Pytest
 
 on:
   push:
-    branches: [ main ]
     paths:
       - '**.py'
   pull_request:
-    branches: [ main ]
     paths:
       - '**.py'
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres
-        env:
-          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
-          POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
-          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+    # services:
+    #   # postgres:
+    #   #   image: postgres
+    #   #   env:
+    #   #     POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+    #   #     POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
+    #   #     POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+    #   #     POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+    #   #   options: >-
+    #   #     --health-cmd pg_isready
+    #   #     --health-interval 10s
+    #   #     --health-timeout 5s
+    #   #     --health-retries 5
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-    - name: Set up Python 3.9
-      uses: actions/setup-python@v3
-      with:
-        python-version: "3.9"
-    - name: Install dependencies
-      working-directory: ./backend
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-    - name: Run Pytest
-      run: pytest ./backend/app/tests/
+    - name: Build docker-compose stack
+      run: docker-compose -f "docker-pytest.yml" up -d
       env:
         PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
         POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
         POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
         POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
         POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+        TEST_USER: ${{ secrets.TEST_USER }}
+        TEST_USER_PASSWORD: ${{ secrets.TEST_USER_PASSWORD }}
+        ALGORITHM: ${{ secrets.ALGORITHM }}
+    - name: Check running containers
+      run: docker ps -a
+    - name: Check logs
+      run: docker logs backend
+    - name: Run Pytest
+      run: docker exec backend pytest

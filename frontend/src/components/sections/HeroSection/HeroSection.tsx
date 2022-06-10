@@ -20,7 +20,7 @@ import {
 
 export const HeroSection = () => {
   return (
-    <GradientBackgroundSection curveFlipX={false}>
+    <GradientBackgroundSection>
       <Flex>
         <TextWrapper>
           <Grid>
@@ -39,9 +39,14 @@ export const HeroSection = () => {
         </TextWrapper>
         <ImageWrapper>
           <ImageApp>
-            <Image src={App} alt="App" />
+            <Image src={App} alt="App" layout="responsive" priority />
             <ImageAppSection>
-              <Image src={AppSection} alt="App Section" />
+              <Image
+                src={AppSection}
+                alt="App Section"
+                layout="responsive"
+                priority
+              />
             </ImageAppSection>
           </ImageApp>
         </ImageWrapper>

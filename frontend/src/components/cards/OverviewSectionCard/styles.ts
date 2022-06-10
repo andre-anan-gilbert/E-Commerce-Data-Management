@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { H3 } from '@blueprintjs/core';
-import { TABLET } from '@styles/breakpoints';
+import * as Breakpoints from '@styles/breakpoints';
 
 export const Card = styled.div`
   flex: 1 1 80%;
@@ -11,7 +11,7 @@ export const Card = styled.div`
   margin-inline: 2rem;
   margin-bottom: 2rem;
 
-  @media (min-width: ${TABLET}) {
+  @media (min-width: ${Breakpoints.MD}) {
     flex: 1 1 30%;
   }
 `;
@@ -27,5 +27,6 @@ export const Title = styled(H3)`
 
 export const Subtitle = styled.p`
   text-align: center;
-  margin: 0;
+  margin-inline: 0;
+  max-width: 32rem;
 `;
