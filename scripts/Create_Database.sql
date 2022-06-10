@@ -39,7 +39,7 @@ CREATE TABLE "category" (
 
 CREATE TABLE "city" (
   "postal_code" varchar PRIMARY KEY,
-  "city" varchar NOT NULL,
+  "name" varchar NOT NULL,
   "created" datetime NOT NULL,
   "updated" datetime,
   "edited_by" int
@@ -194,7 +194,7 @@ CREATE TABLE "warehouse" (
   "edited_by" int
 );
 
-CREATE UNIQUE INDEX ON "city" ("postal_code", "city");
+CREATE UNIQUE INDEX ON "city" ("postal_code", "name");
 
 ALTER TABLE "address" ADD FOREIGN KEY ("postal_code") REFERENCES "city" ("postal_code");
 
