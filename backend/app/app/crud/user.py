@@ -10,9 +10,6 @@ from app.core.security import get_password_hash, verify_password
 class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
     """CRUD user class with methods to get, create, update, and authenticate."""
 
-    def get(self, database: Session, obj_id: Any) -> Optional[User]:
-        return database.query(self._model).filter(self._model.user_id == obj_id).first()
-
     def get_by_email(self, database: Session, *, email: str) -> Optional[User]:
         return database.query(User).filter(User.email == email).first()
 
