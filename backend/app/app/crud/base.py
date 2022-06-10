@@ -5,9 +5,9 @@ from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from app.database.base import Base
 
-ModelType = TypeVar('ModelType', bound=Base)
-CreateSchemaType = TypeVar('CreateSchemaType', bound=BaseModel)
-UpdateSchemaType = TypeVar('UpdateSchemaType', bound=BaseModel)
+ModelType = TypeVar('ModelType', bound=Base)  # pylint: disable=invalid-name
+CreateSchemaType = TypeVar('CreateSchemaType', bound=BaseModel) # pylint: disable=invalid-name
+UpdateSchemaType = TypeVar('UpdateSchemaType', bound=BaseModel)  # pylint: disable=invalid-name
 
 
 class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):

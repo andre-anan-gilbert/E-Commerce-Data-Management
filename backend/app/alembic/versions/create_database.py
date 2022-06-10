@@ -145,10 +145,6 @@ def upgrade():
         ['manager_id'],
         ['id'],
     )
-    sa.ForeignKeyConstraint(
-        ['manager_id'],
-        ['employee.id'],
-    ),
 
     op.create_table('category', sa.Column('id', sa.Integer(), nullable=False),
                     sa.Column('created', sa.DateTime(), nullable=True),
