@@ -2,7 +2,6 @@
 
 # pylint: skip-file
 from app.database.session import Base
-from app.database.base_model import BaseModel
 from app.models.address import Address
 from app.models.address_2_customer import Address2Customer
 from app.models.category import Category

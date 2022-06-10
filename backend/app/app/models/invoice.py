@@ -3,6 +3,7 @@ import enum
 from sqlalchemy import Column, Enum, Integer, Date, ForeignKey
 from sqlalchemy.orm import relationship
 from app.database.session import Base
+from app.database.base_mixin import BaseMixin
 
 
 class InvoiceStatus(enum.Enum):
@@ -12,14 +13,13 @@ class InvoiceStatus(enum.Enum):
     PAID = 3
 
 
-class Invoice(Base):
+class Invoice(Base, BaseMixin):
     """Class that represents invoices."""
     __tablename__ = 'invoice'
 
-    _id = Column(Integer, primary_key=True, index=True)
-    status = Column(Enum(InvoiceStatus), index=True)
-    issue_date = Column(Date, index=True)
-    due_date = Column(Date, index=True)
-    payment_information_id = Column(Integer, ForeignKey('payment_information._id'), index=True)
+    status = Column(Enum(InvoiceStatus), nullable=False, index=True)
+    issue_date = Column(Date, nullable=False, index=True)
+    due_date = Column(Date, nullable=False, index=True)
+    payment_information_id = Column(Integer, ForeignKey('payment_information.id'), index=True)
 
-    payment_information = relationship('PaymentInformation', backref='invoices')
+    payment_information = relationship('PaymentInformation', backref='invoices', foreign_keys=[payment_information_id])

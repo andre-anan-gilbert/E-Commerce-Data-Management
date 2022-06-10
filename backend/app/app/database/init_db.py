@@ -41,7 +41,7 @@ def run(database: Session) -> None:
         # purely fictional test examples
         city_data = {
             'postal_code': '33602',
-            'city': 'Bielefeld',
+            'name': 'Bielefeld',
         }
 
         city = crud.city.create(database, obj_in=city_data)
@@ -62,7 +62,7 @@ def run(database: Session) -> None:
 
         supplier_data = {
             'name': 'Supplier A',
-            'address_id': address._id,
+            'address_id': address.id,
             'phone_number': '+491711234567',
             'email': 'person@supplier.com',
         }
@@ -74,18 +74,18 @@ def run(database: Session) -> None:
         product_data = [{
             'name': 'Product A',
             'price': 42.0,
-            'category_id': categories[0]._id,
-            'supplier_id': supplier._id,
+            'category_id': categories[0].id,
+            'supplier_id': supplier.id,
         }, {
             'name': 'Product B',
             'price': 27.0,
-            'category_id': categories[0]._id,
-            'supplier_id': supplier._id,
+            'category_id': categories[0].id,
+            'supplier_id': supplier.id,
         }, {
             'name': 'Product C',
             'price': 3.50,
-            'category_id': categories[1]._id,
-            'supplier_id': supplier._id,
+            'category_id': categories[1].id,
+            'supplier_id': supplier.id,
         }]
 
         products = []

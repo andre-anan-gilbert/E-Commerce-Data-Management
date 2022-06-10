@@ -22,7 +22,7 @@ class SupplierUpdate(SupplierBase):
 
 
 class SupplierInDBBase(SupplierBase):
-    _id: int
+    id: int
     address_id: int
 
     class Config:

@@ -5,7 +5,7 @@ from pydantic import BaseModel
 # Shared properties
 class CityBase(BaseModel):
     postal_code: str
-    city: str
+    name: str
 
 
 # Properties to receive via API on creation
