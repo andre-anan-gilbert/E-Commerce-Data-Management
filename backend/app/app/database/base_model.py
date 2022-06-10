@@ -1,3 +1,4 @@
+"""Base Model to inherit from if time- and user stamps are desired."""
 from sqlalchemy import Column, DateTime, Integer, ForeignKey
 from sqlalchemy.ext.declarative import as_declarative
 from sqlalchemy.orm import relationship
