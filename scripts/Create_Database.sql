@@ -12,7 +12,7 @@ CREATE TYPE "order_status" AS ENUM (
 
 CREATE TABLE "address" (
   "id" int PRIMARY KEY,
-  "county" varchar NOT NULL,
+  "country" varchar NOT NULL,
   "region" varchar,
   "postal_code" varchar,
   "street" varchar NOT NULL,
