@@ -4,15 +4,8 @@ services:
     build: ./backend
     ports:
       - 8000:80
-    environment:
-      - PROJECT_NAME
-      - POSTGRES_USER
-      - POSTGRES_HOST
-      - POSTGRES_PASSWORD
-      - POSTGRES_DB
-      - TEST_USER
-      - TEST_USER_PASSWORD
-      - ALGORITHM
+    env_file:
+      - .env
     container_name: backend
     command: /start.sh
     depends_on:
@@ -20,13 +13,10 @@ services:
 
   postgres:
     image: postgres
-    environment:
-      - POSTGRES_USER
-      - POSTGRES_HOST
-      - POSTGRES_PASSWORD
-      - POSTGRES_DB
+    env_file:
+      - .env
     volumes:
-      - postgres-db:/var/lib/postgresql/data
+      - postgres-db:/var/lib/postgresql/data-test
     container_name: database
 
 volumes:
