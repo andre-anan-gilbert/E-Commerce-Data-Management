@@ -11,6 +11,7 @@ class Product(Base, BaseMixin):
 
     name = Column(String, nullable=False, index=True)
     price = Column(Float, nullable=False, index=True)
+    description = Column(String, index=True)
     category_id = Column(Integer, ForeignKey('category.id'), index=True)
     supplier_id = Column(Integer, ForeignKey('supplier.id'), index=True)
 

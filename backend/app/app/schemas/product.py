@@ -8,6 +8,7 @@ from pydantic import BaseModel
 class ProductBase(BaseModel):
     name: Optional[str]
     price: Optional[float]
+    description: Optional[str]
 
 
 # Properties to receive via API on creation

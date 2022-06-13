@@ -328,9 +328,8 @@ def upgrade():
     op.create_table('product', sa.Column('id', sa.Integer(), nullable=False),
                     sa.Column('created', sa.DateTime(), nullable=True),
                     sa.Column('updated', sa.DateTime(), nullable=True), sa.Column('name', sa.String(), nullable=False),
-                    sa.Column('price', sa.Float(), nullable=False), sa.Column('category_id',
-                                                                              sa.Integer(),
-                                                                              nullable=True),
+                    sa.Column('price', sa.Float(), nullable=False), sa.Column('description', sa.String()),
+                    sa.Column('category_id', sa.Integer(), nullable=True), sa.Column('description', sa.String()),
                     sa.Column('supplier_id', sa.Integer(), nullable=True),
                     sa.Column('edited_by', sa.Integer(), nullable=True),
                     sa.ForeignKeyConstraint(
