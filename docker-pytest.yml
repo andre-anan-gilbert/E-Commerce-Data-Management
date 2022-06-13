@@ -4,10 +4,12 @@ services:
     build: ./backend
     ports:
       - 8000:80
+    volumes:
+      - ./backend/app:/app
     env_file:
       - .env
     container_name: backend
-    command: /start.sh
+    command: /start-reload.sh
     depends_on:
       - postgres
 
@@ -16,7 +18,9 @@ services:
     env_file:
       - .env
     volumes:
-      - postgres-db:/var/lib/postgresql/data-test
+      - postgres-db:/var/lib/postgresql/data
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
     container_name: database
 
 volumes:
