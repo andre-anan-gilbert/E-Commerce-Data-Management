@@ -112,7 +112,7 @@ table order {
 
 table order_detail {
   order_id int [PK, ref: > order.id]
-  product_item_number int [PK, ref: > product.id]
+  product_id int [PK, ref: > product.id]
   price_at_time_of_purchase decimal [not null]
   number_of_items int [not null]
   created datetime [not null]
@@ -130,7 +130,7 @@ table payment_information {
 }
 
 table payment_information_2_customer {
-  customer_number int [PK, ref: > customer.id]
+  customer_id int [PK, ref: > customer.id]
   payment_information_id int [PK, ref: > payment_information.id]
   is_default boolean [not null]
 }
