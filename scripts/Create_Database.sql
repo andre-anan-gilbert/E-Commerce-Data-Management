@@ -109,13 +109,13 @@ CREATE TABLE "order" (
 
 CREATE TABLE "order_detail" (
   "order_id" int,
-  "product_item_number" int,
+  "product_id" int,
   "price_at_time_of_purchase" decimal NOT NULL,
   "number_of_items" int NOT NULL,
   "created" datetime NOT NULL,
   "updated" datetime,
   "edited_by" int,
-  PRIMARY KEY ("order_id", "product_item_number")
+  PRIMARY KEY ("order_id", "product_id")
 );
 
 CREATE TABLE "payment_information" (
@@ -128,10 +128,10 @@ CREATE TABLE "payment_information" (
 );
 
 CREATE TABLE "payment_information_2_customer" (
-  "customer_number" int,
+  "customer_id" int,
   "payment_information_id" int,
   "is_default" boolean NOT NULL,
-  PRIMARY KEY ("customer_number", "payment_information_id")
+  PRIMARY KEY ("customer_id", "payment_information_id")
 );
 
 CREATE TABLE "product" (
@@ -240,13 +240,13 @@ ALTER TABLE "order" ADD FOREIGN KEY ("edited_by") REFERENCES "user" ("id");
 
 ALTER TABLE "order_detail" ADD FOREIGN KEY ("order_id") REFERENCES "order" ("id");
 
-ALTER TABLE "order_detail" ADD FOREIGN KEY ("product_item_number") REFERENCES "product" ("id");
+ALTER TABLE "order_detail" ADD FOREIGN KEY ("product_id") REFERENCES "product" ("id");
 
 ALTER TABLE "order_detail" ADD FOREIGN KEY ("edited_by") REFERENCES "user" ("id");
 
 ALTER TABLE "payment_information" ADD FOREIGN KEY ("edited_by") REFERENCES "user" ("id");
 
-ALTER TABLE "payment_information_2_customer" ADD FOREIGN KEY ("customer_number") REFERENCES "customer" ("id");
+ALTER TABLE "payment_information_2_customer" ADD FOREIGN KEY ("customer_id") REFERENCES "customer" ("id");
 
 ALTER TABLE "payment_information_2_customer" ADD FOREIGN KEY ("payment_information_id") REFERENCES "payment_information" ("id");
 
