@@ -1,0 +1,195 @@
+table address {
+  id int [PK]
+  country varchar [not null]
+  region varchar
+  postal_code varchar [ref: > city.postal_code]
+  street varchar [not null]
+  house_number int [not null]
+  created datetime [not null]
+  updated datetime
+  edited_by int [ref: > user.id]
+}
+
+table address_2_customer {
+  customer_id int [PK, ref: > customer.id]
+  address_id int [PK, ref: > address.id]
+}
+
+table category {
+  id int [PK]
+  name varchar [not null, unique]
+  description varchar
+  created datetime [not null]
+  updated datetime
+  edited_by int [ref: > user.id]
+}
+
+table city {
+  postal_code varchar [PK]
+  name varchar [not null]
+  created datetime [not null]
+  updated datetime
+  edited_by int [ref: > user.id]
+
+  indexes {
+    (postal_code, name) [unique]
+  }
+}
+
+table customer {
+  id int [PK]
+  salutation varchar
+  first_name varchar [not null]
+  last_name varchar [not null]
+  email varchar [not null, unique]
+  phone_number varchar [unique]
+  created datetime [not null]
+  updated datetime
+  edited_by int [ref: > user.id]
+}
+
+table department {
+  id int [PK]
+  name varchar [not null]
+  manager_id int [ref: > employee.id]
+  created datetime [not null]
+  updated datetime
+  edited_by int [ref: > user.id]
+}
+
+table employee {
+  id int [PK]
+  ssn varchar [unique]
+  salutation varchar
+  first_name varchar [not null]
+  last_name varchar [not null]
+  job_title varchar [not null]
+  department_id int [ref: > department.id]
+  warehouse_id int [ref: > warehouse.id]
+  address_id int [ref: > address.id]
+  email varchar [not null, unique]
+  phone_number varchar [unique]
+  created datetime [not null]
+  updated datetime
+  edited_by int [ref: > user.id]
+}
+
+Enum invoice_status {
+  open
+  overdue
+  paid
+}
+
+table invoice {
+  id int [PK]
+  status invoice_status [not null]
+  issue_date date [not null]
+  due_date date [not null]
+  payment_information_id int [ref: > payment_information.id]
+  created datetime [not null]
+  updated datetime
+  edited_by int [ref: > user.id]
+}
+
+Enum order_status {
+  open
+  sent
+  delivered
+}
+
+table order {
+  id int [PK]
+  customer_id int [ref: > customer.id]
+  invoice_id int [unique, ref: - invoice.id]
+  status order_status [not null]
+  address_id int [ref: > address.id]
+  employee_id int [ref: > employee.id]
+  shipping_service_id int [ref: > shipping_service.id]
+  created datetime [not null]
+  updated datetime
+  edited_by int [ref: > user.id]
+}
+
+table order_detail {
+  order_id int [PK, ref: > order.id]
+  product_item_number int [PK, ref: > product.id]
+  price_at_time_of_purchase decimal [not null]
+  number_of_items int [not null]
+  created datetime [not null]
+  updated datetime
+  edited_by int [ref: > user.id]
+}
+
+table payment_information {
+  id int [PK]
+  iban varchar [not null, unique]
+  bic varchar
+  created datetime [not null]
+  updated datetime
+  edited_by int [ref: > user.id]
+}
+
+table payment_information_2_customer {
+  customer_number int [PK, ref: > customer.id]
+  payment_information_id int [PK, ref: > payment_information.id]
+  is_default boolean [not null]
+}
+
+table product {
+  id int [PK]
+  name varchar [not null]
+  price decimal [not null]
+  description varchar
+  category_id int [ref: > category.id]
+  supplier_id int [ref: > supplier.id]
+  created datetime [not null]
+  updated datetime
+  edited_by int [ref: > user.id]
+}
+
+table product_2_warehouse {
+  product_id int [PK, ref: > product.id]
+  warehouse_id int [PK, ref: > warehouse.id]
+  number_in_stock int [not null]
+}
+
+table shipping_service {
+  id int [PK]
+  name varchar
+  address_id int [ref: > address.id]
+  email varchar [not null, unique]
+  phone_number varchar [unique]
+  created datetime [not null]
+  updated datetime
+  edited_by int [ref: > user.id]
+}
+
+table supplier {
+  id int [PK]
+  name varchar
+  address_id int [ref: > address.id]
+  email varchar [not null, unique]
+  phone_number varchar [unique]
+  created datetime [not null]
+  updated datetime
+  edited_by int [ref: > user.id]
+}
+
+table user {
+  id int [PK]
+  email varchar [not null, unique]
+  hashed_password varchar [not null]
+  token_version int [not null]
+  created datetime [not null]
+  updated datetime
+}
+
+table warehouse {
+  id int [PK]
+  address_id int [ref: > address.id]
+  email varchar [not null, unique]
+  phone_number varchar [unique]
+  created datetime [not null]
+  updated datetime
+  edited_by int [ref: > user.id]
+}
