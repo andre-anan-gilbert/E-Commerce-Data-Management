@@ -10,7 +10,7 @@ from app.api import dependencies
 router = APIRouter()
 
 
-@router.get('/get-product/{item_number}', response_model=schemas.Product)
+@router.get('/get-product/{id}', response_model=schemas.Product)
 def read_product(
         *,
         database: Session = Depends(dependencies.get_database_session),
@@ -47,21 +47,21 @@ def create_product(
         *,
         database: Session = Depends(dependencies.get_database_session),
         product_in: schemas.ProductCreate,
-        current_user: models.User = Depends(dependencies.get_current_user),  # pylint: disable=unused-argument
+        current_user: models.User = Depends(dependencies.get_current_user),
 ) -> Any:
     """Create a new product."""
-    product = crud.product.create(database, obj_in=product_in)
+    product = crud.product.create_with_user_and_timestamp(database, obj_in=product_in, edited_by=current_user.id)
 
     return product
 
 
-@router.put('/update/{item_number}', response_model=schemas.Product)
+@router.put('/update/{id}', response_model=schemas.Product)
 def update_product(
         *,
         database: Session = Depends(dependencies.get_database_session),
         id: int,
         product_in: schemas.ProductUpdate,
-        current_user: models.User = Depends(dependencies.get_current_user),  # pylint: disable=unused-argument
+        current_user: models.User = Depends(dependencies.get_current_user),
 ) -> Any:
     """Update a product."""
     product = crud.product.get(database, obj_id=id)
@@ -69,12 +69,15 @@ def update_product(
     if not product:
         raise HTTPException(status_code=404, detail='Product not found')
 
-    product = crud.product.update(database, database_obj=product, obj_in=product_in)
+    product = crud.product.update_with_user_and_timestamp(database,
+                                                          database_obj=product,
+                                                          obj_in=product_in,
+                                                          edited_by=current_user.id)
 
     return product
 
 
-@router.delete('/delete/{item_number}', response_model=schemas.Product)
+@router.delete('/delete/{id}', response_model=schemas.Product)
 def delete_product(
         *,
         database: Session = Depends(dependencies.get_database_session),
