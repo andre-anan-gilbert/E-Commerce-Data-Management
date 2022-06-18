@@ -54,7 +54,7 @@ def test_create_product(client: TestClient, token_headers: Dict[str, str]) -> No
 
     assert product['name'] == 'Test Product'
     assert product['price'] == 10.0
-    assert product['description'] == None
+    assert product['description'] is None
     assert product['category_id'] == 1
     assert product['supplier_id'] == 1
 
