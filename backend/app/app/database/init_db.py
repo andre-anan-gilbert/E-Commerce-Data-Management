@@ -17,8 +17,6 @@ def run(database: Session) -> None:
         user_in = schemas.UserCreate(email=settings.TEST_USER, password=settings.TEST_USER_PASSWORD)
         user = crud.user.create(database, obj_in=user_in)
 
-    # TODO: implement proper checks for each entity whether the following data already exists
-
     if is_initial_start:
 
         # create initial categories
@@ -34,7 +32,7 @@ def run(database: Session) -> None:
         categories = []
 
         for entry in category_data:
-            categories.append(crud.category.create(database, obj_in=entry))
+            categories.append(crud.category.create_with_user_and_timestamp(database, obj_in=entry, edited_by=user.id))
 
         # create initial cities
 
@@ -44,7 +42,7 @@ def run(database: Session) -> None:
             'name': 'Bielefeld',
         }
 
-        city = crud.city.create(database, obj_in=city_data)
+        city = crud.city.create_with_user_and_timestamp(database, obj_in=city_data, edited_by=user.id)
 
         # create initial addresses
 
@@ -56,7 +54,7 @@ def run(database: Session) -> None:
             'house_number': 1,
         }
 
-        address = crud.address.create(database, obj_in=address_data)
+        address = crud.address.create_with_user_and_timestamp(database, obj_in=address_data, edited_by=user.id)
 
         # create initial suppliers
 
@@ -67,7 +65,7 @@ def run(database: Session) -> None:
             'email': 'person@supplier.com',
         }
 
-        supplier = crud.supplier.create(database, obj_in=supplier_data)
+        supplier = crud.supplier.create_with_user_and_timestamp(database, obj_in=supplier_data, edited_by=user.id)
 
         # create initial products
 
@@ -91,4 +89,4 @@ def run(database: Session) -> None:
         products = []
 
         for entry in product_data:
-            products.append(crud.product.create(database, obj_in=entry))
+            products.append(crud.product.create_with_user_and_timestamp(database, obj_in=entry, edited_by=user.id))
