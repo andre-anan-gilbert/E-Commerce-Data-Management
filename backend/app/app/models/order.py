@@ -19,7 +19,7 @@ class Order(Base, BaseMixin):
 
     customer_id = Column(Integer, ForeignKey('customer.id'), index=True)
     invoice_id = Column(Integer, ForeignKey('invoice.id'), unique=True, index=True)
-    status = Column(Enum(OrderStatus), nullable=False, index=True)
+    status = Column(Enum(OrderStatus), nullable=False, default=OrderStatus.OPEN, index=True)
     address_id = Column(Integer, ForeignKey('address.id'), index=True)
     employee_id = Column(Integer, ForeignKey('employee.id'), index=True)
     shipping_service_id = Column(Integer, ForeignKey('shipping_service.id'), index=True)

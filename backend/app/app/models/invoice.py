@@ -1,4 +1,5 @@
 """Invoice database model."""
+from email.policy import default
 import enum
 from sqlalchemy import Column, Enum, Integer, Date, ForeignKey
 from sqlalchemy.orm import relationship
@@ -17,7 +18,7 @@ class Invoice(Base, BaseMixin):
     """Class that represents invoices."""
     __tablename__ = 'invoice'
 
-    status = Column(Enum(InvoiceStatus), nullable=False, index=True)
+    status = Column(Enum(InvoiceStatus), nullable=False, default=InvoiceStatus.OPEN, index=True)
     issue_date = Column(Date, nullable=False, index=True)
     due_date = Column(Date, nullable=False, index=True)
     payment_information_id = Column(Integer, ForeignKey('payment_information.id'), index=True)
