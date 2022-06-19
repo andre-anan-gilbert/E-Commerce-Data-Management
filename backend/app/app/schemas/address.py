@@ -28,7 +28,6 @@ class AddressUpdate(AddressBase):
 
 class AddressInDBBase(AddressBase):
     id: int
-    postal_code: str
 
     class Config:
         orm_mode = True

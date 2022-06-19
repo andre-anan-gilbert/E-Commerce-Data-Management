@@ -9,11 +9,14 @@ class SupplierBase(BaseModel):
     name: Optional[str]
     phone_number: Optional[str]
     email: Optional[str]
+    address_id: Optional[int]
 
 
 # Properties to receive via API on creation
 class SupplierCreate(SupplierBase):
     name: str
+    email: str
+    address_id: int
 
 
 # Properties to receive via API on update

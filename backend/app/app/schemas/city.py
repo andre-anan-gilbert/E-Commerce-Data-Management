@@ -1,16 +1,19 @@
 """City properties."""
+from typing import Optional
+
 from pydantic import BaseModel
 
 
 # Shared properties
 class CityBase(BaseModel):
-    postal_code: str
-    name: str
+    postal_code: Optional[str]
+    name: Optional[str]
 
 
 # Properties to receive via API on creation
 class CityCreate(CityBase):
-    pass
+    postal_code: str
+    name: str
 
 
 # Properties to receive via API on update
