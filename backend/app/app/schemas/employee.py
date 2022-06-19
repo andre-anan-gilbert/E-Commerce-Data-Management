@@ -6,6 +6,7 @@ from pydantic import BaseModel
 
 # Shared properties
 class EmployeeBase(BaseModel):
+    """Why the fuck does pylint suddenly want a docstring for this specific schema."""
     ssn: Optional[str]
     salutation: Optional[str]
     first_name: Optional[str]
