@@ -2,14 +2,14 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 from app.database.session import Base
+from app.database.base_mixin import BaseMixin
 
 
-class Department(Base):
+class Department(Base, BaseMixin):
     """Class that represents departments where employees work."""
     __tablename__ = 'department'
 
-    _id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, index=True)
-    manager = Column(Integer, ForeignKey('employee.employee_number'), index=True)
+    name = Column(String, nullable=False, index=True)
+    manager_id = Column(Integer, ForeignKey('employee.id'), index=True)
 
-    employee = relationship('Employee', backref='departments', foreign_keys=[manager])
+    manager = relationship('Employee', backref='departments', foreign_keys=[manager_id])

@@ -1,13 +1,14 @@
 """Default CRUD object."""
+import datetime
 from typing import Any, Generic, Optional, Type, TypeVar, Union
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from app.database.base import Base
 
-ModelType = TypeVar('ModelType', bound=Base)
-CreateSchemaType = TypeVar('CreateSchemaType', bound=BaseModel)
-UpdateSchemaType = TypeVar('UpdateSchemaType', bound=BaseModel)
+ModelType = TypeVar('ModelType', bound=Base)  # pylint: disable=invalid-name
+CreateSchemaType = TypeVar('CreateSchemaType', bound=BaseModel)  # pylint: disable=invalid-name
+UpdateSchemaType = TypeVar('UpdateSchemaType', bound=BaseModel)  # pylint: disable=invalid-name
 
 
 class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
@@ -34,6 +35,15 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         database.refresh(database_obj)
         return database_obj
 
+    def create_with_user_and_timestamp(self, database: Session, *, obj_in: CreateSchemaType,
+                                       edited_by: int) -> ModelType:
+        obj_in_data = jsonable_encoder(obj_in)
+        database_obj = self._model(**obj_in_data, edited_by=edited_by)
+        database.add(database_obj)
+        database.commit()
+        database.refresh(database_obj)
+        return database_obj
+
     def update(
         self,
         database: Session,
@@ -51,6 +61,32 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         for field in obj_data:
             if field in update_data:
                 setattr(database_obj, field, update_data[field])
+
+        database.add(database_obj)
+        database.commit()
+        database.refresh(database_obj)
+        return database_obj
+
+    def update_with_user_and_timestamp(
+        self,
+        database: Session,
+        *,
+        database_obj: ModelType,
+        obj_in: Union[UpdateSchemaType, dict[str, Any]],
+        edited_by: int,
+    ) -> ModelType:
+        obj_data = jsonable_encoder(database_obj)
+
+        if isinstance(obj_in, dict):
+            update_data = obj_in
+        else:
+            update_data = obj_in.dict(exclude_unset=True)
+
+        for field in obj_data:
+            if field in update_data:
+                setattr(database_obj, field, update_data[field])
+        setattr(database_obj, 'edited_by', edited_by)
+        setattr(database_obj, 'updated', datetime.datetime.utcnow())
 
         database.add(database_obj)
         database.commit()

@@ -1,12 +1,12 @@
 """Payment information database model."""
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, String
 from app.database.session import Base
+from app.database.base_mixin import BaseMixin
 
 
-class PaymentInformation(Base):
+class PaymentInformation(Base, BaseMixin):
     """Class that represents payment information."""
     __tablename__ = 'payment_information'
 
-    _id = Column(Integer, primary_key=True, index=True)
-    iban = Column(String, unique=True, index=True)
+    iban = Column(String, unique=True, nullable=False, index=True)
     bic = Column(String, index=True)
