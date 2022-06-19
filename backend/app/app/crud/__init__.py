@@ -1,5 +1,4 @@
 # pylint: skip-file
-import imp
 from .address import address
 from .category import category
 from .city import city
