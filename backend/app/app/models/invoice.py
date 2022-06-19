@@ -1,5 +1,4 @@
 """Invoice database model."""
-from email.policy import default
 import enum
 from sqlalchemy import Column, Enum, Integer, Date, ForeignKey
 from sqlalchemy.orm import relationship
