@@ -100,7 +100,7 @@ def upgrade():
 
     op.create_table('employee', sa.Column('id', sa.Integer(), nullable=False),
                     sa.Column('created', sa.DateTime(), nullable=True),
-                    sa.Column('updated', sa.DateTime(), nullable=True), sa.Column('ssn', sa.Integer(), nullable=True),
+                    sa.Column('updated', sa.DateTime(), nullable=True), sa.Column('ssn', sa.String(), nullable=True),
                     sa.Column('salutation', sa.String(), nullable=True),
                     sa.Column('first_name', sa.String(), nullable=False),
                     sa.Column('last_name', sa.String(), nullable=False),
