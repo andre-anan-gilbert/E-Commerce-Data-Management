@@ -27,7 +27,7 @@ class ProductUpdate(ProductBase):
 
 
 class ProductInDBBase(ProductBase):
-    _id: int
+    id: int
     category_id: int
     supplier_id: int
 

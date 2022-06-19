@@ -15,6 +15,7 @@ def test_get_product(client: TestClient, token_headers: Dict[str, str]) -> None:
 
     print(product)
 
+    assert product['id'] == 2
     assert product['name'] == 'Product B'
     assert product['price'] == 27.0
     assert product['description'] is None
@@ -32,6 +33,7 @@ def test_get_products(client: TestClient, token_headers: Dict[str, str]) -> None
     assert len(products) == 3
 
     for product in products:
+        assert product['id']
         assert product['name']
         assert product['price']
         assert product['category_id']
@@ -52,6 +54,7 @@ def test_create_product(client: TestClient, token_headers: Dict[str, str]) -> No
 
     product = response.json()
 
+    assert product['id'] == 4
     assert product['name'] == 'Test Product'
     assert product['price'] == 10.0
     assert product['description'] is None
@@ -72,6 +75,7 @@ def test_update_product(client: TestClient, token_headers: Dict[str, str]) -> No
 
     product = response.json()
 
+    assert product['id'] == 4
     assert product['name'] == 'Test Product'
     assert product['price'] == 12.99
     assert product['description'] == 'AAAAA'

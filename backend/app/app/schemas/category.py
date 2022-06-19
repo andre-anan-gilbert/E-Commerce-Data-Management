@@ -21,7 +21,7 @@ class CategoryUpdate(CategoryBase):
 
 
 class CategoryInDBBase(CategoryBase):
-    _id: int
+    id: int
 
     class Config:
         orm_mode = True
