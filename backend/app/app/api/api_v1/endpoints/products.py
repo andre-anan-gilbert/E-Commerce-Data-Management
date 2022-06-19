@@ -15,7 +15,6 @@ def read_product(
         *,
         database: Session = Depends(dependencies.get_database_session),
         id: int,
-        current_user: models.User = Depends(dependencies.get_current_user),  # pylint: disable=unused-argument
 ) -> Any:
     """Retrieve a product by its product number."""
     product = crud.product.get(database, obj_id=id)
@@ -31,12 +30,11 @@ def read_products(
         database: Session = Depends(dependencies.get_database_session),
         skip: int = 0,
         limit: int = 100,
-        current_user: models.User = Depends(dependencies.get_current_user),  # pylint: disable=unused-argument
 ) -> Any:
     """Retrieve all products."""
     products = crud.product.get_multi(database, skip=skip, limit=limit)
 
-    if len(products) == 0:
+    if not products:
         raise HTTPException(status_code=404, detail='No products were found')
 
     return products
@@ -82,7 +80,6 @@ def delete_product(
         *,
         database: Session = Depends(dependencies.get_database_session),
         id: int,
-        current_user: models.User = Depends(dependencies.get_current_user),  # pylint: disable=unused-argument
 ) -> Any:
     """Delete a product."""
     product = crud.product.get(database, obj_id=id)

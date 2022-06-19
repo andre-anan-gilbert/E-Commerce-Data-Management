@@ -27,7 +27,7 @@ class AddressUpdate(AddressBase):
 
 
 class AddressInDBBase(AddressBase):
-    _id: int
+    id: int
     postal_code: str
 
     class Config:
