@@ -1,4 +1,4 @@
-"""Order Detail properties."""
+"""Order2Product properties."""
 from typing import Optional
 
 from pydantic import BaseModel
@@ -26,7 +26,6 @@ class Order2ProductUpdate(Order2ProductBase):
 
 
 class Order2ProductInDBBase(Order2ProductBase):
-    id: int
 
     class Config:
         orm_mode = True
