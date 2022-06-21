@@ -1,4 +1,5 @@
 # pylint: skip-file
+from .address_2_customer import address_2_customer
 from .address import address
 from .category import category
 from .city import city
@@ -8,7 +9,9 @@ from .employee import employee
 from .invoice import invoice
 from .order_2_product import order_2_product
 from .order import order
+from .payment_information_2_customer import payment_information_2_customer
 from .payment_information import payment_information
+from .product_2_warehouse import product_2_warehouse
 from .product import product
 from .shipping_service import shipping_service
 from .supplier import supplier
