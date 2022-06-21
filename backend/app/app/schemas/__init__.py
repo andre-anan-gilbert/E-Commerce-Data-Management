@@ -7,7 +7,7 @@ from .department import Department, DepartmentCreate, DepartmentInDB, Department
 from .employee import Employee, EmployeeCreate, EmployeeInDB, EmployeeUpdate
 from .invoice import Invoice, InvoiceCreate, InvoiceInDB, InvoiceUpdate
 from .jwt_token import Token, TokenPayload
-from .order_detail import OrderDetail, OrderDetailCreate, OrderDetailInDB, OrderDetailUpdate
+from .order_2_product import Order2Product, Order2ProductCreate, Order2ProductInDB, Order2ProductUpdate
 from .order import Order, OrderCreate, OrderInDB, OrderUpdate
 from .payment_information import PaymentInformation, PaymentInformationCreate, PaymentInformationInDB, PaymentInformationUpdate
 from .product import Product, ProductCreate, ProductInDB, ProductUpdate

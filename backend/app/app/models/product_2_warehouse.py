@@ -2,9 +2,10 @@
 from sqlalchemy import Column, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 from app.database.session import Base
+from app.database.mixins import AssociationMixin
 
 
-class Product2Warehouse(Base):
+class Product2Warehouse(Base, AssociationMixin):
     """Class that represents the assignment of products to warehouses."""
     __tablename__ = 'product_2_warehouse'
 

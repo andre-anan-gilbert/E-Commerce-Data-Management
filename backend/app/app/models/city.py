@@ -1,19 +1,16 @@
-"""Postal code 2 city database model."""
-from sqlalchemy import Column, DateTime, ForeignKey, Index, Integer, String
-from sqlalchemy.orm import relationship
+"""City database model."""
+from sqlalchemy import Column, Index, String
 from app.database.session import Base
+from app.database.mixins import AssociationMixin
 
 
-class City(Base):
+# this entity is not an association object, but since it uses postal code as ID
+# it requires the same fields as them and thus uses the Association Mixin
+class City(Base, AssociationMixin):
     """Class that represents the assignment of postal codes to city names."""
     __tablename__ = 'city'
 
     postal_code = Column(String, primary_key=True, index=True)
     name = Column(String, index=True)
-    created = Column(DateTime)
-    updated = Column(DateTime)
-    edited_by = Column(Integer, ForeignKey('user.id'), index=True)
-
-    user = relationship('User', backref='edits')
 
     __table_args__ = (Index('city_postal_code_uc', 'postal_code', 'name'),)

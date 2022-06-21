@@ -2,7 +2,7 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 from app.database.session import Base
-from app.database.base_mixin import BaseMixin
+from app.database.mixins import BaseMixin
 
 
 class Employee(Base, BaseMixin):

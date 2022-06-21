@@ -5,7 +5,7 @@ from pydantic import BaseModel
 
 
 # Shared properties
-class OrderDetailBase(BaseModel):
+class Order2ProductBase(BaseModel):
     order_id: Optional[int]
     product_id: Optional[int]
     price_at_time_of_purchase: Optional[float]
@@ -13,7 +13,7 @@ class OrderDetailBase(BaseModel):
 
 
 # Properties to receive via API on creation
-class OrderDetailCreate(OrderDetailBase):
+class Order2ProductCreate(Order2ProductBase):
     order_id: int
     product_id: int
     price_at_time_of_purchase: float
@@ -21,11 +21,11 @@ class OrderDetailCreate(OrderDetailBase):
 
 
 # Properties to receive via API on update
-class OrderDetailUpdate(OrderDetailBase):
+class Order2ProductUpdate(Order2ProductBase):
     pass
 
 
-class OrderDetailInDBBase(OrderDetailBase):
+class Order2ProductInDBBase(Order2ProductBase):
     id: int
 
     class Config:
@@ -33,10 +33,10 @@ class OrderDetailInDBBase(OrderDetailBase):
 
 
 # Additional properties to return via API
-class OrderDetail(OrderDetailInDBBase):
+class Order2Product(Order2ProductInDBBase):
     pass
 
 
 # Additional properties stored in DB
-class OrderDetailInDB(OrderDetailInDBBase):
+class Order2ProductInDB(Order2ProductInDBBase):
     pass

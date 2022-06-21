@@ -3,7 +3,7 @@ import enum
 from sqlalchemy import Column, Enum, Integer, ForeignKey
 from sqlalchemy.orm import relationship, backref
 from app.database.session import Base
-from app.database.base_mixin import BaseMixin
+from app.database.mixins import BaseMixin
 
 
 class OrderStatus(enum.Enum):

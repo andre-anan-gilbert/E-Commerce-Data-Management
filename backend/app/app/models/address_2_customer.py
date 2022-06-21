@@ -2,9 +2,10 @@
 from sqlalchemy import Column, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 from app.database.session import Base
+from app.database.mixins import AssociationMixin
 
 
-class Address2Customer(Base):
+class Address2Customer(Base, AssociationMixin):
     """Class that represents the assignment of addresses to customers."""
     __tablename__ = 'address_2_customer'
 
