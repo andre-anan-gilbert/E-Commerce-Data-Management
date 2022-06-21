@@ -13,6 +13,9 @@ table address {
 table address_2_customer {
   customer_id int [PK, ref: > customer.id]
   address_id int [PK, ref: > address.id]
+  created datetime [not null]
+  updated datetime
+  edited_by int [ref: > user.id]
 }
 
 table category {
@@ -110,7 +113,7 @@ table order {
   edited_by int [ref: > user.id]
 }
 
-table order_detail {
+table order_2_product {
   order_id int [PK, ref: > order.id]
   product_id int [PK, ref: > product.id]
   price_at_time_of_purchase decimal [not null]
@@ -133,6 +136,9 @@ table payment_information_2_customer {
   customer_id int [PK, ref: > customer.id]
   payment_information_id int [PK, ref: > payment_information.id]
   is_default boolean [not null]
+  created datetime [not null]
+  updated datetime
+  edited_by int [ref: > user.id]
 }
 
 table product {
@@ -151,6 +157,9 @@ table product_2_warehouse {
   product_id int [PK, ref: > product.id]
   warehouse_id int [PK, ref: > warehouse.id]
   number_in_stock int [not null]
+  created datetime [not null]
+  updated datetime
+  edited_by int [ref: > user.id]
 }
 
 table shipping_service {
