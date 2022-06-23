@@ -1,5 +1,5 @@
 """SQLAlchemy Mixins to inherit from if time- and user stamps are desired."""
-import datetime
+from datetime import datetime
 
 from sqlalchemy import Column, DateTime, Integer, ForeignKey
 from sqlalchemy.ext.declarative import declared_attr
@@ -9,7 +9,7 @@ from sqlalchemy.orm import relationship
 class BaseMixin:
     """MixIn to be used with all normal models that require id and time/user-stamps."""
     id = Column(Integer, primary_key=True, index=True)
-    created = Column(DateTime, default=datetime.datetime.utcnow)
+    created = Column(DateTime, default=datetime.utcnow)
     updated = Column(DateTime)
 
     @declared_attr
@@ -23,7 +23,7 @@ class BaseMixin:
 
 class AssociationMixin:
     """MixIn to be used with all association objects that require time/user-stamps."""
-    created = Column(DateTime, default=datetime.datetime.utcnow)
+    created = Column(DateTime, default=datetime.utcnow)
     updated = Column(DateTime)
 
     @declared_attr

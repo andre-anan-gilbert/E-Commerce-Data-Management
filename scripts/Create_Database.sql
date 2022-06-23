@@ -1,13 +1,13 @@
 CREATE TYPE "invoice_status" AS ENUM (
-  'open',
-  'overdue',
-  'paid'
+  'OPEN',
+  'OVERDUE',
+  'PAID'
 );
 
 CREATE TYPE "order_status" AS ENUM (
-  'open',
-  'sent',
-  'delivered'
+  'OPEN',
+  'SENT',
+  'DELIVERED'
 );
 
 CREATE TABLE "address" (

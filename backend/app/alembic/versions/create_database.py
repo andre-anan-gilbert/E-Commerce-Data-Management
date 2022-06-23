@@ -35,7 +35,7 @@ def upgrade():
                         ['edited_by'],
                         ['user.id'],
                     ), sa.PrimaryKeyConstraint('postal_code'))
-    op.create_index('city_postal_code_uc', 'city', ['postal_code', 'name'], unique=False)
+    op.create_index('city_postal_code_uc', 'city', ['postal_code', 'name'], unique=True)
     op.create_index(op.f('ix_city_name'), 'city', ['name'], unique=False)
     op.create_index(op.f('ix_city_edited_by'), 'city', ['edited_by'], unique=False)
     op.create_index(op.f('ix_city_postal_code'), 'city', ['postal_code'], unique=False)
@@ -379,8 +379,7 @@ def upgrade():
     op.create_index(op.f('ix_product_supplier_id'), 'product', ['supplier_id'], unique=False)
 
     # order_2_product
-    op.create_table('order_2_product', sa.Column('id', sa.Integer(), nullable=False),
-                    sa.Column('order_id', sa.Integer(), nullable=False),
+    op.create_table('order_2_product', sa.Column('order_id', sa.Integer(), nullable=False),
                     sa.Column('product_id', sa.Integer(), nullable=False),
                     sa.Column('price_at_time_of_purchase', sa.Float(), nullable=False),
                     sa.Column('number_of_items', sa.Integer(), nullable=False),
@@ -396,9 +395,8 @@ def upgrade():
                     ), sa.ForeignKeyConstraint(
                         ['product_id'],
                         ['product.id'],
-                    ), sa.PrimaryKeyConstraint('id', 'order_id', 'product_id'))
+                    ), sa.PrimaryKeyConstraint('order_id', 'product_id'))
     op.create_index(op.f('ix_order_2_product_edited_by'), 'order_2_product', ['edited_by'], unique=False)
-    op.create_index(op.f('ix_order_2_product_id'), 'order_2_product', ['id'], unique=False)
     op.create_index(op.f('ix_order_2_product_number_of_items'), 'order_2_product', ['number_of_items'], unique=False)
     op.create_index(op.f('ix_order_2_product_order_id'), 'order_2_product', ['order_id'], unique=False)
     op.create_index(op.f('ix_order_2_product_price_at_time_of_purchase'),

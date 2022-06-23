@@ -8,9 +8,9 @@ from app.database.mixins import BaseMixin
 
 class OrderStatus(enum.Enum):
     """Class that represents the status of the order."""
-    OPEN = 1
-    SENT = 2
-    DELIVERED = 3
+    OPEN = 'OPEN'
+    SENT = 'SENT'
+    DELIVERED = 'DELIVERED'
 
 
 class Order(Base, BaseMixin):

@@ -8,9 +8,9 @@ from app.database.mixins import BaseMixin
 
 class InvoiceStatus(enum.Enum):
     """Class that represents the status of an invoice."""
-    OPEN = 1
-    OVERDUE = 2
-    PAID = 3
+    OPEN = 'OPEN'
+    OVERDUE = 'OVERDUE'
+    PAID = 'PAID'
 
 
 class Invoice(Base, BaseMixin):
