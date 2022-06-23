@@ -5,37 +5,63 @@ table address {
   postal_code varchar [ref: > city.postal_code]
   street varchar [not null]
   house_number int [not null]
-  created datetime [not null]
-  updated datetime
+  created timestamp [not null]
+  updated timestamp
   edited_by int [ref: > user.id]
+
+  Indexes {
+    country [name: "ix_address_country"]
+    edited_by [name: "ix_address_edited_by"]
+    house_number [name: "ix_address_house_number"]
+    id [name: "ix_address_id"]
+    postal_code [name: "ix_address_postal_code"]
+    region [name: "ix_address_region"]
+    street [name: "ix_address_street"]
+  }
 }
 
 table address_2_customer {
   customer_id int [PK, ref: > customer.id]
   address_id int [PK, ref: > address.id]
-  created datetime [not null]
-  updated datetime
+  created timestamp [not null]
+  updated timestamp
   edited_by int [ref: > user.id]
+
+  Indexes {
+    address_id [name: "ix_address_2_customer_address_id"]
+    customer_id [name: "ix_address_2_customer_customer_id"]
+    edited_by [name: "ix_address_2_customer_edited_by"]
+  }
 }
 
 table category {
   id int [PK]
   name varchar [not null, unique]
   description varchar
-  created datetime [not null]
-  updated datetime
+  created timestamp [not null]
+  updated timestamp
   edited_by int [ref: > user.id]
+
+  Indexes {
+    description [name: "ix_category_description"]
+    edited_by [name: "ix_category_edited_by"]
+    id [name: "ix_category_id"]
+    name [name: "ix_category_name"]
+  }
 }
 
 table city {
   postal_code varchar [PK]
   name varchar [not null]
-  created datetime [not null]
-  updated datetime
+  created timestamp [not null]
+  updated timestamp
   edited_by int [ref: > user.id]
 
-  indexes {
-    (postal_code, name) [unique]
+  Indexes {
+    (postal_code, name) [unique, name: "city_postal_code_uc"]
+    name [name: "ix_city_name"]
+    edited_by [name: "ix_city_edited_by"]
+    postal_code [name: "ix_city_postal_code"]
   }
 }
 
@@ -46,18 +72,35 @@ table customer {
   last_name varchar [not null]
   email varchar [not null, unique]
   phone_number varchar [unique]
-  created datetime [not null]
-  updated datetime
+  created timestamp [not null]
+  updated timestamp
   edited_by int [ref: > user.id]
+
+  Indexes {
+    edited_by [name: "ix_customer_edited_by"]
+    email [name: "ix_customer_email"]
+    first_name [name: "ix_customer_first_name"]
+    id [name: "ix_customer_id"]
+    last_name [name: "ix_customer_last_name"]
+    phone_number [name: "ix_customer_phone_number"]
+    salutation [name: "ix_customer_salutation"]
+  }
 }
 
 table department {
   id int [PK]
   name varchar [not null]
   manager_id int [ref: > employee.id]
-  created datetime [not null]
-  updated datetime
+  created timestamp [not null]
+  updated timestamp
   edited_by int [ref: > user.id]
+
+  Indexes {
+    edited_by [name: "ix_department_edited_by"]
+    id [name: "ix_department_id"]
+    manager_id [name: "ix_department_manager_id"]
+    name [name: "ix_department_name"]
+  }
 }
 
 table employee {
@@ -72,9 +115,24 @@ table employee {
   address_id int [ref: > address.id]
   email varchar [not null, unique]
   phone_number varchar [unique]
-  created datetime [not null]
-  updated datetime
+  created timestamp [not null]
+  updated timestamp
   edited_by int [ref: > user.id]
+
+  Indexes {
+    address_id [name: "ix_employee_address_id"]
+    department_id [name: "ix_employee_department_id"]
+    edited_by [name: "ix_employee_edited_by"]
+    email [name: "ix_employee_email"]
+    first_name [name: "ix_employee_first_name"]
+    id [name: "ix_employee_id"]
+    job_title [name: "ix_employee_job_title"]
+    last_name [name: "ix_employee_last_name"]
+    phone_number [name: "ix_employee_phone_number"]
+    salutation [name: "ix_employee_salutation"]
+    ssn [name: "ix_employee_ssn"]
+    warehouse_id [name: "ix_employee_warehouse_id"]
+  }
 }
 
 Enum invoice_status {
@@ -90,9 +148,19 @@ table invoice {
   due_date date [not null]
   order_id int [unique, ref: - order.id]
   payment_information_id int [ref: > payment_information.id]
-  created datetime [not null]
-  updated datetime
+  created timestamp [not null]
+  updated timestamp
   edited_by int [ref: > user.id]
+
+  Indexes {
+    due_date [name: "ix_invoice_due_date"]
+    edited_by [name: "ix_invoice_edited_by"]
+    id [name: "ix_invoice_id"]
+    issue_date [name: "ix_invoice_issue_date"]
+    order_id [name: "ix_invoice_order_id"]
+    payment_information_id [name: "ix_invoice_payment_information_id"]
+    status [name: "ix_invoice_status"]
+  }
 }
 
 Enum order_status {
@@ -105,13 +173,24 @@ table order {
   id int [PK]
   customer_id int [ref: > customer.id]
   status order_status [not null]
-  order_date datetime [not null]
+  order_date date [not null]
   address_id int [ref: > address.id]
   employee_id int [ref: > employee.id]
   shipping_service_id int [ref: > shipping_service.id]
-  created datetime [not null]
-  updated datetime
+  created timestamp [not null]
+  updated timestamp
   edited_by int [ref: > user.id]
+
+  Indexes {
+    address_id [name: "ix_order_address_id"]
+    customer_id [name: "ix_order_customer_id"]
+    edited_by [name: "ix_order_edited_by"]
+    employee_id [name: "ix_order_employee_id"]
+    id [name: "ix_order_id"]
+    order_date [name: "ix_order_order_date"]
+    shipping_service_id [name: "ix_order_shipping_service_id"]
+    status [name: "ix_order_status"]
+  }
 }
 
 table order_2_product {
@@ -119,27 +198,48 @@ table order_2_product {
   product_id int [PK, ref: > product.id]
   price_at_time_of_purchase decimal [not null]
   number_of_items int [not null]
-  created datetime [not null]
-  updated datetime
+  created timestamp [not null]
+  updated timestamp
   edited_by int [ref: > user.id]
+
+  Indexes {
+    edited_by [name: "ix_order_2_product_edited_by"]
+    number_of_items [name: "ix_order_2_product_number_of_items"]
+    order_id [name: "ix_order_2_product_order_id"]
+    price_at_time_of_purchase [name: "ix_order_2_product_price_at_time_of_purchase"]
+    product_id [name: "ix_order_2_product_product_id"]
+  }
 }
 
 table payment_information {
   id int [PK]
   iban varchar [not null, unique]
   bic varchar
-  created datetime [not null]
-  updated datetime
+  created timestamp [not null]
+  updated timestamp
   edited_by int [ref: > user.id]
+
+  Indexes {
+    bic [name: "ix_payment_information_bic"]
+    edited_by [name: "ix_payment_information_edited_by"]
+    iban [name: "ix_payment_information_iban"]
+    id [name: "ix_payment_information_id"]
+  }
 }
 
 table payment_information_2_customer {
   customer_id int [PK, ref: > customer.id]
   payment_information_id int [PK, ref: > payment_information.id]
   is_default boolean [not null]
-  created datetime [not null]
-  updated datetime
+  created timestamp [not null]
+  updated timestamp
   edited_by int [ref: > user.id]
+
+  Indexes {
+    customer_id [name: "ix_payment_information_2_customer_customer_id"]
+    edited_by [name: "ix_payment_information_2_customer_edited_by"]
+    payment_information_id [name: "ix_payment_information_2_customer_payment_information_id"]
+  }
 }
 
 table product {
@@ -149,18 +249,34 @@ table product {
   description varchar
   category_id int [ref: > category.id]
   supplier_id int [ref: > supplier.id]
-  created datetime [not null]
-  updated datetime
+  created timestamp [not null]
+  updated timestamp
   edited_by int [ref: > user.id]
+
+  Indexes {
+    category_id [name: "ix_product_category_id"]
+    edited_by [name: "ix_product_edited_by"]
+    id [name: "ix_product_id"]
+    name [name: "ix_product_name"]
+    price [name: "ix_product_price"]
+    supplier_id [name: "ix_product_supplier_id"]
+  }
 }
 
 table product_2_warehouse {
   product_id int [PK, ref: > product.id]
   warehouse_id int [PK, ref: > warehouse.id]
   number_in_stock int [not null]
-  created datetime [not null]
-  updated datetime
+  created timestamp [not null]
+  updated timestamp
   edited_by int [ref: > user.id]
+
+  Indexes {
+    edited_by [name: "ix_product_2_warehouse_edited_by"]
+    number_in_stock [name: "ix_product_2_warehouse_number_in_stock"]
+    product_id [name: "ix_product_2_warehouse_product_id"]
+    warehouse_id [name: "ix_product_2_warehouse_warehouse_id"]
+  }
 }
 
 table shipping_service {
@@ -169,9 +285,18 @@ table shipping_service {
   address_id int [ref: > address.id]
   email varchar [not null, unique]
   phone_number varchar [unique]
-  created datetime [not null]
-  updated datetime
+  created timestamp [not null]
+  updated timestamp
   edited_by int [ref: > user.id]
+
+  Indexes {
+    address_id [name: "ix_shipping_service_address_id"]
+    edited_by [name: "ix_shipping_service_edited_by"]
+    email [name: "ix_shipping_service_email"]
+    id [name: "ix_shipping_service_id"]
+    name [name: "ix_shipping_service_name"]
+    phone_number [name: "ix_shipping_service_phone_number"]
+  }
 }
 
 table supplier {
@@ -180,9 +305,18 @@ table supplier {
   address_id int [ref: > address.id]
   email varchar [not null, unique]
   phone_number varchar [unique]
-  created datetime [not null]
-  updated datetime
+  created timestamp [not null]
+  updated timestamp
   edited_by int [ref: > user.id]
+
+  Indexes {
+    address_id [name: "ix_supplier_address_id"]
+    edited_by [name: "ix_supplier_edited_by"]
+    email [name: "ix_supplier_email"]
+    id [name: "ix_supplier_id"]
+    name [name: "ix_supplier_name"]
+    phone_number [name: "ix_supplier_phone_number"]
+  }
 }
 
 table user {
@@ -190,8 +324,13 @@ table user {
   email varchar [not null, unique]
   hashed_password varchar [not null]
   token_version int [not null]
-  created datetime [not null]
-  updated datetime
+  created timestamp [not null]
+  updated timestamp
+
+  Indexes {
+    email [name: "ix_user_email"]
+    id [name: "ix_user_id"]
+  }
 }
 
 table warehouse {
@@ -199,7 +338,15 @@ table warehouse {
   address_id int [ref: > address.id]
   email varchar [not null, unique]
   phone_number varchar [unique]
-  created datetime [not null]
-  updated datetime
+  created timestamp [not null]
+  updated timestamp
   edited_by int [ref: > user.id]
+
+  Indexes {
+    address_id [name: "ix_warehouse_address_id"]
+    edited_by [name: "ix_warehouse_edited_by"]
+    email [name: "ix_warehouse_email"]
+    id [name: "ix_warehouse_id"]
+    phone_number [name: "ix_warehouse_phone_number"]
+  }
 }
