@@ -10,6 +10,7 @@ from app.models.invoice import InvoiceStatus
 # Shared properties
 class InvoiceBase(BaseModel):
     status: Optional[InvoiceStatus]
+    order_id: Optional[int]
     issue_date: Optional[datetime]
     due_date: Optional[datetime]
     payment_information_id: Optional[int]
@@ -17,6 +18,7 @@ class InvoiceBase(BaseModel):
 
 # Properties to receive via API on creation
 class InvoiceCreate(InvoiceBase):
+    order_id: int
     issue_date: datetime
     due_date: datetime
     payment_information_id: int

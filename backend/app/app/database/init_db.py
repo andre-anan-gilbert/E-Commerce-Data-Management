@@ -375,66 +375,39 @@ def run(database: Session) -> None:
             'manager_id': employees[2].id,
         }]
 
-        temp_departments = []
+        new_departments = []
 
         for entry, department in zip(department_manager_data, departments):
+            # unfortunately, this print-statement is absolutely necessary for the following update-statement to work
             print(f'Attempting to update department {department.name} with manager_id {entry["manager_id"]}')
-            temp_departments.append(
+            new_departments.append(
                 crud.department.update_with_user_and_timestamp(database,
                                                                database_obj=department,
                                                                obj_in=entry,
                                                                edited_by=user.id))
 
-        departments = temp_departments
-
-        for department in departments:
-            print(f'department_name: {department.name}')
-            print(f'manager_id: {department.manager_id}')
-
-        # create initial invoices
-
-        invoice_data = [{
-            'issue_date': datetime.utcnow() - timedelta(days=7),
-            'due_date': datetime.utcnow() + timedelta(days=7),
-            'status': InvoiceStatus.PAID,
-            'payment_information_id': payment_information_objects[0].id,
-        }, {
-            'issue_date': datetime.utcnow() - timedelta(days=3),
-            'due_date': datetime.utcnow() + timedelta(days=11),
-            'status': InvoiceStatus.OPEN,
-            'payment_information_id': payment_information_objects[0].id,
-        }, {
-            'issue_date': datetime.utcnow() - timedelta(days=15),
-            'due_date': datetime.utcnow() - timedelta(days=1),
-            'status': InvoiceStatus.OVERDUE,
-            'payment_information_id': payment_information_objects[0].id,
-        }]
-
-        invoices = []
-
-        for entry in invoice_data:
-            invoices.append(crud.invoice.create_with_user_and_timestamp(database, obj_in=entry, edited_by=user.id))
+        departments = new_departments
 
         # create initial orders
 
         order_data = [{
             'customer_id': customers[0].id,
-            'invoice_id': invoices[0].id,
             'status': OrderStatus.DELIVERED,
+            'order_date': datetime.utcnow() - timedelta(days=7),
             'address_id': addresses[0].id,
             'employee_id': employees[1].id,
             'shipping_service_id': shipping_services[0].id,
         }, {
             'customer_id': customers[0].id,
-            'invoice_id': invoices[1].id,
             'status': OrderStatus.SENT,
+            'order_date': datetime.utcnow() - timedelta(days=3),
             'address_id': addresses[4].id,
             'employee_id': employees[0].id,
             'shipping_service_id': shipping_services[1].id,
         }, {
             'customer_id': customers[2].id,
-            'invoice_id': invoices[2].id,
             'status': OrderStatus.DELIVERED,
+            'order_date': datetime.utcnow() - timedelta(days=15),
             'address_id': addresses[1].id,
             'employee_id': employees[2].id,
             'shipping_service_id': shipping_services[1].id,
@@ -444,6 +417,33 @@ def run(database: Session) -> None:
 
         for entry in order_data:
             orders.append(crud.order.create_with_user_and_timestamp(database, obj_in=entry, edited_by=user.id))
+
+        # create initial invoices
+
+        invoice_data = [{
+            'issue_date': datetime.utcnow() - timedelta(days=23),
+            'due_date': datetime.utcnow() + timedelta(days=7),
+            'status': InvoiceStatus.PAID,
+            'order_id': orders[0].id,
+            'payment_information_id': payment_information_objects[0].id,
+        }, {
+            'issue_date': datetime.utcnow() - timedelta(days=3),
+            'due_date': datetime.utcnow() + timedelta(days=27),
+            'status': InvoiceStatus.OPEN,
+            'order_id': orders[1].id,
+            'payment_information_id': payment_information_objects[0].id,
+        }, {
+            'issue_date': datetime.utcnow() - timedelta(days=45),
+            'due_date': datetime.utcnow() - timedelta(days=15),
+            'status': InvoiceStatus.OVERDUE,
+            'order_id': orders[2].id,
+            'payment_information_id': payment_information_objects[0].id,
+        }]
+
+        invoices = []
+
+        for entry in invoice_data:
+            invoices.append(crud.invoice.create_with_user_and_timestamp(database, obj_in=entry, edited_by=user.id))
 
         # create initial order product associations
 

@@ -204,29 +204,6 @@ def upgrade():
     op.create_index(op.f('ix_payment_information_iban'), 'payment_information', ['iban'], unique=True)
     op.create_index(op.f('ix_payment_information_id'), 'payment_information', ['id'], unique=False)
 
-    # invoice
-    op.create_table('invoice', sa.Column('id', sa.Integer(), nullable=False),
-                    sa.Column('status', sa.Enum('OPEN', 'OVERDUE', 'PAID', name='invoicestatus'), nullable=False),
-                    sa.Column('issue_date', sa.Date(), nullable=False), sa.Column('due_date', sa.Date(),
-                                                                                  nullable=False),
-                    sa.Column('payment_information_id', sa.Integer(), nullable=True),
-                    sa.Column('created', sa.DateTime(), nullable=True),
-                    sa.Column('updated', sa.DateTime(), nullable=True),
-                    sa.Column('edited_by', sa.Integer(), nullable=True),
-                    sa.ForeignKeyConstraint(
-                        ['edited_by'],
-                        ['user.id'],
-                    ), sa.ForeignKeyConstraint(
-                        ['payment_information_id'],
-                        ['payment_information.id'],
-                    ), sa.PrimaryKeyConstraint('id'))
-    op.create_index(op.f('ix_invoice_due_date'), 'invoice', ['due_date'], unique=False)
-    op.create_index(op.f('ix_invoice_edited_by'), 'invoice', ['edited_by'], unique=False)
-    op.create_index(op.f('ix_invoice_id'), 'invoice', ['id'], unique=False)
-    op.create_index(op.f('ix_invoice_issue_date'), 'invoice', ['issue_date'], unique=False)
-    op.create_index(op.f('ix_invoice_payment_information_id'), 'invoice', ['payment_information_id'], unique=False)
-    op.create_index(op.f('ix_invoice_status'), 'invoice', ['status'], unique=False)
-
     # payment_information_2_customer
     op.create_table('payment_information_2_customer', sa.Column('customer_id', sa.Integer(), nullable=False),
                     sa.Column('payment_information_id', sa.Integer(), nullable=False),
@@ -317,8 +294,8 @@ def upgrade():
     # order
     op.create_table('order', sa.Column('id', sa.Integer(), nullable=False),
                     sa.Column('customer_id', sa.Integer(), nullable=True),
-                    sa.Column('invoice_id', sa.Integer(), nullable=True),
                     sa.Column('status', sa.Enum('OPEN', 'SENT', 'DELIVERED', name='orderstatus'), nullable=False),
+                    sa.Column('order_date', sa.DateTime(), nullable=False),
                     sa.Column('address_id', sa.Integer(), nullable=True),
                     sa.Column('employee_id', sa.Integer(), nullable=True),
                     sa.Column('shipping_service_id', sa.Integer(), nullable=True),
@@ -338,9 +315,6 @@ def upgrade():
                         ['employee_id'],
                         ['employee.id'],
                     ), sa.ForeignKeyConstraint(
-                        ['invoice_id'],
-                        ['invoice.id'],
-                    ), sa.ForeignKeyConstraint(
                         ['shipping_service_id'],
                         ['shipping_service.id'],
                     ), sa.PrimaryKeyConstraint('id'))
@@ -349,9 +323,37 @@ def upgrade():
     op.create_index(op.f('ix_order_edited_by'), 'order', ['edited_by'], unique=False)
     op.create_index(op.f('ix_order_employee_id'), 'order', ['employee_id'], unique=False)
     op.create_index(op.f('ix_order_id'), 'order', ['id'], unique=False)
-    op.create_index(op.f('ix_order_invoice_id'), 'order', ['invoice_id'], unique=True)
+    op.create_index(op.f('ix_order_order_date'), 'order', ['order_date'], unique=False)
     op.create_index(op.f('ix_order_shipping_service_id'), 'order', ['shipping_service_id'], unique=False)
     op.create_index(op.f('ix_order_status'), 'order', ['status'], unique=False)
+
+    # invoice
+    op.create_table('invoice', sa.Column('id', sa.Integer(), nullable=False),
+                    sa.Column('status', sa.Enum('OPEN', 'OVERDUE', 'PAID', name='invoicestatus'), nullable=False),
+                    sa.Column('issue_date', sa.Date(), nullable=False), sa.Column('due_date', sa.Date(),
+                                                                                  nullable=False),
+                    sa.Column('order_id', sa.Integer(), nullable=True),
+                    sa.Column('payment_information_id', sa.Integer(), nullable=True),
+                    sa.Column('created', sa.DateTime(), nullable=True),
+                    sa.Column('updated', sa.DateTime(), nullable=True),
+                    sa.Column('edited_by', sa.Integer(), nullable=True),
+                    sa.ForeignKeyConstraint(
+                        ['edited_by'],
+                        ['user.id'],
+                    ), sa.ForeignKeyConstraint(
+                        ['order_id'],
+                        ['order.id'],
+                    ), sa.ForeignKeyConstraint(
+                        ['payment_information_id'],
+                        ['payment_information.id'],
+                    ), sa.PrimaryKeyConstraint('id'))
+    op.create_index(op.f('ix_invoice_due_date'), 'invoice', ['due_date'], unique=False)
+    op.create_index(op.f('ix_invoice_edited_by'), 'invoice', ['edited_by'], unique=False)
+    op.create_index(op.f('ix_invoice_id'), 'invoice', ['id'], unique=False)
+    op.create_index(op.f('ix_invoice_issue_date'), 'invoice', ['issue_date'], unique=False)
+    op.create_index(op.f('ix_invoice_order_id'), 'invoice', ['order_id'], unique=True)
+    op.create_index(op.f('ix_invoice_payment_information_id'), 'invoice', ['payment_information_id'], unique=False)
+    op.create_index(op.f('ix_invoice_status'), 'invoice', ['status'], unique=False)
 
     # product
     op.create_table('product', sa.Column('id', sa.Integer(), nullable=False),

@@ -1,5 +1,6 @@
 """Order properties."""
 from typing import Optional
+from datetime import datetime
 
 from pydantic import BaseModel
 
@@ -9,8 +10,8 @@ from app.models.order import OrderStatus
 # Shared properties
 class OrderBase(BaseModel):
     customer_id: Optional[int]
-    invoice_id: Optional[int]
     status: Optional[OrderStatus]
+    order_date: Optional[datetime]
     address_id: Optional[int]
     employee_id: Optional[int]
     shipping_service_id: Optional[int]
@@ -19,7 +20,6 @@ class OrderBase(BaseModel):
 # Properties to receive via API on creation
 class OrderCreate(OrderBase):
     customer_id: int
-    invoice_id: int
     address_id: int
     employee_id: int
     shipping_service_id: int
