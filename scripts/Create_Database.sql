@@ -1,13 +1,13 @@
 CREATE TYPE "invoice_status" AS ENUM (
-  'OPEN',
-  'OVERDUE',
-  'PAID'
+  'open',
+  'overdue',
+  'paid'
 );
 
 CREATE TYPE "order_status" AS ENUM (
-  'OPEN',
-  'SENT',
-  'DELIVERED'
+  'open',
+  'sent',
+  'delivered'
 );
 
 CREATE TABLE "address" (
@@ -91,6 +91,7 @@ CREATE TABLE "invoice" (
   "status" invoice_status NOT NULL,
   "issue_date" date NOT NULL,
   "due_date" date NOT NULL,
+  "order_id" int UNIQUE,
   "payment_information_id" int,
   "created" datetime NOT NULL,
   "updated" datetime,
@@ -100,8 +101,8 @@ CREATE TABLE "invoice" (
 CREATE TABLE "order" (
   "id" int PRIMARY KEY,
   "customer_id" int,
-  "invoice_id" int UNIQUE,
   "status" order_status NOT NULL,
+  "order_date" datetime NOT NULL,
   "address_id" int,
   "employee_id" int,
   "shipping_service_id" int,
@@ -233,13 +234,13 @@ ALTER TABLE "employee" ADD FOREIGN KEY ("address_id") REFERENCES "address" ("id"
 
 ALTER TABLE "employee" ADD FOREIGN KEY ("edited_by") REFERENCES "user" ("id");
 
+ALTER TABLE "invoice" ADD FOREIGN KEY ("order_id") REFERENCES "order" ("id");
+
 ALTER TABLE "invoice" ADD FOREIGN KEY ("payment_information_id") REFERENCES "payment_information" ("id");
 
 ALTER TABLE "invoice" ADD FOREIGN KEY ("edited_by") REFERENCES "user" ("id");
 
 ALTER TABLE "order" ADD FOREIGN KEY ("customer_id") REFERENCES "customer" ("id");
-
-ALTER TABLE "order" ADD FOREIGN KEY ("invoice_id") REFERENCES "invoice" ("id");
 
 ALTER TABLE "order" ADD FOREIGN KEY ("address_id") REFERENCES "address" ("id");
 

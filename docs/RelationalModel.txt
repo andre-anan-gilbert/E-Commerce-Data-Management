@@ -88,6 +88,7 @@ table invoice {
   status invoice_status [not null]
   issue_date date [not null]
   due_date date [not null]
+  order_id int [unique, ref: - order.id]
   payment_information_id int [ref: > payment_information.id]
   created datetime [not null]
   updated datetime
@@ -103,8 +104,8 @@ Enum order_status {
 table order {
   id int [PK]
   customer_id int [ref: > customer.id]
-  invoice_id int [unique, ref: - invoice.id]
   status order_status [not null]
+  order_date datetime [not null]
   address_id int [ref: > address.id]
   employee_id int [ref: > employee.id]
   shipping_service_id int [ref: > shipping_service.id]
