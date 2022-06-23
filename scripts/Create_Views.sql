@@ -29,16 +29,49 @@ AS
         add.postal_code = cit.postal_code;
 
 /* create materialized view listing all orders shipped by a specific
-shipping service with their products */
+shipping service with their products and invoices */
 CREATE MATERIALIZED VIEW IF NOT EXISTS
-    orders_with_invoices
+    longfoots_orders_with_invoices
 AS
     SELECT
-        ord.
-        inv.
+        ord.status AS order_status,
+        ord.order_date,
+        inv.status AS invoice_status,
+        inv.issue_date,
+        inv.due_date,
+        pro.name AS product,
+        o2p.number_of_items,
+        o2p.price_at_time_of_purchase,
+        pro.price AS current_price,
+        pro.description,
+        cat.name AS category
     FROM
-        order ord
+        (
+            SELECT
+                *
+            FROM
+                "order"
+            WHERE
+                shipping_service_id = '2'
+        )
+    AS
+        ord
     INNER JOIN
+        invoice inv
+    ON
+        ord.id = inv.order_id
+    INNER JOIN
+        order_2_product o2p
+    ON
+        ord.id = o2p.order_id
+    INNER JOIN
+        product pro
+    ON
+        o2p.product_id = pro.id
+    INNER JOIN
+        category cat
+    ON
+        pro.category_id = cat.id
 
 
 
@@ -47,4 +80,4 @@ AS
 contains the data that satisfied the query by the time the command
 was issues (later added data is not automatically included) */
 REFRESH MATERIALIZED VIEW
-    orders_with_invoices;
+    longfoots_orders_with_invoices;
