@@ -144,7 +144,7 @@ def upgrade():
     op.create_index(op.f('ix_employee_warehouse_id'), 'employee', ['warehouse_id'], unique=False)
 
     op.create_foreign_key(
-        None,
+        'fk_department_manager_id',
         'department',
         'employee',
         ['manager_id'],
@@ -224,6 +224,9 @@ def upgrade():
     op.create_index(op.f('ix_payment_information_2_customer_customer_id'),
                     'payment_information_2_customer', ['customer_id'],
                     unique=False)
+    op.create_index(op.f('ix_payment_information_2_customer_edited_by'),
+                    'payment_information_2_customer', ['edited_by'],
+                    unique=False)
     op.create_index(op.f('ix_payment_information_2_customer_payment_information_id'),
                     'payment_information_2_customer', ['payment_information_id'],
                     unique=False)
@@ -244,6 +247,9 @@ def upgrade():
                         ['customer_id'],
                         ['customer.id'],
                     ), sa.PrimaryKeyConstraint('customer_id', 'address_id'))
+    op.create_index(op.f('ix_address_2_customer_address_id'), 'address_2_customer', ['address_id'], unique=False)
+    op.create_index(op.f('ix_address_2_customer_customer_id'), 'address_2_customer', ['customer_id'], unique=False)
+    op.create_index(op.f('ix_address_2_customer_edited_by'), 'address_2_customer', ['edited_by'], unique=False)
 
     # shipping_service
     op.create_table('shipping_service', sa.Column('id', sa.Integer(), nullable=False),
@@ -295,7 +301,7 @@ def upgrade():
     op.create_table('order', sa.Column('id', sa.Integer(), nullable=False),
                     sa.Column('customer_id', sa.Integer(), nullable=True),
                     sa.Column('status', sa.Enum('OPEN', 'SENT', 'DELIVERED', name='orderstatus'), nullable=False),
-                    sa.Column('order_date', sa.DateTime(), nullable=False),
+                    sa.Column('order_date', sa.Date(), nullable=False),
                     sa.Column('address_id', sa.Integer(), nullable=True),
                     sa.Column('employee_id', sa.Integer(), nullable=True),
                     sa.Column('shipping_service_id', sa.Integer(), nullable=True),
@@ -423,6 +429,7 @@ def upgrade():
                         ['warehouse_id'],
                         ['warehouse.id'],
                     ), sa.PrimaryKeyConstraint('product_id', 'warehouse_id'))
+    op.create_index(op.f('ix_product_2_warehouse_edited_by'), 'product_2_warehouse', ['edited_by'], unique=False)
     op.create_index(op.f('ix_product_2_warehouse_number_in_stock'),
                     'product_2_warehouse', ['number_in_stock'],
                     unique=False)
@@ -436,12 +443,12 @@ def downgrade():
     op.drop_index(op.f('ix_product_2_warehouse_warehouse_id'), table_name='product_2_warehouse')
     op.drop_index(op.f('ix_product_2_warehouse_product_id'), table_name='product_2_warehouse')
     op.drop_index(op.f('ix_product_2_warehouse_number_in_stock'), table_name='product_2_warehouse')
+    op.drop_index(op.f('ix_product_2_warehouse_edited_by'), table_name='product_2_warehouse')
     op.drop_table('product_2_warehouse')
     op.drop_index(op.f('ix_order_2_product_product_id'), table_name='order_2_product')
     op.drop_index(op.f('ix_order_2_product_price_at_time_of_purchase'), table_name='order_2_product')
     op.drop_index(op.f('ix_order_2_product_order_id'), table_name='order_2_product')
     op.drop_index(op.f('ix_order_2_product_number_of_items'), table_name='order_2_product')
-    op.drop_index(op.f('ix_order_2_product_id'), table_name='order_2_product')
     op.drop_index(op.f('ix_order_2_product_edited_by'), table_name='order_2_product')
     op.drop_table('order_2_product')
     op.drop_index(op.f('ix_product_supplier_id'), table_name='product')
@@ -451,21 +458,24 @@ def downgrade():
     op.drop_index(op.f('ix_product_edited_by'), table_name='product')
     op.drop_index(op.f('ix_product_category_id'), table_name='product')
     op.drop_table('product')
+    op.drop_index(op.f('ix_invoice_status'), table_name='invoice')
+    op.drop_index(op.f('ix_invoice_payment_information_id'), table_name='invoice')
+    op.drop_index(op.f('ix_invoice_order_id'), table_name='invoice')
+    op.drop_index(op.f('ix_invoice_issue_date'), table_name='invoice')
+    op.drop_index(op.f('ix_invoice_id'), table_name='invoice')
+    op.drop_index(op.f('ix_invoice_edited_by'), table_name='invoice')
+    op.drop_index(op.f('ix_invoice_due_date'), table_name='invoice')
+    op.drop_table('invoice')
     op.drop_index(op.f('ix_order_status'), table_name='order')
     op.drop_index(op.f('ix_order_shipping_service_id'), table_name='order')
-    op.drop_index(op.f('ix_order_invoice_id'), table_name='order')
+    op.drop_index(op.f('ix_order_status'), table_name='order')
+    op.drop_index(op.f('ix_order_order_date'), table_name='order')
     op.drop_index(op.f('ix_order_id'), table_name='order')
     op.drop_index(op.f('ix_order_employee_id'), table_name='order')
     op.drop_index(op.f('ix_order_edited_by'), table_name='order')
     op.drop_index(op.f('ix_order_customer_id'), table_name='order')
     op.drop_index(op.f('ix_order_address_id'), table_name='order')
     op.drop_table('order')
-    op.drop_index(op.f('ix_warehouse_phone_number'), table_name='warehouse')
-    op.drop_index(op.f('ix_warehouse_id'), table_name='warehouse')
-    op.drop_index(op.f('ix_warehouse_email'), table_name='warehouse')
-    op.drop_index(op.f('ix_warehouse_edited_by'), table_name='warehouse')
-    op.drop_index(op.f('ix_warehouse_address_id'), table_name='warehouse')
-    op.drop_table('warehouse')
     op.drop_index(op.f('ix_supplier_phone_number'), table_name='supplier')
     op.drop_index(op.f('ix_supplier_name'), table_name='supplier')
     op.drop_index(op.f('ix_supplier_id'), table_name='supplier')
@@ -480,26 +490,15 @@ def downgrade():
     op.drop_index(op.f('ix_shipping_service_edited_by'), table_name='shipping_service')
     op.drop_index(op.f('ix_shipping_service_address_id'), table_name='shipping_service')
     op.drop_table('shipping_service')
+    op.drop_index(op.f('ix_address_2_customer_edited_by'), 'address_2_customer')
+    op.drop_index(op.f('ix_address_2_customer_customer_id'), 'address_2_customer')
+    op.drop_index(op.f('ix_address_2_customer_address_id'), 'address_2_customer')
     op.drop_table('address_2_customer')
     op.drop_index(op.f('ix_payment_information_2_customer_payment_information_id'),
                   table_name='payment_information_2_customer')
+    op.drop_index(op.f('ix_payment_information_2_customer_edited_by'), table_name='payment_information_2_customer')
     op.drop_index(op.f('ix_payment_information_2_customer_customer_id'), table_name='payment_information_2_customer')
     op.drop_table('payment_information_2_customer')
-    op.drop_index(op.f('ix_invoice_status'), table_name='invoice')
-    op.drop_index(op.f('ix_invoice_payment_information_id'), table_name='invoice')
-    op.drop_index(op.f('ix_invoice_issue_date'), table_name='invoice')
-    op.drop_index(op.f('ix_invoice_id'), table_name='invoice')
-    op.drop_index(op.f('ix_invoice_edited_by'), table_name='invoice')
-    op.drop_index(op.f('ix_invoice_due_date'), table_name='invoice')
-    op.drop_table('invoice')
-    op.drop_index(op.f('ix_address_street'), table_name='address')
-    op.drop_index(op.f('ix_address_region'), table_name='address')
-    op.drop_index(op.f('ix_address_postal_code'), table_name='address')
-    op.drop_index(op.f('ix_address_id'), table_name='address')
-    op.drop_index(op.f('ix_address_house_number'), table_name='address')
-    op.drop_index(op.f('ix_address_edited_by'), table_name='address')
-    op.drop_index(op.f('ix_address_country'), table_name='address')
-    op.drop_table('address')
     op.drop_index(op.f('ix_payment_information_id'), table_name='payment_information')
     op.drop_index(op.f('ix_payment_information_iban'), table_name='payment_information')
     op.drop_index(op.f('ix_payment_information_edited_by'), table_name='payment_information')
@@ -513,19 +512,12 @@ def downgrade():
     op.drop_index(op.f('ix_customer_email'), table_name='customer')
     op.drop_index(op.f('ix_customer_edited_by'), table_name='customer')
     op.drop_table('customer')
-    op.drop_index(op.f('ix_city_postal_code'), table_name='city')
-    op.drop_index(op.f('ix_city_edited_by'), table_name='city')
-    op.drop_index(op.f('ix_city_city'), table_name='city')
-    op.drop_index('city_postal_code_uc', table_name='city')
-    op.drop_table('city')
     op.drop_index(op.f('ix_category_name'), table_name='category')
     op.drop_index(op.f('ix_category_id'), table_name='category')
     op.drop_index(op.f('ix_category_edited_by'), table_name='category')
     op.drop_index(op.f('ix_category_description'), table_name='category')
     op.drop_table('category')
-    op.drop_index(op.f('ix_user_id'), table_name='user')
-    op.drop_index(op.f('ix_user_email'), table_name='user')
-    op.drop_table('user')
+    op.drop_constraint('fk_department_manager_id')
     op.drop_index(op.f('ix_employee_warehouse_id'), table_name='employee')
     op.drop_index(op.f('ix_employee_ssn'), table_name='employee')
     op.drop_index(op.f('ix_employee_salutation'), table_name='employee')
@@ -544,4 +536,26 @@ def downgrade():
     op.drop_index(op.f('ix_department_id'), table_name='department')
     op.drop_index(op.f('ix_department_edited_by'), table_name='department')
     op.drop_table('department')
+    op.drop_index(op.f('ix_warehouse_phone_number'), table_name='warehouse')
+    op.drop_index(op.f('ix_warehouse_id'), table_name='warehouse')
+    op.drop_index(op.f('ix_warehouse_email'), table_name='warehouse')
+    op.drop_index(op.f('ix_warehouse_edited_by'), table_name='warehouse')
+    op.drop_index(op.f('ix_warehouse_address_id'), table_name='warehouse')
+    op.drop_table('warehouse')
+    op.drop_index(op.f('ix_address_street'), table_name='address')
+    op.drop_index(op.f('ix_address_region'), table_name='address')
+    op.drop_index(op.f('ix_address_postal_code'), table_name='address')
+    op.drop_index(op.f('ix_address_id'), table_name='address')
+    op.drop_index(op.f('ix_address_house_number'), table_name='address')
+    op.drop_index(op.f('ix_address_edited_by'), table_name='address')
+    op.drop_index(op.f('ix_address_country'), table_name='address')
+    op.drop_table('address')
+    op.drop_index(op.f('ix_city_postal_code'), table_name='city')
+    op.drop_index(op.f('ix_city_edited_by'), table_name='city')
+    op.drop_index(op.f('ix_city_city'), table_name='city')
+    op.drop_index('city_postal_code_uc', table_name='city')
+    op.drop_table('city')
+    op.drop_index(op.f('ix_user_id'), table_name='user')
+    op.drop_index(op.f('ix_user_email'), table_name='user')
+    op.drop_table('user')
     # ### end Alembic commands ###

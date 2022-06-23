@@ -1,7 +1,7 @@
 """Invoice database model."""
 import enum
 from datetime import datetime, timedelta
-from sqlalchemy import Column, Enum, Integer, DateTime, ForeignKey
+from sqlalchemy import Column, Enum, Integer, Date, ForeignKey
 from sqlalchemy.orm import relationship, backref
 from app.database.session import Base
 from app.database.mixins import BaseMixin
@@ -24,8 +24,8 @@ class Invoice(Base, BaseMixin):
     __tablename__ = 'invoice'
 
     status = Column(Enum(InvoiceStatus), nullable=False, default=InvoiceStatus.OPEN, index=True)
-    issue_date = Column(DateTime, nullable=False, default=datetime.utcnow, index=True)
-    due_date = Column(DateTime, nullable=False, default=get_default_due_date, index=True)
+    issue_date = Column(Date, nullable=False, default=datetime.utcnow, index=True)
+    due_date = Column(Date, nullable=False, default=get_default_due_date, index=True)
     order_id = Column(Integer, ForeignKey('order.id'), unique=True, index=True)
     payment_information_id = Column(Integer, ForeignKey('payment_information.id'), index=True)
 
