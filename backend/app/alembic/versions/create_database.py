@@ -468,7 +468,6 @@ def downgrade():
     op.drop_table('invoice')
     op.drop_index(op.f('ix_order_status'), table_name='order')
     op.drop_index(op.f('ix_order_shipping_service_id'), table_name='order')
-    op.drop_index(op.f('ix_order_status'), table_name='order')
     op.drop_index(op.f('ix_order_order_date'), table_name='order')
     op.drop_index(op.f('ix_order_id'), table_name='order')
     op.drop_index(op.f('ix_order_employee_id'), table_name='order')
