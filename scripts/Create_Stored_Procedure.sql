@@ -1,6 +1,6 @@
 /* This procedure is supposed to be triggered when someone sets a payment method of a specific
-user as default payment method (is_default=true). It then sets all other payment information
-objects of this user as not default (is_default=false).*/
+customer as default payment method (is_default=true). It then sets all other payment information
+objects of this customer as not default (is_default=false).*/
 
 CREATE FUNCTION
     ensure_only_one_default_payment_information_per_user()
@@ -25,8 +25,8 @@ LANGUAGE
     plpgsql;
 
 
-/* The following trigger executes the procedure after every update on
-payment_information_2_customer.is_default */
+/* The following trigger executes the procedure after every insert or update on
+payment_information_2_customer where is_default = true. */
 
 CREATE TRIGGER
     pay2cus_only_one_default_per_customer
@@ -43,7 +43,8 @@ WHEN
 EXECUTE PROCEDURE
     ensure_only_one_default_payment_information_per_user(customer_id, payment_information_id);
 
-/* this statement leads to triggering the trigger (on inital data) */
+
+/* this simple statement leads to triggering the trigger (on inital data) */
 
 INSERT INTO
     payment_information_2_customer
