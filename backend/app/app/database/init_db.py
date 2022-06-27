@@ -106,7 +106,7 @@ def run(database: Session) -> None:
             'name': 'Morveer\'s Winery',
             'address_id': addresses[1].id,
             'phone_number': '+491511234567',
-            'email': 'person@supplier-b.com',
+            'email': 'day@morveers.com',
         }]
 
         suppliers = []
@@ -185,11 +185,11 @@ def run(database: Session) -> None:
         warehouse_data = [{
             'address_id': addresses[2].id,
             'phone_number': '+491731234567',
-            'email': 'person@warehouse-a.com',
+            'email': 'yulwei@houseofthemaker.com',
         }, {
             'address_id': addresses[4].id,
             'phone_number': '+491531234567',
-            'email': 'person@warehouse-b.com',
+            'email': 'harding.grim@noreply.com',
         }]
 
         warehouses = []
@@ -355,7 +355,7 @@ def run(database: Session) -> None:
             'salutation': 'His Excelency',
             'first_name': 'Sand',
             'last_name': 'dan Glokta',
-            'job_title': 'Arch Lektor of the Inquisition',
+            'job_title': 'Arch Lector of the Inquisition',
             'department_id': departments[1].id,
             'warehouse_id': warehouses[0].id,
             'address_id': addresses[1].id,

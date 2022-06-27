@@ -1,5 +1,6 @@
-/* create simple view listing all customers with name and full address
-in a way it would be needed for shipping*/
+/* Creates a simple view listing all customers with name and full address
+in a way it would be needed for example for shipping.
+(multiple entries are intended for customers with multiple addresses) */
 CREATE OR REPLACE VIEW
     customer_with_full_address
 AS
@@ -28,8 +29,9 @@ AS
     ON
         add.postal_code = cit.postal_code;
 
-/* create materialized view listing all orders shipped by a specific
-shipping service with their products and invoices */
+
+/* Creates a materialized view listing all orders shipped by a specific
+shipping service with their products and invoices. */
 CREATE MATERIALIZED VIEW IF NOT EXISTS
     longfoots_orders_with_invoices
 AS
@@ -52,8 +54,8 @@ AS
             FROM
                 "order"
             WHERE
-                shipping_service_id = '2'
-        )
+                shipping_service_id = 2
+        ) -- many joins, so where clause included in subselect to reduce before the end of joining
     AS
         ord
     INNER JOIN
@@ -71,9 +73,7 @@ AS
     INNER JOIN
         category cat
     ON
-        pro.category_id = cat.id
-
-
+        pro.category_id = cat.id;
 
 
 /* this refreshes the materialized view, since it by default only
