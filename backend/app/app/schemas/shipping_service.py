@@ -1,42 +1,41 @@
-"""Supplier properties."""
+"""Shipping Service properties."""
 from typing import Optional
 
 from pydantic import BaseModel
 
 
 # Shared properties
-class SupplierBase(BaseModel):
+class ShippingServiceBase(BaseModel):
     name: Optional[str]
-    phone_number: Optional[str]
-    email: Optional[str]
     address_id: Optional[int]
+    email: Optional[str]
+    phone_number: Optional[str]
 
 
 # Properties to receive via API on creation
-class SupplierCreate(SupplierBase):
+class ShippingServiceCreate(ShippingServiceBase):
     name: str
-    email: str
     address_id: int
+    email: str
 
 
 # Properties to receive via API on update
-class SupplierUpdate(SupplierBase):
+class ShippingServiceUpdate(ShippingServiceBase):
     pass
 
 
-class SupplierInDBBase(SupplierBase):
+class ShippingServiceInDBBase(ShippingServiceBase):
     id: int
-    address_id: int
 
     class Config:
         orm_mode = True
 
 
 # Additional properties to return via API
-class Supplier(SupplierInDBBase):
+class ShippingService(ShippingServiceInDBBase):
     pass
 
 
 # Additional properties stored in DB
-class SupplierInDB(SupplierInDBBase):
+class ShippingServiceInDB(ShippingServiceInDBBase):
     pass

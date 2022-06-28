@@ -2,14 +2,14 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 from app.database.session import Base
-from app.database.base_mixin import BaseMixin
+from app.database.mixins import BaseMixin
 
 
 class Employee(Base, BaseMixin):
     """Class that represents employees."""
     __tablename__ = 'employee'
 
-    ssn = Column(Integer, unique=True, index=True)
+    ssn = Column(String, unique=True, index=True)
     salutation = Column(String, index=True)
     first_name = Column(String, nullable=False, index=True)
     last_name = Column(String, nullable=False, index=True)

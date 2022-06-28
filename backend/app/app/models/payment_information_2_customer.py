@@ -2,9 +2,10 @@
 from sqlalchemy import Column, Boolean, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 from app.database.session import Base
+from app.database.mixins import AssociationMixin
 
 
-class PaymentInformation2Customer(Base):
+class PaymentInformation2Customer(Base, AssociationMixin):
     """Class that represents the assignment of payment information to customers."""
     __tablename__ = 'payment_information_2_customer'
 

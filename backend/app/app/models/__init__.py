@@ -8,7 +8,7 @@ from .department import Department
 from .employee import Employee
 from .invoice import Invoice
 from .order import Order
-from .order_detail import OrderDetail
+from .order_2_product import Order2Product
 from .payment_information import PaymentInformation
 from .payment_information_2_customer import PaymentInformation2Customer
 from .product import Product

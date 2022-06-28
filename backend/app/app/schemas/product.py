@@ -28,8 +28,6 @@ class ProductUpdate(ProductBase):
 
 class ProductInDBBase(ProductBase):
     id: int
-    category_id: int
-    supplier_id: int
 
     class Config:
         orm_mode = True

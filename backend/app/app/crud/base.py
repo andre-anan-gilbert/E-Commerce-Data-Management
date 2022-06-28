@@ -1,5 +1,5 @@
 """Default CRUD object."""
-import datetime
+from datetime import datetime
 from typing import Any, Generic, Optional, Type, TypeVar, Union
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
@@ -86,7 +86,7 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
             if field in update_data:
                 setattr(database_obj, field, update_data[field])
         setattr(database_obj, 'edited_by', edited_by)
-        setattr(database_obj, 'updated', datetime.datetime.utcnow())
+        setattr(database_obj, 'updated', datetime.utcnow())
 
         database.add(database_obj)
         database.commit()

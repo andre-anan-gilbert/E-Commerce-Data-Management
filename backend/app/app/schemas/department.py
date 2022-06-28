@@ -1,37 +1,38 @@
-"""City properties."""
+"""Department properties."""
 from typing import Optional
 
 from pydantic import BaseModel
 
 
 # Shared properties
-class CityBase(BaseModel):
-    postal_code: Optional[str]
+class DepartmentBase(BaseModel):
     name: Optional[str]
+    manager_id: Optional[int]
 
 
 # Properties to receive via API on creation
-class CityCreate(CityBase):
-    postal_code: str
+class DepartmentCreate(DepartmentBase):
     name: str
+    manager_id: int
 
 
 # Properties to receive via API on update
-class CityUpdate(CityBase):
+class DepartmentUpdate(DepartmentBase):
     pass
 
 
-class CityInDBBase(CityBase):
+class DepartmentInDBBase(DepartmentBase):
+    id: int
 
     class Config:
         orm_mode = True
 
 
 # Additional properties to return via API
-class City(CityInDBBase):
+class Department(DepartmentInDBBase):
     pass
 
 
 # Additional properties stored in DB
-class CityInDB(CityInDBBase):
+class DepartmentInDB(DepartmentInDBBase):
     pass

@@ -49,6 +49,8 @@ alembic revision --autogenerate -m "message"
 
 To ensure conformity with pylint, the created revision files should be formatted before committing then. Since Alembic does not care how the revision files are named, remove the generated revision id from the filename, but be sure to leave the variables `revision` and `down_revision` inside the files unchanged.
 
+Also keep in mind that alembic currently [will not nearly autogenerate everything that is required](https://alembic.sqlalchemy.org/en/latest/autogenerate.html#what-does-autogenerate-detect-and-what-does-it-not-detect), and also will probably f\*\*k up the order in which the tables should be generated to ensure conformity with the foreign keys (alembic creates these in the table's constructors, not later seperately, what would be better), soin many cases a lot of manual adjustments háve to be made before the revision is actually usable and conform with the desired database.
+
 To run the migration (actual change in the database):
 
 ```
