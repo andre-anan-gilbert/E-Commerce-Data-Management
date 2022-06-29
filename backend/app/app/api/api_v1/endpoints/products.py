@@ -15,6 +15,7 @@ def read_product(
         *,
         database: Session = Depends(dependencies.get_database_session),
         id: int,
+        current_user: models.User = Depends(dependencies.get_current_user),  # pylint: disable=unused-argument
 ) -> Any:
     """Retrieve a product by its product number."""
     product = crud.product.get(database, obj_id=id)
@@ -30,6 +31,7 @@ def read_products(
         database: Session = Depends(dependencies.get_database_session),
         skip: int = 0,
         limit: int = 100,
+        current_user: models.User = Depends(dependencies.get_current_user),  # pylint: disable=unused-argument
 ) -> Any:
     """Retrieve all products."""
     products = crud.product.get_multi(database, skip=skip, limit=limit)
@@ -80,6 +82,7 @@ def delete_product(
         *,
         database: Session = Depends(dependencies.get_database_session),
         id: int,
+        current_user: models.User = Depends(dependencies.get_current_user),  # pylint: disable=unused-argument
 ) -> Any:
     """Delete a product."""
     product = crud.product.get(database, obj_id=id)
