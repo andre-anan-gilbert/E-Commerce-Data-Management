@@ -17,13 +17,13 @@ export const GradientBackgroundSection = ({
 }: GradientBackgroundSectionProps) => {
   return (
     <Section>
-      {children}
       <ImageWrapper flipX={curveFlipX}>
         <Image src={Curve} alt="Curve" layout="responsive" priority />
       </ImageWrapper>
       <GlowWrapper>
         <Image src={Glow} alt="Glow" layout="fill" priority />
       </GlowWrapper>
+      {children}
     </Section>
   );
 };

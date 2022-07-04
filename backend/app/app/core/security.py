@@ -4,6 +4,7 @@ from typing import Any, Union
 from jose import jwt
 from passlib.context import CryptContext
 from app.core.config import settings
+from app.models.user import User
 
 pwd_context = CryptContext(schemes=['bcrypt'], deprecated='auto')
 
@@ -35,3 +36,12 @@ def create_refresh_token(subject: Union[str, Any], expires_delta: timedelta, tok
     }
     encoded_jwt = jwt.encode(to_encode, settings.REFRESH_TOKEN_SECRET, algorithm=settings.ALGORITHM)
     return encoded_jwt
+
+
+def generate_tokens(user: User) -> tuple[str, str]:
+    access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token = create_access_token(user.id, access_token_expires)
+
+    refresh_token_expires = timedelta(minutes=settings.REFRESH_TOKEN_EXPIRE_MINUTES)
+    refresh_token = create_refresh_token(user.id, refresh_token_expires, user.token_version)
+    return access_token, refresh_token

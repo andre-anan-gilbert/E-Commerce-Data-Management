@@ -19,7 +19,7 @@ export const Wrapper = styled.div`
 `;
 
 export const ButtonWrapper = styled.div`
-  display: inline-block;
+  display: flex;
 `;
 
 export const Button = styled.button`
@@ -34,18 +34,6 @@ export const Button = styled.button`
   white-space: nowrap;
 `;
 
-export const SignInButton = styled(Button)`
-  color: ${({ theme }) => theme.text.light};
-  background-color: transparent;
-`;
-
-export const SignUpButton = styled(Button)`
-  padding: 0.8rem 1.6rem;
-  margin-left: 1.6rem;
-
-  color: ${({ theme }) => theme.text.light};
-  background-color: transparent;
-
-  border: 1px solid ${({ theme }) => theme.text.light};
-  border-radius: 0.6rem;
+export const Spacing = styled.div`
+  width: 0.8rem;
 `;

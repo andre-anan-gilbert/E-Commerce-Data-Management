@@ -58,8 +58,9 @@ export const Subtitle = styled(H3)`
 `;
 
 export const ButtonWrapper = styled.div`
-  display: inline-block;
+  display: flex;
   margin-inline: auto;
+  z-index: 10;
 
   @media (min-width: ${Breakpoints.LG}) {
     margin-inline: 0;
@@ -89,4 +90,8 @@ export const ImageWrapper = styled.div`
 export const ImageApp = styled.div`
   position: relative;
   width: 100%;
+`;
+
+export const Spacing = styled.div`
+  width: 1.6rem;
 `;

@@ -2,10 +2,11 @@
 import Image from 'next/image';
 import App from '@images/app.svg';
 import AppSection from '@images/app-section.svg';
-import { Classes } from '@blueprintjs/core';
-import { SignInButton } from '@buttons/SignInButton/SignInButton';
-import { SignUpButton } from '@buttons/SignUpButton/SignUpButton';
+import { useState } from 'react';
+import { Button, Classes } from '@blueprintjs/core';
 import { GradientBackgroundSection } from '../GradientBackgroundSection/GradientBackgroundSection';
+import { SignInCard } from '@cards/SignInCard/SignInCard';
+import { SignUpCard } from '@cards/SignUpCard/SignUpCard';
 import {
   Flex,
   TextWrapper,
@@ -16,9 +17,21 @@ import {
   ImageWrapper,
   ImageApp,
   ImageAppSection,
+  Spacing,
 } from './styles';
 
 export const HeroSection = () => {
+  const [isOpenSignIn, setIsOpenSignIn] = useState(false);
+  const [isOpenSignUp, setIsOpenSignUp] = useState(false);
+
+  const handleOpenSignIn = () => setIsOpenSignIn(true);
+
+  const handleCloseSignIn = () => setIsOpenSignIn(false);
+
+  const handleOpenSignUp = () => setIsOpenSignUp(true);
+
+  const handleCloseSignUp = () => setIsOpenSignUp(false);
+
   return (
     <GradientBackgroundSection>
       <Flex>
@@ -31,9 +44,22 @@ export const HeroSection = () => {
               We build world-class software for data analytics and data-driven
               decision making.
             </Subtitle>
-            <ButtonWrapper>
-              <SignInButton />
-              <SignUpButton />
+            <ButtonWrapper className={Classes.DARK}>
+              <Button
+                type="button"
+                text="Sign in"
+                intent="primary"
+                large
+                onClick={handleOpenSignIn}
+              />
+              <Spacing />
+              <Button
+                type="button"
+                text="Sign up"
+                outlined
+                large
+                onClick={handleOpenSignUp}
+              />
             </ButtonWrapper>
           </Grid>
         </TextWrapper>
@@ -51,6 +77,8 @@ export const HeroSection = () => {
           </ImageApp>
         </ImageWrapper>
       </Flex>
+      {isOpenSignIn && <SignInCard handleClose={handleCloseSignIn} />}
+      {isOpenSignUp && <SignUpCard handleClose={handleCloseSignUp} />}
     </GradientBackgroundSection>
   );
 };

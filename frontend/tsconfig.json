@@ -10,7 +10,8 @@
       "@animations/*": ["components/animations/*"],
       "@data/*": ["data/*"],
       "@styles/*": ["styles/*"],
-      "@images/*": ["images/*"]
+      "@images/*": ["images/*"],
+      "@queries/*": ["queries/*"]
     },
     "allowJs": true,
     "allowUnreachableCode": false,

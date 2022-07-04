@@ -9,7 +9,7 @@ import {
   FormGroup,
   InputGroup,
 } from '@blueprintjs/core';
-import { setToken, signIn } from '@queries/user';
+import { signUp, setToken } from '@queries/user';
 import {
   Backdrop,
   Wrapper,
@@ -25,14 +25,15 @@ type SignInCardProps = {
   handleClose: () => void;
 };
 
-export const SignInCard = ({ handleClose }: SignInCardProps) => {
+export const SignUpCard = ({ handleClose }: SignInCardProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const router = useRouter();
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const response = await signIn(email, password);
+    const response = await signUp(email, password);
     if (response.status === 200) {
       setToken(response.data.access_token);
       router.push('/home');
@@ -47,6 +48,10 @@ export const SignInCard = ({ handleClose }: SignInCardProps) => {
     setPassword(event.target.value);
   };
 
+  const handleConfirmPassword = (event: ChangeEvent<HTMLInputElement>) => {
+    setConfirmPassword(event.target.value);
+  };
+
   return (
     <>
       <Backdrop />
@@ -56,7 +61,7 @@ export const SignInCard = ({ handleClose }: SignInCardProps) => {
             <CloseButtonWrapper>
               <Button icon="cross" onClick={handleClose} />
             </CloseButtonWrapper>
-            <Subtitle>Sign in to</Subtitle>
+            <Subtitle>Sign up to</Subtitle>
             <Heading>
               <Image src={Logo} alt="logo" />
               <Title>404</Title>
@@ -87,6 +92,19 @@ export const SignInCard = ({ handleClose }: SignInCardProps) => {
                   leftIcon="lock"
                   large
                   onChange={handlePassword}
+                />
+              </FormGroup>
+              <FormGroup
+                label="Confirm Password"
+                labelFor="text-input"
+                labelInfo="(required)"
+              >
+                <InputGroup
+                  value={confirmPassword}
+                  placeholder="Confirm your password"
+                  leftIcon="lock"
+                  large
+                  onChange={handleConfirmPassword}
                 />
               </FormGroup>
               <div className={Classes.DARK}>

@@ -20,8 +20,6 @@ class UserUpdate(UserBase):
 
 
 class UserInDBBase(UserBase):
-    user_id: Optional[int] = None
-
     class Config:
         orm_mode = True
 
