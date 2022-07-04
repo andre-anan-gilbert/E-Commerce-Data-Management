@@ -11,7 +11,7 @@ from app.models.department import Department
 from app.models.employee import Employee
 from app.models.invoice import Invoice
 from app.models.order import Order
-from app.models.order_detail import OrderDetail
+from app.models.order_2_product import Order2Product
 from app.models.payment_information import PaymentInformation
 from app.models.payment_information_2_customer import PaymentInformation2Customer
 from app.models.product import Product

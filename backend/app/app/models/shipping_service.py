@@ -2,16 +2,16 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 from app.database.session import Base
+from app.database.mixins import BaseMixin
 
 
-class ShippingService(Base):
+class ShippingService(Base, BaseMixin):
     """Class that represents shipping services."""
     __tablename__ = 'shipping_service'
 
-    _id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, index=True)
-    address_id = Column(Integer, ForeignKey('address._id'), index=True)
-    email = Column(String, index=True)
-    phone_number = Column(String, index=True)
+    name = Column(String, nullable=False, index=True)
+    address_id = Column(Integer, ForeignKey('address.id'), index=True)
+    email = Column(String, unique=True, nullable=False, index=True)
+    phone_number = Column(String, unique=True, index=True)
 
-    address = relationship('Address', backref='shipping_services')
+    address = relationship('Address', backref='shipping_services', foreign_keys=[address_id])
