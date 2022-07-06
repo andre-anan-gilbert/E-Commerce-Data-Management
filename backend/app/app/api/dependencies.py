@@ -9,7 +9,7 @@ from app.database.session import SessionLocal
 from app.core.config import settings
 from app import crud, models, schemas
 
-oauth2 = OAuth2PasswordBearer(tokenUrl=f'{settings.API_V1_STR}/sign-in/token')
+oauth2 = OAuth2PasswordBearer(tokenUrl=f'{settings.API_V1_STR}/user/sign-in')
 
 
 def get_database_session() -> Generator:
