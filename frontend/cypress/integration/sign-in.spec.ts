@@ -13,6 +13,7 @@ describe('Sign in', () => {
       },
       { fixture: 'access-token' }
     ).as('accessToken');
+
     cy.get('[data-cy="sign-in"]').click();
     cy.get('[data-cy="sign-in-email"]')
       .should('have.value', '')
@@ -23,6 +24,8 @@ describe('Sign in', () => {
       .type('password123')
       .should('have.value', 'password123');
     cy.get('[data-cy="sign-in-submit"]').click();
+
+    cy.url().should('eq', 'http://localhost:3000/home');
   });
 });
 
