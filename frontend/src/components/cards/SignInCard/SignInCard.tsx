@@ -73,6 +73,7 @@ export const SignInCard = ({ handleClose }: SignInCardProps) => {
                   placeholder="Enter your email"
                   leftIcon="envelope"
                   large
+                  data-cy="sign-in-email"
                   onChange={handleEmail}
                 />
               </FormGroup>
@@ -87,6 +88,7 @@ export const SignInCard = ({ handleClose }: SignInCardProps) => {
                   leftIcon="lock"
                   type="password"
                   large
+                  data-cy="sign-in-password"
                   onChange={handlePassword}
                 />
               </FormGroup>
@@ -97,6 +99,7 @@ export const SignInCard = ({ handleClose }: SignInCardProps) => {
                   intent="primary"
                   large
                   fill
+                  data-cy="sign-in-submit"
                 />
               </div>
             </form>

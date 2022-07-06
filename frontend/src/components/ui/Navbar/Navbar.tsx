@@ -29,6 +29,7 @@ export const Navbar = () => {
             text="Sign in"
             minimal
             onClick={handleOpenSignIn}
+            data-cy="sign-in"
           />
           <Spacing />
           <Button
@@ -37,6 +38,7 @@ export const Navbar = () => {
             minimal
             outlined
             onClick={handleOpenSignUp}
+            data-cy="sign-up"
           />
         </ButtonWrapper>
       </Wrapper>
