@@ -15,7 +15,7 @@ router = APIRouter()
 
 
 @router.post('/sign-up', response_model=schemas.Token)
-def create_user(
+async def sign_up(
         *,
         response: Response,
         database: Session = Depends(dependencies.get_database_session),
@@ -36,7 +36,7 @@ def create_user(
 
 
 @router.post('/sign-in', response_model=schemas.Token)
-async def get_sign_in_token(
+async def sign_in(
     response: Response,
     database: Session = Depends(dependencies.get_database_session),
     form_data: OAuth2PasswordRequestForm = Depends()
@@ -51,7 +51,7 @@ async def get_sign_in_token(
 
 
 @router.post('/refresh-token', response_model=schemas.Token)
-async def get_refresh_token(
+async def create_refresh_token(
     response: Response,
     database: Session = Depends(dependencies.get_database_session),
     jid: Optional[str] = Cookie(None)
@@ -82,7 +82,7 @@ async def get_refresh_token(
 
 
 @router.get('/me', response_model=schemas.User)
-def get_user_me(
+def get_current_user(
         database: Session = Depends(dependencies.get_database_session),  # pylint: disable=unused-argument
         current_user: models.User = Depends(dependencies.get_current_user),
 ) -> Any:

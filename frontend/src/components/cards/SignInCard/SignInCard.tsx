@@ -85,6 +85,7 @@ export const SignInCard = ({ handleClose }: SignInCardProps) => {
                   value={password}
                   placeholder="Enter your password"
                   leftIcon="lock"
+                  type="password"
                   large
                   onChange={handlePassword}
                 />

@@ -90,6 +90,7 @@ export const SignUpCard = ({ handleClose }: SignInCardProps) => {
                   value={password}
                   placeholder="Enter your password"
                   leftIcon="lock"
+                  type="password"
                   large
                   onChange={handlePassword}
                 />
@@ -103,6 +104,7 @@ export const SignUpCard = ({ handleClose }: SignInCardProps) => {
                   value={confirmPassword}
                   placeholder="Confirm your password"
                   leftIcon="lock"
+                  type="password"
                   large
                   onChange={handleConfirmPassword}
                 />
