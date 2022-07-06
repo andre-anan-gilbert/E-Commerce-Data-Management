@@ -6,7 +6,6 @@ export const Section = styled.section`
   position: relative;
   height: min(75rem, 92.6rem);
   background: ${({ theme }) => theme.primary};
-  z-index: -1;
 `;
 
 export const GlowWrapper = styled.div`
@@ -16,7 +15,6 @@ export const GlowWrapper = styled.div`
   width: 60%;
   height: 30%;
   transform: translate(-80%, -50%);
-  z-index: -1;
 
   @media (min-width: ${Breakpoints.MD}) {
     top: 60%;
@@ -31,6 +29,5 @@ export const ImageWrapper = styled.div<IFlipXProps>`
   top: ${({ flipX }) => (flipX ? '-0.05rem' : 'auto')};
   bottom: ${({ flipX }) => (flipX ? 'auto' : '-0.05rem')};
   transform: ${({ flipX }) => (flipX ? 'scaleY(-1)' : 'none')};
-  z-index: -1;
   width: 100%;
 `;

@@ -18,7 +18,7 @@ class Settings(BaseSettings):
     REFRESH_TOKEN_SECRET: str = secrets.token_urlsafe(36)
     ALGORITHM: str
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 15
-    REFRESH_TOKEN_EXPIRE_MINUTES: int = 60 * 7
+    REFRESH_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7
     TEST_USER: EmailStr
     TEST_USER_PASSWORD: str
 
