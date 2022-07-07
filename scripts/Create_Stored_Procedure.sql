@@ -41,7 +41,7 @@ FOR EACH
 WHEN
     (NEW.is_default = true)
 EXECUTE PROCEDURE
-    ensure_only_one_default_payment_information_per_user(customer_id, payment_information_id);
+    ensure_only_one_default_payment_information_per_user();
 
 
 /* this simple statement leads to triggering the trigger (on inital data) */
