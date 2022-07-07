@@ -15,7 +15,7 @@ router = APIRouter()
 
 
 @router.post('/sign-up', response_model=schemas.Token)
-async def sign_up(
+def sign_up(
         *,
         response: Response,
         database: Session = Depends(dependencies.get_database_session),
@@ -36,10 +36,10 @@ async def sign_up(
 
 
 @router.post('/sign-in', response_model=schemas.Token)
-async def sign_in(
-    response: Response,
-    database: Session = Depends(dependencies.get_database_session),
-    form_data: OAuth2PasswordRequestForm = Depends()
+def sign_in(
+        response: Response,
+        database: Session = Depends(dependencies.get_database_session),
+        form_data: OAuth2PasswordRequestForm = Depends(),
 ) -> Any:
     """OAuth2 sign-in token."""
     user = crud.user.authenticate(database, email=form_data.username, password=form_data.password)
@@ -51,10 +51,10 @@ async def sign_in(
 
 
 @router.post('/refresh-token', response_model=schemas.Token)
-async def create_refresh_token(
-    response: Response,
-    database: Session = Depends(dependencies.get_database_session),
-    jid: Optional[str] = Cookie(None)
+def create_refresh_token(
+        response: Response,
+        database: Session = Depends(dependencies.get_database_session),
+        jid: Optional[str] = Cookie(None),
 ) -> Any:
     """OAuth2 refresh token."""
     token = jid
