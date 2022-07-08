@@ -1,10 +1,13 @@
 /** The footer of the application. */
+import { useRouter } from 'next/router';
 import { Classes, Icon } from '@blueprintjs/core';
 import { Foo, Wrapper, Copyright } from './styles';
 
 export const Footer = () => {
+  const router = useRouter();
+
   return (
-    <Foo>
+    <Foo landing={router.pathname === '/'}>
       <Wrapper>
         <Copyright className={Classes.TEXT_MUTED}>
           Copyright © 2022 404, Inc. All rights reserved.
