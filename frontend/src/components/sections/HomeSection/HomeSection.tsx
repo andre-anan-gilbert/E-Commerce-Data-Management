@@ -5,20 +5,28 @@ export const HomeSection = () => {
   return (
     <Section className={Classes.DARK}>
       <Title>Home</Title>
-      <Subtitle>Sales Order</Subtitle>
+      <Subtitle>Employees, Warehouses</Subtitle>
       <Flex>
         <Card elevation={3} interactive>
-          <CardTitle>Manage Products</CardTitle>
+          <CardTitle>Manage Employees</CardTitle>
         </Card>
+        <Card elevation={3} interactive>
+          <CardTitle>Manage Warehouses</CardTitle>
+        </Card>
+      </Flex>
+      <Subtitle style={{ marginTop: '3rem' }}>Sales Order</Subtitle>
+      <Flex>
         <Card elevation={3} interactive>
           <CardTitle>Manage Sales Order</CardTitle>
         </Card>
         <Card elevation={3} interactive>
           <CardTitle>Manage Customers</CardTitle>
         </Card>
-
         <Card elevation={3} interactive>
           <CardTitle>Manage Suppliers</CardTitle>
+        </Card>
+        <Card elevation={3} interactive>
+          <CardTitle>Manage Products</CardTitle>
         </Card>
       </Flex>
     </Section>

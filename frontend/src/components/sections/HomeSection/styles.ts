@@ -8,7 +8,7 @@ export const Section = styled.div`
 `;
 
 export const Title = styled(H1)`
-  margin-bottom: 5rem;
+  margin-bottom: 3rem;
 `;
 
 export const Subtitle = styled(H2)`
