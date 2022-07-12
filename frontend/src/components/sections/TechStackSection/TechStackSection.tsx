@@ -6,20 +6,11 @@ import { Section, Flex, Grid, Title, Subtitle } from './styles';
 
 const CubeAnimation = dynamic<{}>(() =>
   import('@animations/CubeAnimation/CubeAnimation').then(
-    module => module.CubeAnimation
+    (module) => module.CubeAnimation
   )
 );
 
 export const TechStackSection = () => {
-  const teckStackCards = techStackCardData.map(card => (
-    <TechStackSectionCard
-      key={card.id}
-      icon={card.icon}
-      title={card.title}
-      subtitle={card.subtitle}
-    />
-  ));
-
   return (
     <Section>
       <Flex>
@@ -32,7 +23,14 @@ export const TechStackSection = () => {
             et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
             Lorem ipsum dolor sit amet.
           </Subtitle>
-          {teckStackCards}
+          {techStackCardData.map((card) => (
+            <TechStackSectionCard
+              key={card.id}
+              icon={card.icon}
+              title={card.title}
+              subtitle={card.subtitle}
+            />
+          ))}
         </Grid>
         <CubeAnimation />
       </Flex>

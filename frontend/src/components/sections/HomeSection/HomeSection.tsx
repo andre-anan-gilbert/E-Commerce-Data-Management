@@ -1,9 +1,9 @@
-import { Classes, Card } from '@blueprintjs/core';
+import { Card } from '@blueprintjs/core';
 import { Section, Title, Subtitle, Flex, CardTitle } from './styles';
 
 export const HomeSection = () => {
   return (
-    <Section className={Classes.DARK}>
+    <Section>
       <Title>Home</Title>
       <Subtitle>Employees, Warehouses</Subtitle>
       <Flex>

@@ -19,7 +19,7 @@ export const signUp = async (email: string, password: string) => {
     },
     { withCredentials: true }
   );
-  return response;
+  return response.data;
 };
 
 export const signIn = async (email: string, password: string) => {
@@ -28,30 +28,29 @@ export const signIn = async (email: string, password: string) => {
   formData.append('password', password);
   const response = await axiosInstance.post<IToken>(
     'api/v1/user/sign-in',
-    formData,
-    {
-      withCredentials: true,
-    }
+    formData
   );
-  return response;
+  return response.data;
 };
 
 export const refreshToken = async () => {
   const response = await axiosInstance.post<IToken>(
-    'api/v1/user/refresh-token',
-    {
-      withCredentials: true,
-    }
+    'api/v1/user/refresh-token'
   );
-  return response;
+  return response.data;
 };
 
-export const getCurrentUser = async () => {
+export const fetchUser = async () => {
   const response = await axiosInstance.get<IUser>('api/v1/user/me');
-  return response;
+  return response.data;
 };
 
 export const setToken = (accessToken: string) => {
   const fifteenMinutes = 1 / 96;
   Cookies.set('tok', accessToken, { expires: fifteenMinutes });
+};
+
+export const removeToken = () => {
+  Cookies.remove('tok');
+  delete axiosInstance.defaults.headers.common['Authorization'];
 };

@@ -9,7 +9,7 @@ export const Foo = styled.div<IPage>`
     landing ? 'transparent' : Colors.DARK_GRAY3};
 `;
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<IPage>`
   width: min(100%, 120rem);
   min-height: 5rem;
   margin-inline: auto;
@@ -17,6 +17,9 @@ export const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  border-top: ${({ landing }) =>
+    landing ? 'none' : `1px solid ${Colors.GRAY1}`};
 `;
 
 export const Copyright = styled.p`

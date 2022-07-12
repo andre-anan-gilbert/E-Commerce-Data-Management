@@ -8,7 +8,7 @@ export const Footer = () => {
 
   return (
     <Foo landing={router.pathname === '/'}>
-      <Wrapper>
+      <Wrapper landing={router.pathname === '/'}>
         <Copyright className={Classes.TEXT_MUTED}>
           Copyright © 2022 404, Inc. All rights reserved.
         </Copyright>

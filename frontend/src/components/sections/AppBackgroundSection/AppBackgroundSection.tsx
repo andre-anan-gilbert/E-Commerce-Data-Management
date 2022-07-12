@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import { Section } from './styles';
+import { Classes } from '@blueprintjs/core';
 
 type AppBackgroundSectionProps = {
   children: ReactNode;
@@ -8,5 +9,5 @@ type AppBackgroundSectionProps = {
 export const AppBackgroundSection = ({
   children,
 }: AppBackgroundSectionProps) => {
-  return <Section>{children}</Section>;
+  return <Section className={Classes.DARK}>{children}</Section>;
 };

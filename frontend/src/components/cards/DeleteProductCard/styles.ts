@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { H1, H2 } from '@blueprintjs/core';
+import { H3 } from '@blueprintjs/core';
 
 export const Backdrop = styled.div`
   position: fixed;
@@ -31,16 +31,8 @@ export const Flex = styled.div`
   justify-content: center;
 `;
 
-export const Heading = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  grid-gap: 1rem;
-  margin-bottom: 1.5rem;
-`;
-
-export const Subtitle = styled(H2)`
-  text-align: center;
+export const CardWrapper = styled.div`
+  width: min(100%, 40rem);
 `;
 
 export const CloseButtonWrapper = styled.div`
@@ -49,9 +41,9 @@ export const CloseButtonWrapper = styled.div`
   margin-bottom: 1.5rem;
 `;
 
-export const Title = styled(H1)`
+export const Title = styled(H3)`
   text-align: center;
-  margin: 0;
+  margin-bottom: 15px;
 `;
 
 export const Text = styled.p`

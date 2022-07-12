@@ -8,7 +8,7 @@ import {
   Drawer,
   Classes,
 } from '@blueprintjs/core';
-import { Nav } from './styles';
+import { Nav, ButtonWrapper } from './styles';
 
 export const BlueprintMobileNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,7 +19,9 @@ export const BlueprintMobileNavbar = () => {
 
   return (
     <>
-      <Button type="button" rightIcon="menu" minimal onClick={handleOpen} />
+      <ButtonWrapper>
+        <Button type="button" rightIcon="menu" minimal onClick={handleOpen} />
+      </ButtonWrapper>
       <Drawer
         className={Classes.DARK}
         title="404"

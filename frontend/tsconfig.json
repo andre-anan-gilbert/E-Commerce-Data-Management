@@ -11,7 +11,9 @@
       "@data/*": ["data/*"],
       "@styles/*": ["styles/*"],
       "@images/*": ["images/*"],
-      "@queries/*": ["queries/*"]
+      "@queries/*": ["queries/*"],
+      "@hooks/*": ["hooks/*"],
+      "@context/*": ["context/*"]
     },
     "allowJs": true,
     "allowUnreachableCode": false,

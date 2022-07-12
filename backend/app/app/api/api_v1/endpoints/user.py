@@ -63,7 +63,7 @@ def create_refresh_token(
     try:
         payload = jwt.decode(token, settings.REFRESH_TOKEN_SECRET, algorithms=settings.ALGORITHM)
     except jwt.JWTError as error:
-        raise HTTPException(status_code=401, detail='User is not signed in') from error
+        raise HTTPException(status_code=401, detail='Invalid token') from error
 
     user = crud.user.get(database, obj_id=payload['sub'])
 

@@ -5,9 +5,10 @@ import { refreshToken, setToken } from './user';
 
 export const axiosInstance = axios.create({
   baseURL: process.env.BASE_URL || 'http://localhost:8000',
+  withCredentials: true,
 });
 
-axiosInstance.interceptors.request.use(async config => {
+axiosInstance.interceptors.request.use((config) => {
   if (!config.headers) {
     config.headers = {};
   }
@@ -17,17 +18,20 @@ axiosInstance.interceptors.request.use(async config => {
 });
 
 axiosInstance.interceptors.response.use(
-  response => {
+  (response) => {
     return response;
   },
-  async error => {
+  async (error) => {
     const config = error.config;
-    if (error.response.status === 403 && !config._retry) {
+    if (
+      error.response.status >= 400 &&
+      error.response.status < 500 &&
+      !config._retry
+    ) {
       config._retry = true;
       const response = await refreshToken();
-      const accessToken = response.data.access_token;
+      const accessToken = response.access_token;
       setToken(accessToken);
-
       config.headers.Authorization = `Bearer ${accessToken}`;
       return axiosInstance(config);
     }

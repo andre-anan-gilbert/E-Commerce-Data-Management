@@ -11,16 +11,6 @@ import {
 } from './styles';
 
 export const OverviewSection = () => {
-  const overviewCards = overviewCardData.map(card => (
-    <OverviewSectionCard
-      key={card.id}
-      img={card.img}
-      alt={card.alt}
-      title={card.title}
-      subtitle={card.subtitle}
-    />
-  ));
-
   return (
     <Section>
       <TextWrapper>
@@ -33,7 +23,17 @@ export const OverviewSection = () => {
           </Subtitle>
         </Grid>
       </TextWrapper>
-      <CardWrapper>{overviewCards}</CardWrapper>
+      <CardWrapper>
+        {overviewCardData.map((card) => (
+          <OverviewSectionCard
+            key={card.id}
+            img={card.img}
+            alt={card.alt}
+            title={card.title}
+            subtitle={card.subtitle}
+          />
+        ))}
+      </CardWrapper>
     </Section>
   );
 };
