@@ -8,8 +8,8 @@ export const Backdrop = styled.div`
   bottom: 0;
   left: 0;
   background-color: ${({ theme }) => theme.text.dark};
-  z-index: 100;
-  opacity: 0.5;
+  z-index: 1000;
+  opacity: 0.05;
 `;
 
 export const Wrapper = styled.div`
@@ -18,7 +18,7 @@ export const Wrapper = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 200;
+  z-index: 2000;
   padding: 0 2rem;
   overflow-y: auto;
   overflow-x: hidden;

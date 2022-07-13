@@ -9,22 +9,12 @@ import {
   ButtonWrapper,
   Spacing,
 } from './styles';
-import { useProducts, IProducts } from '@queries/products';
+import { useFetchProducts } from '@queries/products';
 import { EditProductCard } from '@cards/EditProductCard/EditProductCard';
 import { DeleteProductCard } from '@cards/DeleteProductCard/DeleteProductCard';
 
 export const ProductsCard = () => {
-  const [isOpenEdit, setIsOpenEdit] = useState(false);
-  const [isOpenDelete, setIsOpenDelete] = useState(false);
-  const { data, error, isError, isLoading, isIdle } = useProducts();
-
-  const handleOpenEdit = () => setIsOpenEdit(true);
-
-  const handleCloseEdit = () => setIsOpenEdit(false);
-
-  const handleOpenDelete = () => setIsOpenDelete(true);
-
-  const handleCloseDelete = () => setIsOpenDelete(false);
+  const { data, error, isError, isLoading, isIdle } = useFetchProducts();
 
   if (isLoading || isIdle) {
     return <div>Loading...</div>;
@@ -43,7 +33,7 @@ export const ProductsCard = () => {
         <Label>Category</Label>
         <Label>Supplier</Label>
       </LabelWrapper>
-      {data.map((product: IProducts) => (
+      {data?.map((product) => (
         <ListItem key={product.id}>
           <ListText>{product.name}</ListText>
           <ListText>{product.description}</ListText>
@@ -51,18 +41,9 @@ export const ProductsCard = () => {
           <ListText>{product.category_id}</ListText>
           <ListText>{product.supplier_id}</ListText>
           <ButtonWrapper>
-            <Button icon="edit" intent="primary" onClick={handleOpenEdit} />
-            {isOpenEdit && (
-              <EditProductCard
-                product={product}
-                handleClose={handleCloseEdit}
-              />
-            )}
+            <EditProductCard product={product} />
             <Spacing />
-            <Button icon="trash" intent="danger" onClick={handleOpenDelete} />
-            {isOpenDelete && (
-              <DeleteProductCard handleClose={handleCloseDelete} />
-            )}
+            <DeleteProductCard id={product.id} />
           </ButtonWrapper>
         </ListItem>
       ))}

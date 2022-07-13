@@ -7,7 +7,8 @@ import {
   Classes,
   NumericInput,
 } from '@blueprintjs/core';
-import { useState } from 'react';
+import { useUpdateProduct } from '@queries/products';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import {
   Backdrop,
   Wrapper,
@@ -26,98 +27,144 @@ type EditProductCardProps = {
     category_id: number;
     supplier_id: number;
   };
-  handleClose: () => void;
 };
 
-export const EditProductCard = ({
-  product,
-  handleClose,
-}: EditProductCardProps) => {
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [price, setPrice] = useState();
-  const [category, setCategory] = useState();
-  const [supplier, setSupplier] = useState();
+export const EditProductCard = ({ product }: EditProductCardProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [name, setName] = useState(product.name);
+  const [description, setDescription] = useState(product.description ?? '');
+  const [price, setPrice] = useState(product.price);
+  const [category, setCategory] = useState(product.category_id);
+  const [supplier, setSupplier] = useState(product.supplier_id);
+  const updateProduct = useUpdateProduct();
+
+  const handleOpen = () => setIsOpen(true);
+
+  const handleClose = () => setIsOpen(false);
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    updateProduct.mutate({
+      id: product.id,
+      name: name,
+      description: description,
+      price: price,
+      category_id: category,
+      supplier_id: supplier,
+    });
+    handleClose();
+  };
+
+  const handleName = (event: ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value);
+  };
+
+  const handleDescription = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setDescription(event.target.value);
+  };
+
+  const handlePrice = (valueAsNumber: number) => {
+    setPrice(valueAsNumber);
+  };
+
+  const handleCategory = (valueAsNumber: number) => {
+    setCategory(valueAsNumber);
+  };
+
+  const handleSupplier = (valueAsNumber: number) => {
+    setSupplier(valueAsNumber);
+  };
 
   return (
     <>
-      <Backdrop />
-      <Wrapper>
-        <Flex>
-          <CardWrapper>
-            <Card className={Classes.ELEVATION_1}>
-              <CloseButtonWrapper>
-                <Button icon="cross" onClick={handleClose} minimal />
-              </CloseButtonWrapper>
-              <Title>Edit Product</Title>
-              <FormGroup
-                label="Name"
-                labelFor="text-input"
-                labelInfo="(required)"
-              >
-                <InputGroup
-                  value={product.name}
-                  placeholder="Product name"
-                  large
-                />
-              </FormGroup>
-              <FormGroup
-                label="Description"
-                labelFor="text-input"
-                labelInfo="(required)"
-              >
-                <TextArea
-                  value={product.description}
-                  placeholder="Description"
-                  large
-                  fill
-                />
-              </FormGroup>
-              <FormGroup
-                label="Price"
-                labelFor="number-input"
-                labelInfo="(required)"
-              >
-                <NumericInput
-                  value={product.price}
-                  placeholder="Price in EUR"
-                  allowNumericCharactersOnly={false}
-                  large
-                  fill
-                  min={0}
-                />
-              </FormGroup>
-              <FormGroup
-                label="Category"
-                labelFor="number-input"
-                labelInfo="(required)"
-              >
-                <NumericInput
-                  value={product.category_id}
-                  placeholder="Category"
-                  large
-                  fill
-                  min={0}
-                />
-              </FormGroup>
-              <FormGroup
-                label="Supplier"
-                labelFor="number-input"
-                labelInfo="(required)"
-              >
-                <NumericInput
-                  value={product.supplier_id}
-                  placeholder="Supplier"
-                  large
-                  fill
-                  min={0}
-                />
-              </FormGroup>
-              <Button text="Update" intent="primary" fill type="submit" />
-            </Card>
-          </CardWrapper>
-        </Flex>
-      </Wrapper>
+      <Button icon="edit" intent="primary" onClick={handleOpen} />
+      {isOpen && (
+        <>
+          <Backdrop />
+          <Wrapper>
+            <Flex>
+              <CardWrapper>
+                <Card className={Classes.ELEVATION_1}>
+                  <CloseButtonWrapper>
+                    <Button icon="cross" onClick={handleClose} minimal />
+                  </CloseButtonWrapper>
+                  <Title>Edit Product</Title>
+                  <form onSubmit={handleSubmit}>
+                    <FormGroup
+                      label="Name"
+                      labelFor="text-input"
+                      labelInfo="(required)"
+                    >
+                      <InputGroup
+                        value={name}
+                        placeholder="Product name"
+                        large
+                        onChange={handleName}
+                      />
+                    </FormGroup>
+                    <FormGroup
+                      label="Description"
+                      labelFor="text-input"
+                      labelInfo="(required)"
+                    >
+                      <TextArea
+                        value={description}
+                        placeholder="Description"
+                        large
+                        fill
+                        onChange={handleDescription}
+                      />
+                    </FormGroup>
+                    <FormGroup
+                      label="Price"
+                      labelFor="number-input"
+                      labelInfo="(required)"
+                    >
+                      <NumericInput
+                        value={price}
+                        placeholder="Price in EUR"
+                        large
+                        fill
+                        min={0}
+                        onValueChange={handlePrice}
+                      />
+                    </FormGroup>
+                    <FormGroup
+                      label="Category"
+                      labelFor="number-input"
+                      labelInfo="(required)"
+                    >
+                      <NumericInput
+                        value={category}
+                        placeholder="Category"
+                        large
+                        fill
+                        min={0}
+                        onValueChange={handleCategory}
+                      />
+                    </FormGroup>
+                    <FormGroup
+                      label="Supplier"
+                      labelFor="number-input"
+                      labelInfo="(required)"
+                    >
+                      <NumericInput
+                        value={supplier}
+                        placeholder="Supplier"
+                        large
+                        fill
+                        min={0}
+                        onValueChange={handleSupplier}
+                      />
+                    </FormGroup>
+                    <Button text="Update" intent="primary" fill type="submit" />
+                  </form>
+                </Card>
+              </CardWrapper>
+            </Flex>
+          </Wrapper>
+        </>
+      )}
     </>
   );
 };
