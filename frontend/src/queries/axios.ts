@@ -3,8 +3,11 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import { refreshToken, setToken } from './user';
 
+export const BASE_URL = process.env.BASE_URL || 'http://localhost:8000';
+console.log(process.env.BASE_URL);
+
 export const axiosInstance = axios.create({
-  baseURL: process.env.BASE_URL || 'http://localhost:8000',
+  baseURL: BASE_URL,
   withCredentials: true,
 });
 

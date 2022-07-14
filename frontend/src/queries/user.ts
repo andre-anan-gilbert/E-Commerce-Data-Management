@@ -1,5 +1,5 @@
 /** The user queries. */
-import { axiosInstance } from './axios';
+import { axiosInstance, BASE_URL } from './axios';
 import { useQuery } from 'react-query';
 import Cookies from 'js-cookie';
 
@@ -38,17 +38,23 @@ export const refreshToken = async () => {
 };
 
 export const useFetchUser = () => {
-  const { data, error, isError, isLoading, isIdle } = useQuery<IUser, Error>(
+  const { data, error, isError, isLoading } = useQuery<IUser, Error>(
     'user',
-    fetchUser
+    fetchUser,
+    {
+      retry: 3,
+    }
   );
 
-  return { data, error, isError, isLoading, isIdle };
+  return { data, error, isError, isLoading };
 };
 
 const fetchUser = async () => {
-  const response = await axiosInstance.get<IUser>('api/v1/user/me');
-  return response.data;
+  const accessToken = Cookies.get('tok');
+  const response = await fetch(`${BASE_URL}/api/v1/user/me`, {
+    headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {},
+  });
+  return response.json();
 };
 
 export const setToken = (accessToken: string) => {

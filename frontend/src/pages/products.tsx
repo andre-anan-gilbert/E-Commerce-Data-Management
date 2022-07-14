@@ -1,4 +1,4 @@
-/** The customers page. */
+/** The products page. */
 import { ReactElement } from 'react';
 import { NextPage } from 'next';
 import { Layout } from '@layout/Layout';

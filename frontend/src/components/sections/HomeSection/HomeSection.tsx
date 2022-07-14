@@ -13,7 +13,7 @@ import { Classes } from '@blueprintjs/core';
 import { useFetchProducts } from '@queries/products';
 
 export const HomeSection = () => {
-  const { data, error, isError, isLoading, isIdle } = useFetchProducts();
+  const { data, error, isError, isLoading } = useFetchProducts();
 
   if (isError) {
     return <div>{!error}</div>;
@@ -45,9 +45,7 @@ export const HomeSection = () => {
         <Link href="/products">
           <Card elevation={3} interactive>
             <CardTitle>Manage Products</CardTitle>
-            <CardNumberWrapper
-              className={isLoading || isIdle ? Classes.SKELETON : ''}
-            >
+            <CardNumberWrapper className={isLoading ? Classes.SKELETON : ''}>
               <CardNumber>{data?.length}</CardNumber>
             </CardNumberWrapper>
           </Card>

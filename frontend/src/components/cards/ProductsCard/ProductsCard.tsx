@@ -14,7 +14,7 @@ import { EditProductCard } from '@cards/EditProductCard/EditProductCard';
 import { DeleteProductCard } from '@cards/DeleteProductCard/DeleteProductCard';
 
 export const ProductsCard = () => {
-  const { data, error, isError, isLoading, isIdle } = useFetchProducts();
+  const { data, error, isError, isLoading } = useFetchProducts();
 
   if (isError) {
     return <div>Error {error?.message}</div>;
@@ -43,7 +43,7 @@ export const ProductsCard = () => {
           </ButtonWrapper>
         </ListItem>
       ))}
-      {(isLoading || isIdle) && <Loading />}
+      {isLoading && <Loading />}
     </Card>
   );
 };

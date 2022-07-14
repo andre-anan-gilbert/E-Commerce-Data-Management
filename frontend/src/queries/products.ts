@@ -15,12 +15,12 @@ export interface IProduct extends ICreateProduct {
 }
 
 export const useFetchProducts = () => {
-  const { data, error, isError, isLoading, isIdle } = useQuery<
-    IProduct[],
-    Error
-  >('products', fetchProducts);
+  const { data, error, isError, isLoading } = useQuery<IProduct[], Error>(
+    'products',
+    fetchProducts
+  );
 
-  return { data, error, isError, isLoading, isIdle };
+  return { data, error, isError, isLoading };
 };
 
 const fetchProducts = async () => {

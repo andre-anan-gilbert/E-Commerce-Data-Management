@@ -10,7 +10,7 @@ type BlueprintMenuProps = {
 };
 
 export const BlueprintMenu = ({ handleClose }: BlueprintMenuProps) => {
-  const { data, error, isError, isLoading, isIdle } = useFetchUser();
+  const { data, error, isError, isLoading } = useFetchUser();
   const router = useRouter();
   const ref = useRef<HTMLDivElement | null>(null);
   useOnClickOutside(ref, handleClose);
@@ -20,11 +20,13 @@ export const BlueprintMenu = ({ handleClose }: BlueprintMenuProps) => {
     router.push('/');
   };
 
+  console.log(data);
+
   return (
     <Wrapper ref={ref}>
       <Menu className={Classes.ELEVATION_1}>
         <MenuDivider
-          className={isLoading || isIdle ? Classes.SKELETON : ''}
+          className={isLoading ? Classes.SKELETON : ''}
           title={isError ? error?.message : data?.email}
         />
         <MenuItem text="Sign out" onClick={handleSignOut} />
