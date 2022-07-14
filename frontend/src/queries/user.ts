@@ -12,14 +12,10 @@ interface IToken {
 }
 
 export const signUp = async (email: string, password: string) => {
-  const response = await axiosInstance.post<IToken>(
-    'api/v1/user/sign-up',
-    {
-      email: email,
-      password: password,
-    },
-    { withCredentials: true }
-  );
+  const response = await axiosInstance.post<IToken>('api/v1/user/sign-up', {
+    email: email,
+    password: password,
+  });
   return response.data;
 };
 
@@ -29,16 +25,14 @@ export const signIn = async (email: string, password: string) => {
   formData.append('password', password);
   const response = await axiosInstance.post<IToken>(
     'api/v1/user/sign-in',
-    formData,
-    { withCredentials: true }
+    formData
   );
   return response.data;
 };
 
 export const refreshToken = async () => {
   const response = await axiosInstance.post<IToken>(
-    'api/v1/user/refresh-token',
-    { withCredentials: true }
+    'api/v1/user/refresh-token'
   );
   return response.data;
 };
