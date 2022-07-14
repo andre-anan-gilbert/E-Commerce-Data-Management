@@ -13,20 +13,9 @@ import {
 import { BlueprintMobileNavbar } from '../BlueprintMobileNavbar/BlueprintMobileNavbar';
 import { BlueprintMenu } from '../BlueprintMenu/BlueprintMenu';
 import { NavWrapper } from './styles';
-import { fetchUser } from '@queries/user';
 
 export const BlueprintNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [user, setUser] = useState('');
-
-  useEffect(() => {
-    const getMe = async () => {
-      const response = await fetchUser();
-      setUser(response.email);
-    };
-
-    getMe();
-  }, []);
 
   const handleOpen = () => setIsOpen(true);
 
@@ -64,7 +53,7 @@ export const BlueprintNavbar = () => {
         <Button icon="user" minimal onClick={handleOpen} />
         <BlueprintMobileNavbar />
       </NavbarGroup>
-      {isOpen && <BlueprintMenu handleClose={handleClose} user={user} />}
+      {isOpen && <BlueprintMenu handleClose={handleClose} />}
     </Navbar>
   );
 };

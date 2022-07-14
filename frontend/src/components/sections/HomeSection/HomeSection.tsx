@@ -1,13 +1,19 @@
-import { Card } from '@blueprintjs/core';
-import { Section, Title, Subtitle, Flex, CardTitle } from './styles';
+import Link from 'next/link';
+import {
+  Section,
+  Title,
+  Subtitle,
+  Flex,
+  Card,
+  CardTitle,
+  CardNumberWrapper,
+  CardNumber,
+} from './styles';
+import { Classes } from '@blueprintjs/core';
 import { useFetchProducts } from '@queries/products';
 
 export const HomeSection = () => {
   const { data, error, isError, isLoading, isIdle } = useFetchProducts();
-
-  if (isLoading || isIdle) {
-    return <div>Loading...</div>;
-  }
 
   if (isError) {
     return <div>{!error}</div>;
@@ -25,7 +31,7 @@ export const HomeSection = () => {
           <CardTitle>Manage Warehouses</CardTitle>
         </Card>
       </Flex>
-      <Subtitle style={{ marginTop: '3rem' }}>Sales Order</Subtitle>
+      <Subtitle>Sales Order</Subtitle>
       <Flex>
         <Card elevation={3} interactive>
           <CardTitle>Manage Sales Order</CardTitle>
@@ -36,10 +42,16 @@ export const HomeSection = () => {
         <Card elevation={3} interactive>
           <CardTitle>Manage Suppliers</CardTitle>
         </Card>
-        <Card elevation={3} interactive>
-          <CardTitle>Manage Products</CardTitle>
-          <h1>{data?.length}</h1>
-        </Card>
+        <Link href="/products">
+          <Card elevation={3} interactive>
+            <CardTitle>Manage Products</CardTitle>
+            <CardNumberWrapper
+              className={isLoading || isIdle ? Classes.SKELETON : ''}
+            >
+              <CardNumber>{data?.length}</CardNumber>
+            </CardNumberWrapper>
+          </Card>
+        </Link>
       </Flex>
     </Section>
   );

@@ -1,5 +1,6 @@
 /** The user queries. */
 import { axiosInstance } from './axios';
+import { useQuery } from 'react-query';
 import Cookies from 'js-cookie';
 
 interface IUser {
@@ -28,19 +29,30 @@ export const signIn = async (email: string, password: string) => {
   formData.append('password', password);
   const response = await axiosInstance.post<IToken>(
     'api/v1/user/sign-in',
-    formData
+    formData,
+    { withCredentials: true }
   );
   return response.data;
 };
 
 export const refreshToken = async () => {
   const response = await axiosInstance.post<IToken>(
-    'api/v1/user/refresh-token'
+    'api/v1/user/refresh-token',
+    { withCredentials: true }
   );
   return response.data;
 };
 
-export const fetchUser = async () => {
+export const useFetchUser = () => {
+  const { data, error, isError, isLoading, isIdle } = useQuery<IUser, Error>(
+    'user',
+    fetchUser
+  );
+
+  return { data, error, isError, isLoading, isIdle };
+};
+
+const fetchUser = async () => {
   const response = await axiosInstance.get<IUser>('api/v1/user/me');
   return response.data;
 };

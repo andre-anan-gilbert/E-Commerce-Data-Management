@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Classes, Button } from '@blueprintjs/core';
+import { Classes } from '@blueprintjs/core';
+import { Loading } from './Loading';
 import {
   Card,
   LabelWrapper,
@@ -16,12 +16,8 @@ import { DeleteProductCard } from '@cards/DeleteProductCard/DeleteProductCard';
 export const ProductsCard = () => {
   const { data, error, isError, isLoading, isIdle } = useFetchProducts();
 
-  if (isLoading || isIdle) {
-    return <div>Loading...</div>;
-  }
-
   if (isError) {
-    return <div>Error {error!}</div>;
+    return <div>Error {error?.message}</div>;
   }
 
   return (
@@ -47,6 +43,7 @@ export const ProductsCard = () => {
           </ButtonWrapper>
         </ListItem>
       ))}
+      {(isLoading || isIdle) && <Loading />}
     </Card>
   );
 };

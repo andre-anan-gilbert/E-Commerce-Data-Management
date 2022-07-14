@@ -5,7 +5,6 @@ import { refreshToken, setToken } from './user';
 
 export const axiosInstance = axios.create({
   baseURL: process.env.BASE_URL || 'http://localhost:8000',
-  withCredentials: true,
 });
 
 axiosInstance.interceptors.request.use((config) => {

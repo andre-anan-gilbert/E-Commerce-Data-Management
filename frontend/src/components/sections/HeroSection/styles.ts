@@ -6,11 +6,13 @@ export const Flex = styled.div`
   display: block;
 
   @media (min-width: ${Breakpoints.LG}) {
+    width: min(100%, 200rem);
     height: 100%;
     display: flex;
     grid-gap: 10rem;
     justify-content: center;
     align-items: center;
+    margin-inline: auto;
   }
 `;
 

@@ -58,10 +58,10 @@ export const SignUpCard = ({ handleClose }: SignInCardProps) => {
   return (
     <>
       <Backdrop />
-      <Wrapper ref={ref}>
+      <Wrapper>
         <Flex>
-          <Card className={Classes.ELEVATION_1}>
-            <div ref={ref}>
+          <div ref={ref}>
+            <Card className={Classes.ELEVATION_1}>
               <CloseButtonWrapper>
                 <Button icon="cross" onClick={handleClose} minimal />
               </CloseButtonWrapper>
@@ -127,8 +127,8 @@ export const SignUpCard = ({ handleClose }: SignInCardProps) => {
                   />
                 </div>
               </form>
-            </div>
-          </Card>
+            </Card>
+          </div>
         </Flex>
       </Wrapper>
     </>

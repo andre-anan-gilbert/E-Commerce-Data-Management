@@ -1,16 +1,17 @@
 /** The home page of the data management application. */
 import { ReactElement } from 'react';
 import { NextPage } from 'next';
+import { useRouter } from 'next/router';
 import { Layout } from '@layout/Layout';
 import { BlueprintNavbar } from '@ui/Blueprint/BlueprintNavbar/BlueprintNavbar';
-import { AppBackgroundSection } from '@sections/AppBackgroundSection/AppBackgroundSection';
+import { AuthGuardSection } from '@sections/AuthGuardSection/AuthGuardSection';
 import { HomeSection } from '@sections/HomeSection/HomeSection';
 
 const Home: NextPage = () => {
   return (
-    <AppBackgroundSection>
+    <AuthGuardSection>
       <HomeSection />
-    </AppBackgroundSection>
+    </AuthGuardSection>
   );
 };
 

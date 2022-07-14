@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import * as Breakpoints from '@styles/breakpoints';
 
@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
   @media (min-width: ${Breakpoints.MD}) {
     flex: 1 1 50%;
     align-items: flex-start;
-    margin-top: 5rem;
+    margin-top: 10rem;
   }
 `;
 
@@ -30,7 +30,7 @@ export const CubeFaces = styled(motion.div)`
   width: 200px;
 
   @media (min-width: ${Breakpoints.MD}) {
-    width: 300px;
+    width: 250px;
   }
 
   div {
@@ -45,8 +45,8 @@ export const CubeFaces = styled(motion.div)`
     place-items: center;
 
     @media (min-width: ${Breakpoints.MD}) {
-      width: 300px;
-      height: 300px;
+      width: 250px;
+      height: 250px;
     }
   }
 `;
@@ -56,7 +56,7 @@ export const CubeFaceFront = styled.div`
   background: ${({ theme }) => theme.primary};
 
   @media (min-width: ${Breakpoints.MD}) {
-    transform: translateZ(150px);
+    transform: translateZ(125px);
   }
 `;
 
@@ -65,7 +65,7 @@ export const CubeFaceBack = styled.div`
   background: ${({ theme }) => theme.primary};
 
   @media (min-width: ${Breakpoints.MD}) {
-    transform: translateZ(-150px) rotateY(180deg);
+    transform: translateZ(-125px) rotateY(180deg);
   }
 `;
 
@@ -75,7 +75,7 @@ export const CubeFaceLeft = styled.div`
   background: ${({ theme }) => theme.primary};
 
   @media (min-width: ${Breakpoints.MD}) {
-    transform: rotateY(270deg) translateX(-150px);
+    transform: rotateY(270deg) translateX(-125px);
   }
 `;
 
@@ -85,7 +85,7 @@ export const CubeFaceRight = styled.div`
   background: ${({ theme }) => theme.primary};
 
   @media (min-width: ${Breakpoints.MD}) {
-    transform: rotateY(-270deg) translateX(150px);
+    transform: rotateY(-270deg) translateX(125px);
   }
 `;
 
@@ -95,7 +95,7 @@ export const CubeFaceTop = styled.div`
   background-color: ${({ theme }) => theme.secondary};
 
   @media (min-width: ${Breakpoints.MD}) {
-    transform: rotateX(-90deg) translateY(-150px);
+    transform: rotateX(-90deg) translateY(-125px);
   }
 `;
 
@@ -105,7 +105,7 @@ export const CubeFaceBottom = styled.div`
   background-color: ${({ theme }) => theme.secondary};
 
   @media (min-width: ${Breakpoints.MD}) {
-    transform: rotateX(90deg) translateY(150px);
+    transform: rotateX(90deg) translateY(125px);
   }
 `;
 
@@ -115,7 +115,7 @@ export const CubeShadow = styled(motion.div)`
   transform-style: preserve-3d;
 
   @media (min-width: ${Breakpoints.MD}) {
-    width: 300px;
+    width: 250px;
   }
 
   div {
@@ -129,9 +129,9 @@ export const CubeShadow = styled(motion.div)`
     transform-origin: bottom center;
 
     @media (min-width: ${Breakpoints.MD}) {
-      width: 300px;
-      height: 300px;
-      transform: rotateX(90deg) translateY(150px);
+      width: 250px;
+      height: 250px;
+      transform: rotateX(90deg) translateY(125px);
     }
   }
 `;

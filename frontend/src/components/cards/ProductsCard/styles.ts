@@ -27,6 +27,7 @@ export const Label = styled.p`
 `;
 
 export const ListItem = styled.div`
+  min-height: 59px;
   position: relative;
   display: flex;
   align-items: center;
@@ -38,6 +39,7 @@ export const ListItem = styled.div`
 export const ListText = styled.p`
   flex: 1 1 20rem;
   margin: 0;
+  min-height: 14px;
 `;
 
 export const ButtonWrapper = styled.div`

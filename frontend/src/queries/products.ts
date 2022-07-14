@@ -1,3 +1,4 @@
+/** The products queries. */
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { axiosInstance } from './axios';
 
@@ -14,10 +15,10 @@ export interface IProduct extends ICreateProduct {
 }
 
 export const useFetchProducts = () => {
-  const { data, error, isError, isLoading, isIdle } = useQuery(
-    'products',
-    fetchProducts
-  );
+  const { data, error, isError, isLoading, isIdle } = useQuery<
+    IProduct[],
+    Error
+  >('products', fetchProducts);
 
   return { data, error, isError, isLoading, isIdle };
 };
@@ -37,10 +38,10 @@ export const useCreateProduct = () => {
     },
     {
       onSuccess: (newProduct: IProduct) => {
-        queryClient.setQueryData('products', (products: any) => [
-          ...products,
-          newProduct,
-        ]);
+        const products = queryClient.getQueryData<IProduct[]>('products');
+        if (products) {
+          queryClient.setQueryData('products', [...products, newProduct]);
+        }
       },
     }
   );
@@ -49,9 +50,12 @@ export const useCreateProduct = () => {
 };
 
 const createProduct = async (newProduct: ICreateProduct) => {
-  const response = await axiosInstance.post('api/v1/products/create', {
-    ...newProduct,
-  });
+  const response = await axiosInstance.post<IProduct>(
+    'api/v1/products/create',
+    {
+      ...newProduct,
+    }
+  );
   return response.data;
 };
 
@@ -63,11 +67,15 @@ export const useUpdateProduct = () => {
     },
     {
       onSuccess: (updatedProduct: IProduct) => {
-        queryClient.setQueryData('products', (products: any) =>
-          products.map((product: { id: number }) =>
-            updatedProduct.id === product.id ? updatedProduct : product
-          )
-        );
+        const products = queryClient.getQueryData<IProduct[]>('products');
+        if (products) {
+          queryClient.setQueryData(
+            'products',
+            products.map((product: IProduct) =>
+              updatedProduct.id === product.id ? updatedProduct : product
+            )
+          );
+        }
       },
     }
   );
@@ -91,11 +99,15 @@ export const useDeleteProduct = () => {
     },
     {
       onSuccess: (deletedProduct: IProduct) => {
-        queryClient.setQueryData('products', (products: any) =>
-          products.filter(
-            (product: { id: number }) => deletedProduct.id !== product.id
-          )
-        );
+        const products = queryClient.getQueryData<IProduct[]>('products');
+        if (products) {
+          queryClient.setQueryData(
+            'products',
+            products.filter(
+              (product: IProduct) => deletedProduct.id !== product.id
+            )
+          );
+        }
       },
     }
   );
@@ -104,6 +116,8 @@ export const useDeleteProduct = () => {
 };
 
 const deleteProduct = async (id: number) => {
-  const response = await axiosInstance.delete(`api/v1/products/delete/${id}`);
+  const response = await axiosInstance.delete<IProduct>(
+    `api/v1/products/delete/${id}`
+  );
   return response.data;
 };

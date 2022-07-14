@@ -2,15 +2,15 @@ import { useRef } from 'react';
 import { useRouter } from 'next/router';
 import { Classes, Menu, MenuItem, MenuDivider } from '@blueprintjs/core';
 import { useOnClickOutside } from '@hooks/use-on-click-outside';
-import { removeToken } from '@queries/user';
+import { removeToken, useFetchUser } from '@queries/user';
 import { Wrapper } from './styles';
 
 type BlueprintMenuProps = {
   handleClose: () => void;
-  user: string;
 };
 
-export const BlueprintMenu = ({ handleClose, user }: BlueprintMenuProps) => {
+export const BlueprintMenu = ({ handleClose }: BlueprintMenuProps) => {
+  const { data, error, isError, isLoading, isIdle } = useFetchUser();
   const router = useRouter();
   const ref = useRef<HTMLDivElement | null>(null);
   useOnClickOutside(ref, handleClose);
@@ -23,7 +23,10 @@ export const BlueprintMenu = ({ handleClose, user }: BlueprintMenuProps) => {
   return (
     <Wrapper ref={ref}>
       <Menu className={Classes.ELEVATION_1}>
-        <MenuDivider title={user} />
+        <MenuDivider
+          className={isLoading || isIdle ? Classes.SKELETON : ''}
+          title={isError ? error?.message : data?.email}
+        />
         <MenuItem text="Sign out" onClick={handleSignOut} />
       </Menu>
     </Wrapper>
