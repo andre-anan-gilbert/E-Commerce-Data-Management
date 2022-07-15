@@ -1,3 +1,4 @@
+/** Full page loading screen. */
 import { Spinner, SpinnerSize } from '@blueprintjs/core';
 import { SpinnerWrapper, Backdrop, Flex } from './styles';
 

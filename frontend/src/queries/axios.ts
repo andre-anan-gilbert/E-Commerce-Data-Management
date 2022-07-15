@@ -4,7 +4,6 @@ import Cookies from 'js-cookie';
 import { refreshToken, setToken } from './user';
 
 export const BASE_URL = process.env.BASE_URL || 'http://localhost:8000';
-console.log(process.env.BASE_URL);
 
 export const axiosInstance = axios.create({
   baseURL: BASE_URL,
@@ -25,18 +24,14 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   async (error) => {
-    const config = error.config;
-    if (
-      error.response.status >= 400 &&
-      error.response.status < 500 &&
-      !config._retry
-    ) {
-      config._retry = true;
+    const originalRequest = error.config;
+    if (error.response.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
       const response = await refreshToken();
       const accessToken = response.access_token;
       setToken(accessToken);
-      config.headers.Authorization = `Bearer ${accessToken}`;
-      return axiosInstance(config);
+      originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+      return axiosInstance(originalRequest);
     }
     return Promise.reject(error);
   }

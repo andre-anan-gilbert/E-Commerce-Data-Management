@@ -1,4 +1,7 @@
 /** The app component to intialize pages. */
+import 'normalize.css/normalize.css';
+import '@blueprintjs/core/lib/css/blueprint.css';
+import '@blueprintjs/icons/lib/css/blueprint-icons.css';
 import { ReactElement, ReactNode, useState } from 'react';
 import { NextPage } from 'next';
 import { AppProps } from 'next/app';

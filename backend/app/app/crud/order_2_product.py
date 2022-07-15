@@ -6,7 +6,6 @@ from app.schemas.order_2_product import Order2ProductCreate, Order2ProductUpdate
 
 class CRUDOrder2Product(CRUDBase[Order2Product, Order2ProductCreate, Order2ProductUpdate]):
     """CRUD order_2_product class with methods to get, create, update, and delete."""
-
     pass
 
 

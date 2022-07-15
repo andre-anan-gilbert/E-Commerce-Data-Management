@@ -6,7 +6,6 @@ from app.schemas.invoice import InvoiceCreate, InvoiceUpdate
 
 class CRUDInvoice(CRUDBase[Invoice, InvoiceCreate, InvoiceUpdate]):
     """CRUD invoice class with methods to get, create, update, and delete."""
-
     pass
 
 

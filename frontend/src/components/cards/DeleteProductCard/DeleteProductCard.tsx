@@ -1,3 +1,4 @@
+/** Card to delete products. */
 import { Button, Card, Classes } from '@blueprintjs/core';
 import { useDeleteProduct } from '@queries/products';
 import { FormEvent, useState } from 'react';

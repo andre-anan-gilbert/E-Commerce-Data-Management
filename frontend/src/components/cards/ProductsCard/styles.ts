@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import {
-  Colors,
   Card as BlueprintCard,
   FormGroup as BlueprintFormGroup,
 } from '@blueprintjs/core';

@@ -1,3 +1,4 @@
+/** Card to edit products. */
 import {
   Card,
   Button,

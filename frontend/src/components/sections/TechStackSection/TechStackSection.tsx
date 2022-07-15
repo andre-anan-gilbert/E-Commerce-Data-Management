@@ -1,3 +1,4 @@
+/** Tech stack section of the landing page. */
 import dynamic from 'next/dynamic';
 import { Classes } from '@blueprintjs/core';
 import { TechStackSectionCard } from '@cards/TechStackSectionCard/TechStackSectionCard';

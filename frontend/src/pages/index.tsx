@@ -1,4 +1,4 @@
-/** The landing page which the users first see. */
+/** The landing page. */
 import { ReactElement } from 'react';
 import { NextPage } from 'next';
 import { Layout } from '@layout/Layout';

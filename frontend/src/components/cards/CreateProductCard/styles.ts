@@ -9,7 +9,7 @@ export const Backdrop = styled.div`
   left: 0;
   background-color: ${({ theme }) => theme.text.dark};
   z-index: 100;
-  opacity: 0.05;
+  opacity: 0.5;
 `;
 
 export const Wrapper = styled.div`

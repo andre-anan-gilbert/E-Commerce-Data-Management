@@ -1,3 +1,4 @@
+/** The user menu of the navbar. */
 import { useRef } from 'react';
 import { useRouter } from 'next/router';
 import { Classes, Menu, MenuItem, MenuDivider } from '@blueprintjs/core';
@@ -19,8 +20,6 @@ export const BlueprintMenu = ({ handleClose }: BlueprintMenuProps) => {
     removeToken();
     router.push('/');
   };
-
-  console.log(data);
 
   return (
     <Wrapper ref={ref}>

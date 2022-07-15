@@ -6,7 +6,6 @@ from app.schemas.address_2_customer import Address2CustomerCreate, Address2Custo
 
 class CRUDAddress2Customer(CRUDBase[Address2Customer, Address2CustomerCreate, Address2CustomerUpdate]):
     """CRUD address_2_customer class with methods to get, create, update, and delete."""
-
     pass
 
 

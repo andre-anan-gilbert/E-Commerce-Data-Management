@@ -28,8 +28,8 @@ def sign_up(
             status_code=400,
             detail='The user with this username already exists in the system.',
         )
-    user = crud.user.create(database, obj_in=user_in)
 
+    user = crud.user.create(database, obj_in=user_in)
     access_token, refresh_token = security.generate_tokens(user)
     response.set_cookie(key='jid', value=refresh_token, httponly=True)
     return {'access_token': access_token}
@@ -43,7 +43,11 @@ def sign_in(
 ) -> Any:
     """OAuth2 sign-in token."""
     user = crud.user.authenticate(database, email=form_data.username, password=form_data.password)
-    if user is None: raise HTTPException(status_code=400, detail='Incorrect email or password')
+    if not user:
+        raise HTTPException(
+            status_code=400,
+            detail='Incorrect email or password',
+        )
 
     access_token, refresh_token = security.generate_tokens(user)
     response.set_cookie(key='jid', value=refresh_token, httponly=True)
@@ -58,7 +62,8 @@ def create_refresh_token(
 ) -> Any:
     """OAuth2 refresh token."""
     token = jid
-    if token is None: raise HTTPException(status_code=401, detail='Token missing')
+    if token is None:
+        raise HTTPException(status_code=401, detail='Token missing')
 
     try:
         payload = jwt.decode(token, settings.REFRESH_TOKEN_SECRET, algorithms=settings.ALGORITHM)
@@ -66,8 +71,7 @@ def create_refresh_token(
         raise HTTPException(status_code=401, detail='Invalid token') from error
 
     user = crud.user.get(database, obj_id=payload['sub'])
-
-    if user is None:
+    if not user:
         raise HTTPException(status_code=401, detail='User is not signed in')
 
     if user.token_version != int(payload['ver']):

@@ -6,7 +6,6 @@ from app.schemas.payment_information import PaymentInformationCreate, PaymentInf
 
 class CRUDPaymentInformation(CRUDBase[PaymentInformation, PaymentInformationCreate, PaymentInformationUpdate]):
     """CRUD payment information class with methods to get, create, update, and delete."""
-
     pass
 
 

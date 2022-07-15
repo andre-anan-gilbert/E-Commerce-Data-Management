@@ -6,7 +6,6 @@ from app.schemas.shipping_service import ShippingServiceCreate, ShippingServiceU
 
 class CRUDShippingService(CRUDBase[ShippingService, ShippingServiceCreate, ShippingServiceUpdate]):
     """CRUD shipping service class with methods to get, create, update, and delete."""
-
     pass
 
 

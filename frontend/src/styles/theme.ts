@@ -1,4 +1,4 @@
-/** Theme of the landing page. */
+/** Landing page theme. */
 export const theme = {
   primary: 'linear-gradient(123.9deg, #1d007e 3.71%, #c7b3ff 100%)',
   secondary: '#8D8DF7',

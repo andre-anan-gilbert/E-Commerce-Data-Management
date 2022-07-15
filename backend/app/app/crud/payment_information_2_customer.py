@@ -7,7 +7,6 @@ from app.schemas.payment_information_2_customer import PaymentInformation2Custom
 class CRUDPaymentInformation2Customer(CRUDBase[PaymentInformation2Customer, PaymentInformation2CustomerCreate,
                                                PaymentInformation2CustomerUpdate]):
     """CRUD payment_information_2_customer class with methods to get, create, update, and delete."""
-
     pass
 
 

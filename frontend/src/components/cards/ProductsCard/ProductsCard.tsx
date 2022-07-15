@@ -1,3 +1,4 @@
+/** The card for the products. */
 import { Classes } from '@blueprintjs/core';
 import { Loading } from './Loading';
 import {

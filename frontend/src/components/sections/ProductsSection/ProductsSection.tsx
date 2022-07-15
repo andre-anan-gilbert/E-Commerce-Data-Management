@@ -1,3 +1,4 @@
+/** Product page section. */
 import { useState } from 'react';
 import { Navbar, NavbarGroup, Button, Alignment } from '@blueprintjs/core';
 import { Section, Title } from './styles';

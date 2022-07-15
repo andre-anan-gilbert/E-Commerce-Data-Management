@@ -1,3 +1,4 @@
+/** The sign up card. */
 import Image from 'next/image';
 import Logo from '@images/logo.svg';
 import { ChangeEvent, FormEvent, useState, useRef } from 'react';

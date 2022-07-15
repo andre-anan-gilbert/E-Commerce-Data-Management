@@ -1,3 +1,4 @@
+/** Card of the overview section. */
 import Image from 'next/image';
 import { Classes } from '@blueprintjs/core';
 import { Card, ImageWrapper, Title, Subtitle } from './styles';

@@ -1,3 +1,4 @@
+/** Card to create new products. */
 import {
   Card,
   Button,

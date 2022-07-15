@@ -1,6 +1,6 @@
 """Test REST API."""
 import pytest
-from typing import Dict, Generator
+from typing import Generator
 from fastapi.testclient import TestClient
 
 from app.database.session import SessionLocal
@@ -20,5 +20,5 @@ def client() -> Generator:
 
 
 @pytest.fixture(scope='module')
-def token_headers(client: TestClient) -> Dict[str, str]:  # pylint: disable=redefined-outer-name
+def token_headers(client: TestClient) -> dict[str, str]:  # pylint: disable=redefined-outer-name
     return get_token_headers(client)

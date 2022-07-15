@@ -1,3 +1,4 @@
+/** Card of the tech stack section. */
 import { Icon, IconName, MaybeElement } from '@blueprintjs/core';
 import { Wrapper, Title, Subtitle } from './styles';
 

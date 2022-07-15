@@ -6,7 +6,6 @@ from app.schemas.order import OrderCreate, OrderUpdate
 
 class CRUDOrder(CRUDBase[Order, OrderCreate, OrderUpdate]):
     """CRUD order class with methods to get, create, update, and delete."""
-
     pass
 
 

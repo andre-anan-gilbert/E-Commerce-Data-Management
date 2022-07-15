@@ -1,3 +1,4 @@
+/** The cube spinning animation of the tech overview section. */
 import Image from 'next/image';
 import NextJS from '@images/nextjs.svg';
 import FastAPI from '@images/fastapi.svg';
@@ -17,7 +18,7 @@ import {
   CubeFaceBottom,
 } from './styles';
 
-const spinAnimation = {
+const ANIMATION = {
   rotateY: 360,
   repeat: Infinity,
   duration: 45,
@@ -30,11 +31,11 @@ export const CubeAnimation = () => {
       <Cube>
         <CubeWrapper>
           <CubeShadow
-            whileInView={{ rotateY: spinAnimation.rotateY }}
+            whileInView={{ rotateY: ANIMATION.rotateY }}
             transition={{
-              repeat: spinAnimation.repeat,
-              duration: spinAnimation.duration,
-              ease: spinAnimation.ease,
+              repeat: ANIMATION.repeat,
+              duration: ANIMATION.duration,
+              ease: ANIMATION.ease,
             }}
           >
             <div>&nbsp;</div>
@@ -42,11 +43,11 @@ export const CubeAnimation = () => {
         </CubeWrapper>
         <CubeWrapper>
           <CubeFaces
-            whileInView={{ rotateY: spinAnimation.rotateY }}
+            whileInView={{ rotateY: ANIMATION.rotateY }}
             transition={{
-              repeat: spinAnimation.repeat,
-              duration: spinAnimation.duration,
-              ease: spinAnimation.ease,
+              repeat: ANIMATION.repeat,
+              duration: ANIMATION.duration,
+              ease: ANIMATION.ease,
             }}
           >
             <CubeFaceFront>

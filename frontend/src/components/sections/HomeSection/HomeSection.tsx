@@ -1,3 +1,4 @@
+/** Section of the home page.*/
 import Link from 'next/link';
 import {
   Section,

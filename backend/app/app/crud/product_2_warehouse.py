@@ -6,7 +6,6 @@ from app.schemas.product_2_warehouse import Product2WarehouseCreate, Product2War
 
 class CRUDProduct2Warehouse(CRUDBase[Product2Warehouse, Product2WarehouseCreate, Product2WarehouseUpdate]):
     """CRUD product_2_warehouse class with methods to get, create, update, and delete."""
-
     pass
 
 

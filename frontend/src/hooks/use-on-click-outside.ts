@@ -1,3 +1,4 @@
+/** Hook to detect click events outside of a component. */
 import { MutableRefObject, useEffect } from 'react';
 
 export const useOnClickOutside = (

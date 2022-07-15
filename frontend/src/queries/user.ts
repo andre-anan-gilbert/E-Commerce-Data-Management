@@ -4,7 +4,8 @@ import { useQuery } from 'react-query';
 import Cookies from 'js-cookie';
 
 interface IUser {
-  email: string;
+  email?: string;
+  detail?: string;
 }
 
 interface IToken {
@@ -40,21 +41,15 @@ export const refreshToken = async () => {
 export const useFetchUser = () => {
   const { data, error, isError, isLoading } = useQuery<IUser, Error>(
     'user',
-    fetchUser,
-    {
-      retry: 3,
-    }
+    fetchUser
   );
 
   return { data, error, isError, isLoading };
 };
 
-const fetchUser = async () => {
-  const accessToken = Cookies.get('tok');
-  const response = await fetch(`${BASE_URL}/api/v1/user/me`, {
-    headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {},
-  });
-  return response.json();
+export const fetchUser = async () => {
+  const response = await axiosInstance.get('api/v1/user/me');
+  return response.data;
 };
 
 export const setToken = (accessToken: string) => {

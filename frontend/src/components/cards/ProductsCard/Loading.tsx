@@ -1,3 +1,4 @@
+/** Loading skeleton card of the products. */
 import { Classes } from '@blueprintjs/core';
 import { ListItem, ListText } from './styles';
 

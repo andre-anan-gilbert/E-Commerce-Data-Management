@@ -15,7 +15,7 @@ def run(database: Session) -> None:
 
     # create initial users
     user = crud.user.get_by_email(database, email=settings.TEST_USER)
-    if user is None:
+    if not user:
         is_initial_start = True
         user_in = schemas.UserCreate(email=settings.TEST_USER, password=settings.TEST_USER_PASSWORD)
         user = crud.user.create(database, obj_in=user_in)
@@ -33,9 +33,12 @@ def run(database: Session) -> None:
         }]
 
         categories = []
-
         for entry in category_data:
-            categories.append(crud.category.create_with_user_and_timestamp(database, obj_in=entry, edited_by=user.id))
+            categories.append(crud.category.create_with_user_and_timestamp(
+                database,
+                obj_in=entry,
+                edited_by=user.id,
+            ))
 
         # create initial cities
 
@@ -52,9 +55,12 @@ def run(database: Session) -> None:
         }]
 
         cities = []
-
         for entry in city_data:
-            cities.append(crud.city.create_with_user_and_timestamp(database, obj_in=entry, edited_by=user.id))
+            cities.append(crud.city.create_with_user_and_timestamp(
+                database,
+                obj_in=entry,
+                edited_by=user.id,
+            ))
 
         # create initial addresses
 
@@ -91,9 +97,12 @@ def run(database: Session) -> None:
         }]
 
         addresses = []
-
         for entry in address_data:
-            addresses.append(crud.address.create_with_user_and_timestamp(database, obj_in=entry, edited_by=user.id))
+            addresses.append(crud.address.create_with_user_and_timestamp(
+                database,
+                obj_in=entry,
+                edited_by=user.id,
+            ))
 
         # create initial suppliers
 
@@ -110,9 +119,12 @@ def run(database: Session) -> None:
         }]
 
         suppliers = []
-
         for entry in supplier_data:
-            suppliers.append(crud.supplier.create_with_user_and_timestamp(database, obj_in=entry, edited_by=user.id))
+            suppliers.append(crud.supplier.create_with_user_and_timestamp(
+                database,
+                obj_in=entry,
+                edited_by=user.id,
+            ))
 
         # create initial products
 
@@ -140,9 +152,12 @@ def run(database: Session) -> None:
         }]
 
         products = []
-
         for entry in product_data:
-            products.append(crud.product.create_with_user_and_timestamp(database, obj_in=entry, edited_by=user.id))
+            products.append(crud.product.create_with_user_and_timestamp(
+                database,
+                obj_in=entry,
+                edited_by=user.id,
+            ))
 
         # create initial shipping services
 
@@ -159,10 +174,13 @@ def run(database: Session) -> None:
         }]
 
         shipping_services = []
-
         for entry in shipping_service_data:
             shipping_services.append(
-                crud.shipping_service.create_with_user_and_timestamp(database, obj_in=entry, edited_by=user.id))
+                crud.shipping_service.create_with_user_and_timestamp(
+                    database,
+                    obj_in=entry,
+                    edited_by=user.id,
+                ))
 
         # create initial payment information
 
@@ -175,10 +193,13 @@ def run(database: Session) -> None:
         }]
 
         payment_information_objects = []
-
         for entry in payment_information_data:
             payment_information_objects.append(
-                crud.payment_information.create_with_user_and_timestamp(database, obj_in=entry, edited_by=user.id))
+                crud.payment_information.create_with_user_and_timestamp(
+                    database,
+                    obj_in=entry,
+                    edited_by=user.id,
+                ))
 
         # create initial warehouses
 
@@ -193,9 +214,12 @@ def run(database: Session) -> None:
         }]
 
         warehouses = []
-
         for entry in warehouse_data:
-            warehouses.append(crud.warehouse.create_with_user_and_timestamp(database, obj_in=entry, edited_by=user.id))
+            warehouses.append(crud.warehouse.create_with_user_and_timestamp(
+                database,
+                obj_in=entry,
+                edited_by=user.id,
+            ))
 
         # create initial customers
 
@@ -218,9 +242,12 @@ def run(database: Session) -> None:
         }]
 
         customers = []
-
         for entry in customer_data:
-            customers.append(crud.customer.create_with_user_and_timestamp(database, obj_in=entry, edited_by=user.id))
+            customers.append(crud.customer.create_with_user_and_timestamp(
+                database,
+                obj_in=entry,
+                edited_by=user.id,
+            ))
 
         # create initial customer address associations
 
@@ -239,10 +266,13 @@ def run(database: Session) -> None:
         }]
 
         address_2_customer_objects = []
-
         for entry in address_2_customer_data:
             address_2_customer_objects.append(
-                crud.address_2_customer.create_with_user_and_timestamp(database, obj_in=entry, edited_by=user.id))
+                crud.address_2_customer.create_with_user_and_timestamp(
+                    database,
+                    obj_in=entry,
+                    edited_by=user.id,
+                ))
 
         # create initial payment information customer associations
 
@@ -265,12 +295,13 @@ def run(database: Session) -> None:
         }]
 
         payment_information_2_customer_objects = []
-
         for entry in payment_information_2_customer_data:
             payment_information_2_customer_objects.append(
-                crud.payment_information_2_customer.create_with_user_and_timestamp(database,
-                                                                                   obj_in=entry,
-                                                                                   edited_by=user.id))
+                crud.payment_information_2_customer.create_with_user_and_timestamp(
+                    database,
+                    obj_in=entry,
+                    edited_by=user.id,
+                ))
 
         # create initial product warehouse associations
 
@@ -309,10 +340,13 @@ def run(database: Session) -> None:
         }]
 
         product_2_warehouse_objects = []
-
         for entry in product_2_warehouse_data:
             product_2_warehouse_objects.append(
-                crud.product_2_warehouse.create_with_user_and_timestamp(database, obj_in=entry, edited_by=user.id))
+                crud.product_2_warehouse.create_with_user_and_timestamp(
+                    database,
+                    obj_in=entry,
+                    edited_by=user.id,
+                ))
 
         # create initial departments
 
@@ -323,10 +357,13 @@ def run(database: Session) -> None:
         }]
 
         departments = []
-
         for entry in department_data:
-            departments.append(crud.department.create_with_user_and_timestamp(database, obj_in=entry,
-                                                                              edited_by=user.id))
+            departments.append(
+                crud.department.create_with_user_and_timestamp(
+                    database,
+                    obj_in=entry,
+                    edited_by=user.id,
+                ))
 
         # create initial employees
 
@@ -363,9 +400,12 @@ def run(database: Session) -> None:
         }]
 
         employees = []
-
         for entry in employee_data:
-            employees.append(crud.employee.create_with_user_and_timestamp(database, obj_in=entry, edited_by=user.id))
+            employees.append(crud.employee.create_with_user_and_timestamp(
+                database,
+                obj_in=entry,
+                edited_by=user.id,
+            ))
 
         # update departments so they have a manager
 
@@ -376,15 +416,16 @@ def run(database: Session) -> None:
         }]
 
         new_departments = []
-
         for entry, department in zip(department_manager_data, departments):
             # unfortunately, this print-statement is absolutely necessary for the following update-statement to work
             print(f'Attempting to update department {department.name} with manager_id {entry["manager_id"]}')
             new_departments.append(
-                crud.department.update_with_user_and_timestamp(database,
-                                                               database_obj=department,
-                                                               obj_in=entry,
-                                                               edited_by=user.id))
+                crud.department.update_with_user_and_timestamp(
+                    database,
+                    database_obj=department,
+                    obj_in=entry,
+                    edited_by=user.id,
+                ))
 
         departments = new_departments
 
@@ -414,9 +455,12 @@ def run(database: Session) -> None:
         }]
 
         orders = []
-
         for entry in order_data:
-            orders.append(crud.order.create_with_user_and_timestamp(database, obj_in=entry, edited_by=user.id))
+            orders.append(crud.order.create_with_user_and_timestamp(
+                database,
+                obj_in=entry,
+                edited_by=user.id,
+            ))
 
         # create initial invoices
 
@@ -441,9 +485,12 @@ def run(database: Session) -> None:
         }]
 
         invoices = []
-
         for entry in invoice_data:
-            invoices.append(crud.invoice.create_with_user_and_timestamp(database, obj_in=entry, edited_by=user.id))
+            invoices.append(crud.invoice.create_with_user_and_timestamp(
+                database,
+                obj_in=entry,
+                edited_by=user.id,
+            ))
 
         # create initial order product associations
 
@@ -470,7 +517,10 @@ def run(database: Session) -> None:
         }]
 
         order_2_product_objects = []
-
         for entry in order_2_product_data:
             order_2_product_objects.append(
-                crud.order_2_product.create_with_user_and_timestamp(database, obj_in=entry, edited_by=user.id))
+                crud.order_2_product.create_with_user_and_timestamp(
+                    database,
+                    obj_in=entry,
+                    edited_by=user.id,
+                ))
