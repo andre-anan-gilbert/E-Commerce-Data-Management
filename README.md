@@ -42,6 +42,18 @@ To use the testing container, modify the commands in the following way:
 docker-compose -f"docker-pytest.yml" up --build -d
 ```
 
+## Database
+
+The Database is automatically created and populated with initial data. Even though it is not directly used by the application, a script that would create the used database is included [here](/scripts/Create_Database.sql) for easier reference than the alembic revision. All other scripts containing the database operations required in the task are located [in the same folder](/scripts/).
+
+## Documentation
+
+The documentation can be found in the folder [docs](/docs/). It includes the following:
+
+- The [project documentation](/docs/reports/project_documentation_404.pdf) includes explanations to ER Diagram, Relational Model and Normalization, as well as general information about Authentication and APIs used for the CRUD Operations.
+- For better visibility, full resolution versions of [ER Diagram](/docs/diagrams/ERModel.png) and [Relational Model](/docs/diagrams/RelationalModel.png) are included. Further diagrams are in the [same folder](/docs/diagrams/) but require opening with [draw.io](https://app.diagrams.net/) since there were some bugs in draw.io regarding the export.
+- Finally, the [short presentation video](/docs/media/...) TODO: Link and Description once it is finished
+
 ## License
 
 This repository is released under the [MIT license](https://opensource.org/licenses/MIT). In short, this means you are free to use this software in any personal, open-source or -commercial projects. Attribution is optional but appreciated.
