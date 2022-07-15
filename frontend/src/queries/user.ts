@@ -53,7 +53,7 @@ export const fetchUser = async () => {
 };
 
 export const setToken = (accessToken: string) => {
-  const fifteenMinutes = 1 / 1440; // 1 / 96;
+  const fifteenMinutes = 1 / 96;
   Cookies.set('tok', accessToken, { expires: fifteenMinutes });
 };
 
