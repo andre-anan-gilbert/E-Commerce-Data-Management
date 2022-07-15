@@ -14,7 +14,7 @@ export const AuthGuardSection = ({ children }: AuthGuardSectionProps) => {
   const { data, isLoading } = useFetchUser();
   const router = useRouter();
 
-  if (!data && !isLoading && typeof window !== 'undefined') {
+  if (!data?.email && !isLoading && typeof window !== 'undefined') {
     router.push('/');
   }
 

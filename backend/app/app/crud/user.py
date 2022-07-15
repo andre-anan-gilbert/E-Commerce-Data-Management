@@ -35,7 +35,7 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
         user_db = self.get_by_email(database, email=email)
         if not user_db: return
         if not verify_password(password, user_db.hashed_password): return
-        return user
+        return user_db
 
 
 user = CRUDUser(User)
