@@ -1,6 +1,9 @@
 import styled from 'styled-components';
-import { IPage } from './types';
 import { Colors } from '@blueprintjs/core';
+
+interface IPage {
+  landing: boolean;
+}
 
 export const Foo = styled.div<IPage>`
   width: 100%;

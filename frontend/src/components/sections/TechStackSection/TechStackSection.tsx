@@ -5,10 +5,12 @@ import { TechStackSectionCard } from '@cards/TechStackSectionCard/TechStackSecti
 import { techStackCardData } from '@data/tech-stack-card-data';
 import { Section, Flex, Grid, Title, Subtitle } from './styles';
 
-const CubeAnimation = dynamic<{}>(() =>
-  import('@animations/CubeAnimation/CubeAnimation').then(
-    (module) => module.CubeAnimation
-  )
+const CubeAnimation = dynamic<{}>(
+  () =>
+    import('@animations/CubeAnimation/CubeAnimation').then(
+      (module) => module.CubeAnimation
+    ),
+  { ssr: false }
 );
 
 export const TechStackSection = () => {
@@ -18,11 +20,11 @@ export const TechStackSection = () => {
         <Grid>
           <Title>Tech Stack.</Title>
           <Subtitle className={`${Classes.RUNNING_TEXT} ${Classes.TEXT_LARGE}`}>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-            Lorem ipsum dolor sit amet.
+            This project consists of a database implemented with PostgreSQL, a
+            backend server created with Python and the framework FastAPI, and a
+            frontend that utilizes NextJS. SQLAlchemy serves as the
+            object-relational mapping tool. Application and database are served
+            in docker containers.
           </Subtitle>
           {techStackCardData.map((card) => (
             <TechStackSectionCard

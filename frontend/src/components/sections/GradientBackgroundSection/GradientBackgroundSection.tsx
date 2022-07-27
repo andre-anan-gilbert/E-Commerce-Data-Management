@@ -5,19 +5,16 @@ import Glow from '@images/glow.svg';
 import Curve from '@images/curve.svg';
 import { Section, GlowWrapper, ImageWrapper } from './styles';
 
-type GradientBackgroundSectionProps = {
-  /** Whether to flip the curve SVG on the x-axis. */
-  curveFlipX?: boolean;
-  children: ReactNode;
-};
-
 export const GradientBackgroundSection = ({
   curveFlipX,
   children,
-}: GradientBackgroundSectionProps) => {
+}: {
+  curveFlipX?: boolean;
+  children: ReactNode;
+}) => {
   return (
     <Section>
-      <ImageWrapper flipX={curveFlipX}>
+      <ImageWrapper curveFlipX={curveFlipX}>
         <Image src={Curve} alt="Curve" layout="responsive" priority />
       </ImageWrapper>
       <GlowWrapper>

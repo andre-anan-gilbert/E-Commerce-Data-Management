@@ -23,11 +23,7 @@ import {
   Text,
 } from './styles';
 
-type SignInCardProps = {
-  handleClose: () => void;
-};
-
-export const SignInCard = ({ handleClose }: SignInCardProps) => {
+export const SignInCard = ({ handleClose }: { handleClose: () => void }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();

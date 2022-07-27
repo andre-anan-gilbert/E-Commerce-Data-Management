@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { IFlipXProps } from './types';
 import * as Breakpoints from '@styles/breakpoints';
 
 export const Section = styled.section`
@@ -24,10 +23,10 @@ export const GlowWrapper = styled.div`
   }
 `;
 
-export const ImageWrapper = styled.div<IFlipXProps>`
+export const ImageWrapper = styled.div<{ curveFlipX: boolean | undefined }>`
   position: absolute;
-  top: ${({ flipX }) => (flipX ? '-0.05rem' : 'auto')};
-  bottom: ${({ flipX }) => (flipX ? 'auto' : '-0.05rem')};
-  transform: ${({ flipX }) => (flipX ? 'scaleY(-1)' : 'none')};
+  top: ${({ curveFlipX }) => (curveFlipX ? '-0.05rem' : 'auto')};
+  bottom: ${({ curveFlipX }) => (curveFlipX ? 'auto' : '-0.05rem')};
+  transform: ${({ curveFlipX }) => (curveFlipX ? 'scaleY(-1)' : 'none')};
   width: 100%;
 `;

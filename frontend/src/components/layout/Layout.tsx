@@ -2,12 +2,7 @@
 import { ReactNode } from 'react';
 import { Footer } from '@ui/Footer/Footer';
 
-type LayoutProps = {
-  // children: ReactNode;
-  children: any;
-};
-
-export const Layout = ({ children }: LayoutProps) => {
+export const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <>
       {children}

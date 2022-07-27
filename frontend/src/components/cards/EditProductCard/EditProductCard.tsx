@@ -10,6 +10,7 @@ import {
 } from '@blueprintjs/core';
 import { useUpdateProduct } from '@queries/products';
 import { ChangeEvent, FormEvent, useState } from 'react';
+import { IProduct } from '@queries/products';
 import {
   Backdrop,
   Wrapper,
@@ -19,18 +20,7 @@ import {
   CardWrapper,
 } from './styles';
 
-type EditProductCardProps = {
-  product: {
-    id: number;
-    name: string;
-    description: string;
-    price: number;
-    category_id: number;
-    supplier_id: number;
-  };
-};
-
-export const EditProductCard = ({ product }: EditProductCardProps) => {
+export const EditProductCard = ({ product }: { product: IProduct }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState(product.name);
   const [description, setDescription] = useState(product.description ?? '');

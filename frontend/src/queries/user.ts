@@ -1,11 +1,10 @@
 /** The user queries. */
-import { axiosInstance, BASE_URL } from './axios';
+import { axiosInstance } from './axios';
 import { useQuery } from 'react-query';
 import Cookies from 'js-cookie';
 
 interface IUser {
-  email?: string;
-  detail?: string;
+  email: string;
 }
 
 interface IToken {

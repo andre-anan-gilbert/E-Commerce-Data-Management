@@ -3,19 +3,17 @@ import Image from 'next/image';
 import { Classes } from '@blueprintjs/core';
 import { Card, ImageWrapper, Title, Subtitle } from './styles';
 
-type OverviewSectionCardProps = {
-  img: string;
-  alt: string;
-  title: string;
-  subtitle: string;
-};
-
 export const OverviewSectionCard = ({
   img,
   alt,
   title,
   subtitle,
-}: OverviewSectionCardProps) => {
+}: {
+  img: string;
+  alt: string;
+  title: string;
+  subtitle: string;
+}) => {
   return (
     <Card>
       <ImageWrapper>

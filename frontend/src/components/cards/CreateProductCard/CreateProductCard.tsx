@@ -19,11 +19,11 @@ import {
   CardWrapper,
 } from './styles';
 
-type CreateProductCardProps = {
+export const CreateProductCard = ({
+  handleClose,
+}: {
   handleClose: () => void;
-};
-
-export const CreateProductCard = ({ handleClose }: CreateProductCardProps) => {
+}) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState(0);

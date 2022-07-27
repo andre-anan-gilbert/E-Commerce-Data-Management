@@ -11,9 +11,7 @@ import {
   Title,
 } from './styles';
 
-type DeleteProductCardProps = { id: number };
-
-export const DeleteProductCard = ({ id }: DeleteProductCardProps) => {
+export const DeleteProductCard = ({ id }: { id: number }) => {
   const [isOpen, setIsOpen] = useState(false);
   const deleteProduct = useDeleteProduct();
 

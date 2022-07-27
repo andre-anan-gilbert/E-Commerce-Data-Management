@@ -6,15 +6,11 @@ import { useFetchUser } from '@queries/user';
 import { Loading } from './Loading';
 import { useRouter } from 'next/router';
 
-type AuthGuardSectionProps = {
-  children: ReactNode;
-};
-
-export const AuthGuardSection = ({ children }: AuthGuardSectionProps) => {
+export const AuthGuardSection = ({ children }: { children: ReactNode }) => {
   const { data, isLoading } = useFetchUser();
   const router = useRouter();
 
-  if (!data?.email && !isLoading && typeof window !== 'undefined') {
+  if (!data && !isLoading && typeof window !== 'undefined') {
     router.push('/');
   }
 

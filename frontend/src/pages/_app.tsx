@@ -5,7 +5,7 @@ import '@blueprintjs/icons/lib/css/blueprint-icons.css';
 import { ReactElement, ReactNode, useState } from 'react';
 import { NextPage } from 'next';
 import { AppProps } from 'next/app';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider, Hydrate } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { ThemeProvider } from 'styled-components';
 import { theme } from '@styles/theme';
@@ -25,11 +25,13 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        {getLayout(<Component {...pageProps} />)}
-      </ThemeProvider>
-      <ReactQueryDevtools initialIsOpen={false} />
+      <Hydrate state={pageProps.dehydratedState}>
+        <ThemeProvider theme={theme}>
+          <GlobalStyle />
+          {getLayout(<Component {...pageProps} />)}
+        </ThemeProvider>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </Hydrate>
     </QueryClientProvider>
   );
 }
