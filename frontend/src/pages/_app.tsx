@@ -5,11 +5,12 @@ import '@blueprintjs/icons/lib/css/blueprint-icons.css';
 import { ReactElement, ReactNode, useState } from 'react';
 import { NextPage } from 'next';
 import { AppProps } from 'next/app';
-import { QueryClient, QueryClientProvider, Hydrate } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ThemeProvider } from 'styled-components';
 import { theme } from '@styles/theme';
 import { GlobalStyle } from '@styles/global-style';
+import { AuthProvider } from '@auth/AuthProvider';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -25,13 +26,11 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Hydrate state={pageProps.dehydratedState}>
-        <ThemeProvider theme={theme}>
-          <GlobalStyle />
-          {getLayout(<Component {...pageProps} />)}
-        </ThemeProvider>
-        <ReactQueryDevtools initialIsOpen={false} />
-      </Hydrate>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <AuthProvider>{getLayout(<Component {...pageProps} />)}</AuthProvider>
+      </ThemeProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }

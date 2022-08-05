@@ -15,18 +15,20 @@ import {
   Classes,
 } from '@blueprintjs/core';
 import { NavWrapper, Nav, ButtonWrapper, MenuWrapper } from './styles';
-import { removeToken, useFetchUser } from '@queries/user';
+import { useFetchUser } from '@queries/user';
 import { useOnClickOutside } from '@hooks/use-on-click-outside';
 import { useRouter } from 'next/router';
+import { useAuth } from '@hooks/use-auth';
 
 const UserMenu = ({ handleClose }: { handleClose: () => void }) => {
   const { data, error, isError, isLoading } = useFetchUser();
+  const auth = useAuth();
   const router = useRouter();
   const ref = useRef<HTMLDivElement | null>(null);
   useOnClickOutside(ref, handleClose);
 
   const handleSignOut = () => {
-    removeToken();
+    auth?.removeToken();
     router.push('/');
   };
 

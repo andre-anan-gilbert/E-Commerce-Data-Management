@@ -10,7 +10,9 @@ import {
   FormGroup,
   InputGroup,
 } from '@blueprintjs/core';
-import { signIn, setToken } from '@queries/user';
+import { signIn } from '@queries/user';
+import { useAuth } from '@hooks/use-auth';
+import { useQueryClient } from '@tanstack/react-query';
 import { useOnClickOutside } from '@hooks/use-on-click-outside';
 import {
   Backdrop,
@@ -26,6 +28,7 @@ import {
 export const SignInCard = ({ handleClose }: { handleClose: () => void }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const auth = useAuth();
   const router = useRouter();
   const ref = useRef<HTMLDivElement | null>(null);
   useOnClickOutside(ref, handleClose);
@@ -34,7 +37,7 @@ export const SignInCard = ({ handleClose }: { handleClose: () => void }) => {
     event.preventDefault();
     const response = await signIn(email, password);
     if (response) {
-      setToken(response.access_token);
+      auth?.setToken(response.access_token);
       router.push('/home');
     }
   };

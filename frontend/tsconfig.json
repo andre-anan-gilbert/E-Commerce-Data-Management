@@ -13,7 +13,7 @@
       "@images/*": ["images/*"],
       "@queries/*": ["queries/*"],
       "@hooks/*": ["hooks/*"],
-      "@context/*": ["context/*"]
+      "@auth/*": ["auth/*"]
     },
     "allowJs": true,
     "allowUnreachableCode": false,

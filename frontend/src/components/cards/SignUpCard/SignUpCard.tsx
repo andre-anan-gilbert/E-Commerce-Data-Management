@@ -10,7 +10,8 @@ import {
   FormGroup,
   InputGroup,
 } from '@blueprintjs/core';
-import { signUp, setToken } from '@queries/user';
+import { signUp } from '@queries/user';
+import { useAuth } from '@hooks/use-auth';
 import { useOnClickOutside } from '@hooks/use-on-click-outside';
 import {
   Backdrop,
@@ -27,6 +28,7 @@ export const SignUpCard = ({ handleClose }: { handleClose: () => void }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const auth = useAuth();
   const router = useRouter();
   const ref = useRef<HTMLDivElement | null>(null);
   useOnClickOutside(ref, handleClose);
@@ -35,7 +37,7 @@ export const SignUpCard = ({ handleClose }: { handleClose: () => void }) => {
     event.preventDefault();
     const response = await signUp(email, password);
     if (response) {
-      setToken(response.access_token);
+      auth?.setToken(response.access_token);
       router.push('/home');
     }
   };

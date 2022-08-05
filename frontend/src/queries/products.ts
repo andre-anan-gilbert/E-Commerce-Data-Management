@@ -1,6 +1,6 @@
 /** The products queries. */
-import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { axiosInstance } from './axios';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useAxiosClient } from './axios';
 
 export interface ICreateProduct {
   name: string;
@@ -15,62 +15,57 @@ export interface IProduct extends ICreateProduct {
 }
 
 export const useFetchProducts = () => {
+  const axiosClient = useAxiosClient();
   const { data, error, isError, isLoading } = useQuery<IProduct[], Error>(
-    'products',
-    fetchProducts
+    ['products'],
+    async () =>
+      await axiosClient
+        .get<IProduct[]>('api/v1/products/get-products')
+        .then((response) => response.data)
   );
 
   return { data, error, isError, isLoading };
 };
 
-const fetchProducts = async () => {
-  const response = await axiosInstance.get<IProduct[]>(
-    'api/v1/products/get-products'
-  );
-  return response.data;
-};
-
 export const useCreateProduct = () => {
+  const axiosClient = useAxiosClient();
   const queryClient = useQueryClient();
-  const mutate = useMutation(
-    (newProduct: ICreateProduct) => {
-      return createProduct(newProduct);
+  const mutation = useMutation(
+    async (newProduct: ICreateProduct) => {
+      return await axiosClient
+        .post<IProduct>('api/v1/products/create', {
+          ...newProduct,
+        })
+        .then((response) => response.data);
     },
     {
       onSuccess: (newProduct: IProduct) => {
-        const products = queryClient.getQueryData<IProduct[]>('products');
+        const products = queryClient.getQueryData<IProduct[]>(['products']);
         if (products) {
-          queryClient.setQueryData('products', [...products, newProduct]);
+          queryClient.setQueryData(['products'], [...products, newProduct]);
         }
       },
     }
   );
 
-  return mutate;
-};
-
-const createProduct = async (newProduct: ICreateProduct) => {
-  const response = await axiosInstance.post<IProduct>(
-    'api/v1/products/create',
-    {
-      ...newProduct,
-    }
-  );
-  return response.data;
+  return mutation;
 };
 
 export const useUpdateProduct = () => {
+  const axiosClient = useAxiosClient();
   const queryClient = useQueryClient();
-  const mutate = useMutation(
-    (updatedProduct: IProduct) => {
-      return updateProduct(updatedProduct);
+  const mutation = useMutation(
+    async (updatedProduct: IProduct) => {
+      return await axiosClient
+        .put<IProduct>(`api/v1/products/update/${updatedProduct.id}`)
+        .then((response) => response.data);
     },
     {
       onSuccess: (updatedProduct: IProduct) => {
-        const products = queryClient.getQueryData<IProduct[]>('products');
+        const products = queryClient.getQueryData<IProduct[]>(['products']);
         if (products) {
           queryClient.setQueryData(
-            'products',
+            ['products'],
             products.map((product: IProduct) =>
               updatedProduct.id === product.id ? updatedProduct : product
             )
@@ -80,29 +75,24 @@ export const useUpdateProduct = () => {
     }
   );
 
-  return mutate;
-};
-
-const updateProduct = async (product: IProduct) => {
-  const response = await axiosInstance.put(
-    `api/v1/products/update/${product.id}`,
-    { ...product }
-  );
-  return response.data;
+  return mutation;
 };
 
 export const useDeleteProduct = () => {
+  const axiosClient = useAxiosClient();
   const queryClient = useQueryClient();
-  const mutate = useMutation(
-    (id: number) => {
-      return deleteProduct(id);
+  const mutation = useMutation(
+    async (id: number) => {
+      return await axiosClient
+        .delete<IProduct>(`api/v1/products/delete/${id}`)
+        .then((response) => response.data);
     },
     {
       onSuccess: (deletedProduct: IProduct) => {
-        const products = queryClient.getQueryData<IProduct[]>('products');
+        const products = queryClient.getQueryData<IProduct[]>(['products']);
         if (products) {
           queryClient.setQueryData(
-            'products',
+            ['products'],
             products.filter(
               (product: IProduct) => deletedProduct.id !== product.id
             )
@@ -112,12 +102,5 @@ export const useDeleteProduct = () => {
     }
   );
 
-  return mutate;
-};
-
-const deleteProduct = async (id: number) => {
-  const response = await axiosInstance.delete<IProduct>(
-    `api/v1/products/delete/${id}`
-  );
-  return response.data;
+  return mutation;
 };

@@ -1,7 +1,7 @@
 /** The user queries. */
-import { axiosInstance } from './axios';
-import { useQuery } from 'react-query';
-import Cookies from 'js-cookie';
+import { axiosInstance, useAxiosClient } from './axios';
+import { useQuery } from '@tanstack/react-query';
+import { useAuth } from '@hooks/use-auth';
 
 interface IUser {
   email: string;
@@ -30,33 +30,30 @@ export const signIn = async (email: string, password: string) => {
   return response.data;
 };
 
-export const refreshToken = async () => {
-  const response = await axiosInstance.post<IToken>(
-    'api/v1/user/refresh-token'
-  );
-  return response.data;
+export const useRefreshToken = () => {
+  const auth = useAuth();
+
+  const fetchRefreshToken = async () => {
+    const response = await axiosInstance
+      .post<IToken>('api/v1/user/refresh-token')
+      .then((response) => response.data);
+
+    auth?.setToken(response.access_token);
+    return response.access_token;
+  };
+
+  return fetchRefreshToken;
 };
 
 export const useFetchUser = () => {
+  const axiosClient = useAxiosClient();
   const { data, error, isError, isLoading } = useQuery<IUser, Error>(
-    'user',
-    fetchUser
+    ['user'],
+    async () =>
+      await axiosClient
+        .get<IUser>('api/v1/user/me')
+        .then((response) => response.data)
   );
 
   return { data, error, isError, isLoading };
-};
-
-export const fetchUser = async () => {
-  const response = await axiosInstance.get('api/v1/user/me');
-  return response.data;
-};
-
-export const setToken = (accessToken: string) => {
-  const fifteenMinutes = 1 / 96;
-  Cookies.set('tok', accessToken, { expires: fifteenMinutes });
-};
-
-export const removeToken = () => {
-  Cookies.remove('tok');
-  delete axiosInstance.defaults.headers.common['Authorization'];
 };

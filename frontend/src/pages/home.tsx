@@ -5,8 +5,8 @@ import { Layout } from '@layout/Layout';
 import { BlueprintNavbar } from '@ui/BlueprintNavbar/BlueprintNavbar';
 import { AuthGuardSection } from '@sections/AuthGuardSection/AuthGuardSection';
 import { HomeSection } from '@sections/HomeSection/HomeSection';
-import { dehydrate, QueryClient } from 'react-query';
-import { fetchUser } from '@queries/user';
+import { dehydrate, QueryClient } from '@tanstack/react-query';
+import { useAxiosClient } from '@queries/axios';
 
 const Home: NextPage = () => {
   return (
@@ -25,16 +25,5 @@ Home.getLayout = function getLayout(page: ReactElement) {
     </Layout>
   );
 };
-
-export async function getServerSideProps() {
-  const queryClient = new QueryClient();
-  await queryClient.prefetchQuery('user', fetchUser);
-
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-    },
-  };
-}
 
 export default Home;
