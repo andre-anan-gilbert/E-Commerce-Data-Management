@@ -8,12 +8,12 @@ import {
   Drawer,
   Menu,
   MenuDivider,
-  MenuItem,
   Navbar,
   NavbarGroup,
   NavbarHeading,
   Classes,
 } from '@blueprintjs/core';
+import { MenuItem2 } from '@blueprintjs/popover2';
 import { NavWrapper, Nav, ButtonWrapper, MenuWrapper } from './styles';
 import { useFetchUser } from '@queries/user';
 import { useOnClickOutside } from '@hooks/use-on-click-outside';
@@ -39,7 +39,7 @@ const UserMenu = ({ handleClose }: { handleClose: () => void }) => {
           className={isLoading ? Classes.SKELETON : ''}
           title={isError ? error?.message : data?.email}
         />
-        <MenuItem text="Sign out" onClick={handleSignOut} />
+        <MenuItem2 text="Sign out" onClick={handleSignOut} />
       </Menu>
     </MenuWrapper>
   );

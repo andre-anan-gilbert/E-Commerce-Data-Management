@@ -1,57 +1,89 @@
-/** Section of the home page.*/
+/** Section of the home page. */
 import Link from 'next/link';
+import Image from 'next/image';
+import Logo from '@images/logo.svg';
+import { Button, Classes } from '@blueprintjs/core';
+import { useFetchProducts } from '@queries/products';
 import {
   Section,
+  Header,
   Title,
-  Subtitle,
+  ApplicationWrapper,
   Flex,
   Card,
+  CardContent,
+  CardHeader,
   CardTitle,
-  CardNumberWrapper,
-  CardNumber,
 } from './styles';
-import { Classes } from '@blueprintjs/core';
-import { useFetchProducts } from '@queries/products';
 
 export const HomeSection = () => {
   const { data, error, isError, isLoading } = useFetchProducts();
 
   if (isError) {
-    return <div>{!error}</div>;
+    return <div>{error?.message}</div>;
   }
 
   return (
     <Section>
-      <Title>Home</Title>
-      <Subtitle>Employees, Warehouses</Subtitle>
-      <Flex>
-        <Card elevation={3} interactive>
-          <CardTitle>Manage Employees</CardTitle>
-        </Card>
-        <Card elevation={3} interactive>
-          <CardTitle>Manage Warehouses</CardTitle>
-        </Card>
-      </Flex>
-      <Subtitle>Sales Order</Subtitle>
-      <Flex>
-        <Card elevation={3} interactive>
-          <CardTitle>Manage Sales Order</CardTitle>
-        </Card>
-        <Card elevation={3} interactive>
-          <CardTitle>Manage Customers</CardTitle>
-        </Card>
-        <Card elevation={3} interactive>
-          <CardTitle>Manage Suppliers</CardTitle>
-        </Card>
-        <Link href="/products">
-          <Card elevation={3} interactive>
-            <CardTitle>Manage Products</CardTitle>
-            <CardNumberWrapper className={isLoading ? Classes.SKELETON : ''}>
-              <CardNumber>{data?.length}</CardNumber>
-            </CardNumberWrapper>
+      <Header>
+        <Image src={Logo} alt="logo" width="80" height="80" priority />
+      </Header>
+      <ApplicationWrapper>
+        <Title className={Classes.TEXT_MUTED}>Apps</Title>
+        <Flex>
+          <Card interactive>
+            <CardContent>
+              <CardHeader>
+                <Button icon="people" intent="primary" />
+                <CardTitle>Manage Employees</CardTitle>
+              </CardHeader>
+            </CardContent>
           </Card>
-        </Link>
-      </Flex>
+          <Card interactive>
+            <CardContent>
+              <CardHeader>
+                <Button icon="office" intent="primary" />
+                <CardTitle>Manage Warehouses</CardTitle>
+              </CardHeader>
+            </CardContent>
+          </Card>
+          <Card interactive>
+            <CardContent>
+              <CardHeader>
+                <Button icon="airplane" intent="primary" />
+                <CardTitle>Manage Sales Orders</CardTitle>
+              </CardHeader>
+            </CardContent>
+          </Card>
+          <Card interactive>
+            <CardContent>
+              <CardHeader>
+                <Button icon="person" intent="primary" />
+                <CardTitle>Manage Customers</CardTitle>
+              </CardHeader>
+            </CardContent>
+          </Card>
+          <Card interactive>
+            <CardContent>
+              <CardHeader>
+                <Button icon="cargo-ship" intent="primary" />
+                <CardTitle>Manage Suppliers</CardTitle>
+              </CardHeader>
+            </CardContent>
+          </Card>
+          <Link href="/products">
+            <Card interactive>
+              <CardContent className={isLoading ? Classes.SKELETON : ''}>
+                <CardHeader>
+                  <Button icon="shopping-cart" intent="primary" />
+                  <CardTitle>Manage Products</CardTitle>
+                </CardHeader>
+                <CardTitle>{data?.length}</CardTitle>
+              </CardContent>
+            </Card>
+          </Link>
+        </Flex>
+      </ApplicationWrapper>
     </Section>
   );
 };

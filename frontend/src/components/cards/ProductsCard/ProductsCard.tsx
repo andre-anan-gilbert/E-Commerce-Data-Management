@@ -22,29 +22,31 @@ export const ProductsCard = () => {
   }
 
   return (
-    <Card>
-      <LabelWrapper className={Classes.TEXT_MUTED}>
+    <>
+      <LabelWrapper>
         <Label>Name</Label>
         <Label>Description</Label>
         <Label>Price</Label>
         <Label>Category</Label>
         <Label>Supplier</Label>
       </LabelWrapper>
-      {data?.map((product) => (
-        <ListItem key={product.id}>
-          <ListText>{product.name}</ListText>
-          <ListText>{product.description}</ListText>
-          <ListText>{product.price}</ListText>
-          <ListText>{product.category_id}</ListText>
-          <ListText>{product.supplier_id}</ListText>
-          <ButtonWrapper>
-            <EditProductCard product={product} />
-            <Spacing />
-            <DeleteProductCard id={product.id} />
-          </ButtonWrapper>
-        </ListItem>
-      ))}
+      <Card>
+        {data?.map((product) => (
+          <ListItem key={product.id}>
+            <ListText>{product.name}</ListText>
+            <ListText>{product.description}</ListText>
+            <ListText>{product.price}</ListText>
+            <ListText>{product.category_id}</ListText>
+            <ListText>{product.supplier_id}</ListText>
+            <ButtonWrapper>
+              <EditProductCard product={product} />
+              <Spacing />
+              <DeleteProductCard id={product.id} />
+            </ButtonWrapper>
+          </ListItem>
+        ))}
+      </Card>
       {isLoading && <Loading />}
-    </Card>
+    </>
   );
 };

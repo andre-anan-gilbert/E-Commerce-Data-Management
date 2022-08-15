@@ -18,24 +18,17 @@ import {
   CubeFaceBottom,
 } from './styles';
 
-const ANIMATION = {
-  rotateY: 360,
-  repeat: Infinity,
-  duration: 45,
-  ease: 'linear',
-};
-
 export const CubeAnimation = () => {
   return (
     <Wrapper>
       <Cube>
         <CubeWrapper>
           <CubeShadow
-            whileInView={{ rotateY: ANIMATION.rotateY }}
+            whileInView={{ rotateY: animation.rotateY }}
             transition={{
-              repeat: ANIMATION.repeat,
-              duration: ANIMATION.duration,
-              ease: ANIMATION.ease,
+              repeat: animation.repeat,
+              duration: animation.duration,
+              ease: animation.ease,
             }}
           >
             <div>&nbsp;</div>
@@ -43,11 +36,11 @@ export const CubeAnimation = () => {
         </CubeWrapper>
         <CubeWrapper>
           <CubeFaces
-            whileInView={{ rotateY: ANIMATION.rotateY }}
+            whileInView={{ rotateY: animation.rotateY }}
             transition={{
-              repeat: ANIMATION.repeat,
-              duration: ANIMATION.duration,
-              ease: ANIMATION.ease,
+              repeat: animation.repeat,
+              duration: animation.duration,
+              ease: animation.ease,
             }}
           >
             <CubeFaceFront>
@@ -73,4 +66,11 @@ export const CubeAnimation = () => {
       </Cube>
     </Wrapper>
   );
+};
+
+const animation = {
+  rotateY: 360,
+  repeat: Infinity,
+  duration: 45,
+  ease: 'linear',
 };

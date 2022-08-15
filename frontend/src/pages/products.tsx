@@ -3,15 +3,14 @@ import { ReactElement } from 'react';
 import { NextPage } from 'next';
 import { Layout } from '@layout/Layout';
 import { BlueprintNavbar } from '@ui/BlueprintNavbar/BlueprintNavbar';
-import { AuthGuardSection } from '@sections/AuthGuardSection/AuthGuardSection';
 import { ProductsSection } from '@sections/ProductsSection/ProductsSection';
-import { dehydrate, QueryClient } from '@tanstack/react-query';
+import { RequireAuth } from '@auth/RequireAuth';
 
 const Products: NextPage = () => {
   return (
-    <AuthGuardSection>
+    <RequireAuth>
       <ProductsSection />
-    </AuthGuardSection>
+    </RequireAuth>
   );
 };
 

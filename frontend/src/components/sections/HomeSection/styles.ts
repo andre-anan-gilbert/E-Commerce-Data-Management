@@ -1,42 +1,62 @@
 import styled from 'styled-components';
-import { H1, H2, H3, Card as BlueprintCard } from '@blueprintjs/core';
+import { H4, H5, Card as BlueprintCard, Colors } from '@blueprintjs/core';
 import * as Breakpoints from '@styles/breakpoints';
 
 export const Section = styled.div`
-  width: min(100%, 120rem);
   margin-inline: auto;
 `;
 
-export const Title = styled(H1)`
-  margin-bottom: 3rem;
+export const Header = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 5rem 1rem;
+  background-color: ${Colors.DARK_GRAY3};
 `;
 
-export const Subtitle = styled(H2)`
-  margin-bottom: 3rem;
+export const Title = styled(H5)`
+  margin-bottom: 2rem;
+`;
 
-  &:last-of-type {
-    margin-top: 3rem;
+export const ApplicationWrapper = styled.div`
+  width: min(100%, 121rem);
+  padding: 5rem 1rem;
+  margin-inline: auto;
+
+  @media (min-width: ${Breakpoints.MD}) {
+    padding: 5rem 1rem 50rem;
   }
 `;
 
 export const Flex = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 2rem;
-
-  @media (min-width: ${Breakpoints.MD}) {
-    flex-direction: row;
-  }
+  gap: 2rem 5rem;
 `;
 
 export const Card = styled(BlueprintCard)`
-  width: 24rem;
-  height: 24rem;
+  flex: 1 1 80%;
+
+  @media (min-width: ${Breakpoints.MD}) {
+    flex: 1 1 30%;
+  }
 `;
 
-export const CardTitle = styled(H3)`
-  margin-bottom: 2rem;
+export const CardContent = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const CardHeader = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const CardTitle = styled(H4)`
+  margin-left: 2rem;
+  margin-bottom: 0;
 `;
 
 export const CardNumberWrapper = styled.div`

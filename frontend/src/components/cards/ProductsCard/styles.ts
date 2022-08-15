@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import {
+  H5,
   Card as BlueprintCard,
   FormGroup as BlueprintFormGroup,
 } from '@blueprintjs/core';
@@ -20,13 +21,13 @@ export const LabelWrapper = styled.div`
   padding: 20px;
 `;
 
-export const Label = styled.p`
+export const Label = styled(H5)`
   flex: 1 1 20rem;
   margin: 0;
 `;
 
 export const ListItem = styled.div`
-  min-height: 59px;
+  min-height: 10rem;
   position: relative;
   display: flex;
   align-items: center;

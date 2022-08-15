@@ -1,8 +1,8 @@
 /** Tech stack section of the landing page. */
 import dynamic from 'next/dynamic';
+import { IconName, MaybeElement } from '@blueprintjs/core';
 import { Classes } from '@blueprintjs/core';
 import { TechStackSectionCard } from '@cards/TechStackSectionCard/TechStackSectionCard';
-import { techStackCardData } from '@data/tech-stack-card-data';
 import { Section, Flex, Grid, Title, Subtitle } from './styles';
 
 const CubeAnimation = dynamic<{}>(
@@ -26,7 +26,7 @@ export const TechStackSection = () => {
             object-relational mapping tool. Application and database are served
             in docker containers.
           </Subtitle>
-          {techStackCardData.map((card) => (
+          {data.map((card) => (
             <TechStackSectionCard
               key={card.id}
               icon={card.icon}
@@ -40,3 +40,37 @@ export const TechStackSection = () => {
     </Section>
   );
 };
+
+interface IData {
+  id: number;
+  icon: IconName | MaybeElement;
+  title: string;
+  subtitle: string;
+}
+
+export const data: IData[] = [
+  {
+    id: 1,
+    icon: 'application',
+    title: 'Next.js',
+    subtitle: 'Lorem ipsum dolor sit amet',
+  },
+  {
+    id: 2,
+    icon: 'layers',
+    title: 'FastAPI',
+    subtitle: 'Lorem ipsum dolor sit amet',
+  },
+  {
+    id: 3,
+    icon: 'database',
+    title: 'PostgreSQL',
+    subtitle: 'Lorem ipsum dolor sit amet',
+  },
+  {
+    id: 4,
+    icon: 'cargo-ship',
+    title: 'Docker',
+    subtitle: 'Lorem ipsum dolor sit amet',
+  },
+];

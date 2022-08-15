@@ -9,7 +9,7 @@ export const Foo = styled.div<IPage>`
   width: 100%;
   padding-inline: 1.2rem;
   background-color: ${({ landing }) =>
-    landing ? 'transparent' : Colors.DARK_GRAY3};
+    landing ? 'transparent' : Colors.DARK_GRAY2};
 `;
 
 export const Wrapper = styled.div<IPage>`

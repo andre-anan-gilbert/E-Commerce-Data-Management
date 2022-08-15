@@ -57,7 +57,9 @@ export const useUpdateProduct = () => {
   const mutation = useMutation(
     async (updatedProduct: IProduct) => {
       return await axiosClient
-        .put<IProduct>(`api/v1/products/update/${updatedProduct.id}`)
+        .put<IProduct>(`api/v1/products/update/${updatedProduct.id}`, {
+          ...updatedProduct,
+        })
         .then((response) => response.data);
     },
     {
